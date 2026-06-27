@@ -1,0 +1,161 @@
+{
+  "examId": "jee",
+  "examName": "JEE (Joint Entrance Examination)",
+  "subjects": [
+    {
+      "subjectId": "physics",
+      "subjectName": "Physics",
+      "chapters": [
+        {
+          "chapterId": "kinematics",
+          "chapterName": "Kinematics & Projectiles",
+          "summary": "Covers vectors, equations of motion, projectile motion on horizontal and inclined planes, relative velocity in 1D and 2D (rain-man and river-boat problems), and circular motion basics.",
+          "keyConcepts": [
+            {
+              "title": "Projectile on Inclined Plane",
+              "description": "Motion analysed by resolving gravity along (g sin theta) and perpendicular (g cos theta) to the incline surface."
+            },
+            {
+              "title": "Relative Velocity in 2D",
+              "description": "Used to find shortest path/time in river crossings: V_boat_ground = V_boat_river + V_river_ground."
+            }
+          ],
+          "formulas": [
+            {
+              "name": "Time of Flight (Horizontal Projectile)",
+              "equation": "T = (2 * u * sin(theta)) / g",
+              "description": "u is initial speed, theta is angle of projection with horizontal."
+            },
+            {
+              "name": "Maximum Range (R_max)",
+              "equation": "R_max = u^2 / g (at theta = 45 degrees)",
+              "description": "Maximum horizontal distance covered."
+            },
+            {
+              "name": "Equation of Trajectory",
+              "equation": "y = x * tan(theta) - (g * x^2) / (2 * u^2 * cos^2(theta))",
+              "description": "Represents a parabolic path."
+            }
+          ],
+          "resources": {
+            "videos": [
+              {
+                "title": "JEE Advanced Kinematics Questions & Concepts",
+                "videoId": "2yQcKk5eZ9U",
+                "duration": "1h 55m",
+                "thumbnail": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=320&q=80"
+              }
+            ],
+            "practiceResources": [
+              {
+                "title": "JEE Main & Advanced Kinematics Practice Sheet PDF",
+                "url": "https://example.com/jee-kinematics-adv"
+              }
+            ],
+            "websites": [
+              {
+                "name": "Irodov Kinematics Selected Problems",
+                "url": "https://example.com/irodov-kinematics"
+              }
+            ]
+          },
+          "quizzes": [
+            {
+              "questionId": "jee_ph_ki_q1",
+              "question": "A projectile is thrown with velocity v at an angle theta. If range R is equal to maximum height H, then tan(theta) is:",
+              "options": [
+                "1",
+                "2",
+                "4",
+                "0.5"
+              ],
+              "correctAnswerIndex": 2,
+              "explanation": "R = (u^2 * sin 2theta)/g and H = (u^2 * sin^2 theta)/(2g). Since R = H, (u^2 * 2 sin theta cos theta)/g = (u^2 * sin^2 theta)/(2g) => 2 cos theta = (sin theta)/2 => tan theta = 4."
+            },
+            {
+              "questionId": "jee_ph_ki_q2",
+              "question": "A boat crosses a river of width D in the shortest possible time. If velocity of boat in still water is v and river velocity is u, the time taken is:",
+              "options": [
+                "D / v",
+                "D / sqrt(v^2 - u^2)",
+                "D / u",
+                "D / (v + u)"
+              ],
+              "correctAnswerIndex": 0,
+              "explanation": "To cross the river in shortest time, the boat should steer perpendicular to the river flow (theta = 90 deg relative to flow). The velocity component perpendicular to river banks is v. Time = D / v."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "subjectId": "mathematics",
+      "subjectName": "Mathematics",
+      "chapters": [
+        {
+          "chapterId": "limits",
+          "chapterName": "Limits and Continuity",
+          "summary": "Deals with the behavior of functions as they approach specific points. Topics include standard limits, indeterminate forms (0/0, inf/inf, 1^inf), L'Hopital's rule, sandwich theorem, and testing continuity at a point.",
+          "keyConcepts": [
+            {
+              "title": "Indeterminate Form 1^infinity",
+              "description": "If lim f(x) = 1 and lim g(x) = infinity, then lim [f(x)]^g(x) = e^[lim (f(x) - 1)*g(x)]."
+            },
+            {
+              "title": "L'Hopital's Rule",
+              "description": "For indeterminate forms 0/0 or inf/inf, lim f(x)/g(x) = lim f'(x)/g'(x) provided limits exist."
+            }
+          ],
+          "formulas": [
+            {
+              "name": "Standard Limit: sin(x)/x",
+              "equation": "lim (x->0) sin(x)/x = 1",
+              "description": "x must be in radians."
+            },
+            {
+              "name": "Standard Limit: (e^x - 1)/x",
+              "equation": "lim (x->0) (e^x - 1)/x = 1",
+              "description": "Fundamental exponential limit."
+            }
+          ],
+          "resources": {
+            "videos": [
+              {
+                "title": "Limits for JEE Main & Advanced - Complete Series",
+                "videoId": "k-W0aE8-Wdg",
+                "duration": "1h 30m",
+                "thumbnail": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=320&q=80"
+              }
+            ],
+            "practiceResources": [
+              {
+                "title": "Limits Practice Sheet (JEE Advanced Level)",
+                "url": "https://example.com/jee-maths-limits"
+              }
+            ],
+            "websites": [
+              {
+                "name": "JEE Mathematics Notes",
+                "url": "https://example.com/jee-limits-notes"
+              }
+            ]
+          },
+          "quizzes": [
+            {
+              "questionId": "jee_ma_li_q1",
+              "question": "Find the value of lim (x->0) [tan(x) - sin(x)] / x^3.",
+              "options": [
+                "0",
+                "1",
+                "1/2",
+                "2"
+              ],
+              "correctAnswerIndex": 2,
+              "explanation": "Write as lim [sin(x)(1 - cos(x))] / (x^3 * cos(x)) = lim (sin(x)/x) * [(1-cos(x))/x^2] * (1/cos(x)). As x->0, sin(x)/x -> 1, (1-cos(x))/x^2 -> 1/2, and 1/cos(x) -> 1. Result is 1 * (1/2) * 1 = 1/2."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

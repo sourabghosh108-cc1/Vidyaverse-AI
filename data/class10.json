@@ -1,0 +1,180 @@
+{
+  "examId": "class10",
+  "examName": "Class 10 CBSE Board Prep",
+  "subjects": [
+    {
+      "subjectId": "science",
+      "subjectName": "Science",
+      "chapters": [
+        {
+          "chapterId": "chemical-reactions",
+          "chapterName": "Chemical Reactions and Equations",
+          "summary": "This chapter covers chemical changes, balancing chemical equations, types of chemical reactions (combination, decomposition, displacement, double displacement, oxidation, and reduction), and the effects of oxidation in daily life (corrosion and rancidity).",
+          "keyConcepts": [
+            {
+              "title": "Balanced Chemical Equation",
+              "description": "An equation where the number of atoms of each element is equal on both the reactant and product sides, satisfying the Law of Conservation of Mass."
+            },
+            {
+              "title": "Redox Reactions",
+              "description": "Reactions in which both oxidation (loss of electrons / gain of oxygen) and reduction (gain of electrons / loss of oxygen) occur simultaneously."
+            },
+            {
+              "title": "Exothermic & Endothermic",
+              "description": "Exothermic reactions release heat energy to the surroundings, while endothermic reactions absorb heat energy from the surroundings."
+            }
+          ],
+          "formulas": [
+            {
+              "name": "Law of Conservation of Mass",
+              "equation": "Mass of Reactants = Mass of Products",
+              "description": "Matter can neither be created nor destroyed in a chemical reaction."
+            }
+          ],
+          "resources": {
+            "videos": [
+              {
+                "title": "Chemical Reactions & Equations in 30 Mins",
+                "videoId": "bg7OszEl5EE",
+                "duration": "32m",
+                "thumbnail": "https://images.unsplash.com/photo-1532187863486-abf9d39d66e8?auto=format&fit=crop&w=320&q=80"
+              },
+              {
+                "title": "Balancing Chemical Equations - Easiest Trick",
+                "videoId": "yA3iGki8L-o",
+                "duration": "15m",
+                "thumbnail": "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?auto=format&fit=crop&w=320&q=80"
+              }
+            ],
+            "practiceResources": [
+              {
+                "title": "NCERT Intext & Exercise Questions PDF",
+                "url": "https://ncert.nic.in/textbook.php?jesc1=1-16"
+              },
+              {
+                "title": "CBSE Class 10 Chemical Reactions Practice Sheet",
+                "url": "https://example.com/class10-chem-practice"
+              }
+            ],
+            "websites": [
+              {
+                "name": "Khan Academy - Chemical Reactions",
+                "url": "https://www.khanacademy.org/science/class-10-chemistry"
+              }
+            ]
+          },
+          "quizzes": [
+            {
+              "questionId": "c10_sc_cr_q1",
+              "question": "Which of the following is a displacement reaction?",
+              "options": [
+                "CaCO3 --> CaO + CO2",
+                "2H2 + O2 --> 2H2O",
+                "Fe + CuSO4 --> FeSO4 + Cu",
+                "NaOH + HCl --> NaCl + H2O"
+              ],
+              "correctAnswerIndex": 2,
+              "explanation": "Iron (Fe) is more reactive than copper (Cu) and displaces it from copper sulfate solution, forming iron sulfate and copper metal."
+            },
+            {
+              "questionId": "c10_sc_cr_q2",
+              "question": "What happens when dilute hydrochloric acid is added to iron filings?",
+              "options": [
+                "Hydrogen gas and iron chloride are produced.",
+                "Chlorine gas and iron hydroxide are produced.",
+                "No reaction takes place.",
+                "Iron salt and water are produced."
+              ],
+              "correctAnswerIndex": 0,
+              "explanation": "Fe + 2HCl --> FeCl2 + H2. Hydrogen gas and iron(II) chloride are formed. This is a single displacement reaction."
+            }
+          ]
+        },
+        {
+          "chapterId": "light-reflection",
+          "chapterName": "Light - Reflection and Refraction",
+          "summary": "Explores the behavior of light, spherical mirrors (concave and convex), mirror formula, magnification, refraction of light, refractive index, lens formula, magnification, and power of a lens.",
+          "keyConcepts": [
+            {
+              "title": "Laws of Reflection",
+              "description": "1. The angle of incidence is equal to the angle of reflection. 2. The incident ray, the reflected ray and the normal all lie in the same plane."
+            },
+            {
+              "title": "Refractive Index",
+              "description": "The ratio of the speed of light in a vacuum to the speed of light in a given medium (n = c / v)."
+            },
+            {
+              "title": "Power of a Lens",
+              "description": "The degree of convergence or divergence of light rays achieved by a lens, calculated as P = 1 / f (f in meters). Unit is Dioptres (D)."
+            }
+          ],
+          "formulas": [
+            {
+              "name": "Mirror Formula",
+              "equation": "1/v + 1/u = 1/f",
+              "description": "u is object distance, v is image distance, f is focal length."
+            },
+            {
+              "name": "Lens Formula",
+              "equation": "1/v - 1/u = 1/f",
+              "description": "u is object distance, v is image distance, f is focal length."
+            },
+            {
+              "name": "Magnification (m)",
+              "equation": "m = -v/u (mirrors) | m = v/u (lenses)",
+              "description": "Ratio of image height to object height (h' / h)."
+            }
+          ],
+          "resources": {
+            "videos": [
+              {
+                "title": "Light Reflection & Refraction Full Chapter",
+                "videoId": "G0U9s7_J610",
+                "duration": "1h 10m",
+                "thumbnail": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=320&q=80"
+              }
+            ],
+            "practiceResources": [
+              {
+                "title": "Spherical Mirrors Ray Diagrams & Practice Sheet",
+                "url": "https://example.com/class10-light-practice"
+              }
+            ],
+            "websites": [
+              {
+                "name": "Physics Classroom - Refraction",
+                "url": "https://www.physicsclassroom.com/class/refrn"
+              }
+            ]
+          },
+          "quizzes": [
+            {
+              "questionId": "c10_sc_lr_q1",
+              "question": "A concave mirror gives virtual, erect, and enlarged image of the object. Where is the object placed?",
+              "options": [
+                "At principal focus F",
+                "At center of curvature C",
+                "Beyond center of curvature C",
+                "Between pole P and principal focus F"
+              ],
+              "correctAnswerIndex": 3,
+              "explanation": "When an object is placed between the pole (P) and the principal focus (F) of a concave mirror, a virtual, erect, and magnified image is formed behind the mirror."
+            },
+            {
+              "questionId": "c10_sc_lr_q2",
+              "question": "If focal length of a spherical lens is +25 cm, what is its power?",
+              "options": [
+                "+4 D",
+                "-4 D",
+                "+0.04 D",
+                "-0.04 D"
+              ],
+              "correctAnswerIndex": 0,
+              "explanation": "Power P = 1 / f (in meters). f = +25 cm = +0.25 m. Therefore, P = 1 / 0.25 = +4 D. Positive sign indicates a convex lens."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

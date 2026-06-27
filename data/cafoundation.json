@@ -1,0 +1,70 @@
+{
+  "examId": "cafoundation",
+  "examName": "CA Foundation",
+  "subjects": [
+    {
+      "subjectId": "accounting",
+      "subjectName": "Principles and Practice of Accounting",
+      "chapters": [
+        {
+          "chapterId": "accounting-framework",
+          "chapterName": "Theoretical Framework & Concepts",
+          "summary": "Covers accounting concepts, principles, and conventions (entity concept, money measurement, going concern, periodicity, accrual, matching, consistency, conservatism, materiality). Also reviews capital vs. revenue expenditures.",
+          "keyConcepts": [
+            {
+              "title": "Conservatism / Prudence Concept",
+              "description": "State that anticipate no profit, but provide for all possible losses. Do not record assets at inflated values, and do record liabilities when probable."
+            },
+            {
+              "title": "Capital vs. Revenue Expenditure",
+              "description": "Capital expenditure yields benefit over multiple accounting periods (e.g., purchasing machinery), while revenue expenditure is consumed in the current period (e.g., repairs, salaries)."
+            }
+          ],
+          "formulas": [
+            {
+              "name": "Accounting Equation",
+              "equation": "Assets = Liabilities + Owner's Equity (Capital)",
+              "description": "The fundamental basis of double-entry accounting."
+            }
+          ],
+          "resources": {
+            "videos": [
+              {
+                "title": "CA Foundation Accounting Basic Concepts One Shot",
+                "videoId": "9_wL4c-U2eE",
+                "duration": "1h 10m",
+                "thumbnail": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=320&q=80"
+              }
+            ],
+            "practiceResources": [
+              {
+                "title": "ICAI CA Foundation Accounts Study Material Chapter 1",
+                "url": "https://www.icai.org/post.html?post_id=14532"
+              }
+            ],
+            "websites": [
+              {
+                "name": "ICAI Official Portal",
+                "url": "https://www.icai.org"
+              }
+            ]
+          },
+          "quizzes": [
+            {
+              "questionId": "ca_ac_tf_q1",
+              "question": "Which of the following is an example of capital expenditure?",
+              "options": [
+                "Payment of salaries to factory workers",
+                "Purchase of office stationery",
+                "Cost of installing a new machine",
+                "Insurance premium paid on warehouse"
+              ],
+              "correctAnswerIndex": 2,
+              "explanation": "The cost of installation is directly attributable to bringing the new machine (asset) to its working condition, thus capitalized as a capital expenditure."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

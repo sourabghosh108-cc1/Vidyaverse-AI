@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vidyaverse AI - Your Personalized Learning Universe</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Vidyaverse AI is an interactive, gamified educational portal for Indian students preparing for Class 10, Class 12, JEE, NEET, CUET, and CA Foundation.">
+  <meta name="keywords" content="Vidyaverse, Edtech, study dashboard, JEE study, NEET study, CUET prep, CA Foundation, PDF Summarizer, notes generator, Pomodoro timer">
+  <meta name="author" content="Vidyaverse AI Team">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Upgraded Stylesheet -->
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+  <!-- Mobile Navigation Topbar (Mobile Viewport Only) -->
+  <header class="mobile-top-bar" id="mobile-action-bar">
+    <button class="hamburger-btn" id="btn-hamburger" aria-label="Toggle navigation menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <a href="#home" class="mobile-logo">
+      <span>🚀 Vidyaverse</span>
+    </a>
+    <button class="theme-toggle-btn btn-sm" id="btn-mobile-theme-toggle" aria-label="Toggle theme">
+      <span>🌓</span>
+    </button>
+  </header>
+
+  <!-- Sidebar Backdrop Overlay for Mobile Drawer -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- Left Navigation Sidebar (Fixed Desktop/Drawer Mobile) -->
+  <aside class="app-sidebar" id="app-sidebar">
+    <!-- Sidebar Header Brand Logo -->
+    <div class="sidebar-brand">
+      <a href="#home" class="logo-wrap">
+        <span class="logo-icon">🚀</span>
+        <span class="logo-text">Vidyaverse <span class="logo-accent">AI</span></span>
+      </a>
+    </div>
+
+    <!-- Sidebar Main Navigation Menu -->
+    <nav class="sidebar-nav" id="sidebar-nav-menu">
+      <a href="#home" class="nav-link" id="nav-link-home">
+        <span class="nav-link-icon">🏠</span>
+        <span class="nav-link-text">Home</span>
+      </a>
+      <a href="#learn" class="nav-link" id="nav-link-learn">
+        <span class="nav-link-icon">🔍</span>
+        <span class="nav-link-text">Learn</span>
+      </a>
+      <a href="#notes" class="nav-link" id="nav-link-notes">
+        <span class="nav-link-icon">📝</span>
+        <span class="nav-link-text">Notes</span>
+      </a>
+      <a href="#quiz" class="nav-link" id="nav-link-quiz">
+        <span class="nav-link-icon">🎯</span>
+        <span class="nav-link-text">Quiz Arena</span>
+      </a>
+      <a href="#pdf" class="nav-link" id="nav-link-pdf">
+        <span class="nav-link-icon">📄</span>
+        <span class="nav-link-text">PDF Summarizer</span>
+      </a>
+      <a href="#dashboard" class="nav-link" id="nav-link-dashboard">
+        <span class="nav-link-icon">📊</span>
+        <span class="nav-link-text">Dashboard</span>
+      </a>
+      <a href="#settings" class="nav-link" id="nav-link-settings">
+        <span class="nav-link-icon">⚙️</span>
+        <span class="nav-link-text">Settings</span>
+      </a>
+    </nav>
+
+    <!-- Sidebar Footer (Theme controls, user stats, and version badge) -->
+    <footer class="sidebar-footer">
+      <!-- User stats bubble -->
+      <div class="sidebar-user-pill" id="sidebar-user-stats">
+        <div class="user-pill-row">
+          <span class="user-name-tag" id="sidebar-username">Aspirant</span>
+          <span class="user-streak-tag" title="Daily streak">🔥 <span id="sidebar-streak-val">0</span></span>
+        </div>
+        <div class="user-level-row">
+          <span id="sidebar-level-val">Lvl 1</span>
+          <span id="sidebar-xp-val">0 XP</span>
+        </div>
+      </div>
+
+      <div class="footer-action-row">
+        <button class="theme-toggle-btn" id="btn-sidebar-theme-toggle" aria-label="Toggle theme">
+          <span class="theme-icon-indicator">🌓</span>
+        </button>
+        <span class="version-badge">v1.1.0</span>
+      </div>
+    </footer>
+  </aside>
+
+  <!-- Notification Toaster Container (populated dynamically) -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- SPA Views Core Workspace -->
+  <main class="app-content-canvas" id="app-content-canvas">
+    
+    <!-- 1. Home Panel -->
+    <div id="view-home" class="view-panel active"></div>
+
+    <!-- 2. Learn Panel -->
+    <div id="view-learn" class="view-panel"></div>
+
+    <!-- 3. Notes Panel -->
+    <div id="view-notes" class="view-panel"></div>
+
+    <!-- 4. PDF Panel -->
+    <div id="view-pdf" class="view-panel"></div>
+
+    <!-- 5. Quiz Panel -->
+    <div id="view-quiz" class="view-panel"></div>
+
+    <!-- 6. Dashboard Panel -->
+    <div id="view-dashboard" class="view-panel"></div>
+
+    <!-- 7. Settings Panel -->
+    <div id="view-settings" class="view-panel"></div>
+
+  </main>
+
+  <!-- App modular coordinator entry script -->
+  <script type="module" src="./script.js"></script>
+</body>
+</html>
