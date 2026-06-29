@@ -603,25 +603,10 @@ class LearnView {
           <!-- 11. Suggested Videos -->
           <section class="guide-section">
             <div class="section-badge">11. Suggested Video Lectures</div>
-            <div class="videos-grid">
-              ${(topicData.videos || []).map(v => {
-      const ytThumb = `https://img.youtube.com/vi/${v.videoId}/mqdefault.jpg`;
-      return `
-                  <div class="card video-card">
-                    <div class="video-thumbnail-wrapper">
-                      <img class="video-thumb" src="${ytThumb}" alt="${v.title}" />
-                      <span class="video-duration-tag">${v.duration}</span>
-                    </div>
-                    <div class="video-info">
-                      <div class="video-channel-tag">${v.channel}</div>
-                      <h4 class="video-title">${v.title}</h4>
-                      <a class="btn btn-primary btn-sm btn-block" href="https://www.youtube.com/watch?v=${v.videoId}" target="_blank" rel="noopener noreferrer">
-                        Watch on YouTube ↗
-                      </a>
-                    </div>
-                  </div>
-                `;
-    }).join("")}
+            <div id="videos-section-container">
+              <div class="videos-loading-state" style="display:flex;align-items:center;gap:10px;color:var(--text-muted);font-size:0.9rem;">
+                <span style="animation: spin 1s linear infinite; display:inline-block;">⏳</span> Loading videos...
+              </div>
             </div>
           </section>
         </div>
@@ -629,6 +614,125 @@ class LearnView {
     `;
 
     this.bindGuideEvents(container, topicData);
+    // Load videos asynchronously after the guide is painted
+    this.loadVideos(container, topicData.topic);
+  }
+
+  async loadVideos(container, topic) {
+    const videoContainer = container.querySelector("#videos-section-container");
+    if (!videoContainer) return;
+
+    const ytKey = store.getYouTubeApiKey();
+
+    if (!ytKey) {
+      // ── Fallback: no API key — show curated search links ──
+      const searchQueries = [
+        `${topic} lecture explained`,
+        `${topic} exam preparation`,
+        `${topic} concepts and problems`
+      ];
+      videoContainer.innerHTML = `
+        <div class="yt-no-key-notice" style="
+          background: rgba(255,255,255,0.04);
+          border: 1px dashed var(--border-color);
+          border-radius: var(--radius-lg);
+          padding: 20px 24px;
+          margin-bottom: 8px;
+        ">
+          <p style="color:var(--text-secondary);font-size:0.88rem;margin-bottom:14px;">
+            📺 Add a <strong>YouTube API Key</strong> in <span style="color:var(--color-primary);">Settings → YouTube API Key</span> for auto-loaded video lectures.
+            Until then, search directly:
+          </p>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            ${searchQueries.map(q => `
+              <a
+                href="https://www.youtube.com/results?search_query=${encodeURIComponent(q)}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-outline btn-sm"
+                style="text-align:left;justify-content:flex-start;gap:8px;"
+              >
+                🔍 ${q}
+              </a>
+            `).join("")}
+          </div>
+        </div>
+      `;
+      return;
+    }
+
+    // ── YouTube Data API v3 search ──
+    try {
+      const searchQuery = encodeURIComponent(`${topic} lecture`);
+      const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchQuery}&type=video&videoCategoryId=27&maxResults=4&relevanceLanguage=en&key=${ytKey}`;
+
+      const resp = await fetch(url);
+      if (!resp.ok) {
+        const errData = await resp.json().catch(() => ({}));
+        throw new Error(errData?.error?.message || `YouTube API error ${resp.status}`);
+      }
+
+      const data = await resp.json();
+      const items = data.items || [];
+
+      if (items.length === 0) {
+        videoContainer.innerHTML = `<p style="color:var(--text-muted);font-size:0.9rem;">No videos found for this topic.</p>`;
+        return;
+      }
+
+      videoContainer.innerHTML = `
+        <div class="videos-grid">
+          ${items.map(item => {
+            const vid = item.id.videoId;
+            const snip = item.snippet;
+            const thumb = snip.thumbnails?.medium?.url || snip.thumbnails?.default?.url || "";
+            const channel = snip.channelTitle || "";
+            const title = snip.title || "";
+            return `
+              <div class="card video-card">
+                <div class="video-thumbnail-wrapper">
+                  <img class="video-thumb" src="${thumb}" alt="${title}" loading="lazy" />
+                  <span class="video-duration-tag">▶ YouTube</span>
+                </div>
+                <div class="video-info">
+                  <div class="video-channel-tag">${channel}</div>
+                  <h4 class="video-title">${title}</h4>
+                  <a class="btn btn-primary btn-sm btn-block"
+                     href="https://www.youtube.com/watch?v=${vid}"
+                     target="_blank"
+                     rel="noopener noreferrer">
+                    Watch on YouTube ↗
+                  </a>
+                </div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      `;
+    } catch (err) {
+      console.warn("YouTube fetch failed:", err.message);
+      videoContainer.innerHTML = `
+        <div class="yt-no-key-notice" style="
+          background: rgba(255,80,80,0.06);
+          border: 1px dashed rgba(255,80,80,0.3);
+          border-radius: var(--radius-lg);
+          padding: 20px 24px;
+        ">
+          <p style="color:var(--color-danger,#f87171);font-size:0.88rem;margin-bottom:14px;">
+            ⚠️ Could not load videos: <em>${err.message}</em>
+          </p>
+          <a
+            href="https://www.youtube.com/results?search_query=${encodeURIComponent(topic + ' lecture')}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline btn-sm"
+          >
+            🔍 Search "${topic}" on YouTube ↗
+          </a>
+        </div>
+      `;
+    }
+
   }
 
   resetTopicStates() {

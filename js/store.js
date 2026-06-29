@@ -149,6 +149,19 @@ class GameStore {
     }
     this.notify();
   }
+
+  getYouTubeApiKey() {
+    return localStorage.getItem("vidyaverse_yt_key") || "";
+  }
+
+  setYouTubeApiKey(key) {
+    if (key) {
+      localStorage.setItem("vidyaverse_yt_key", key);
+    } else {
+      localStorage.removeItem("vidyaverse_yt_key");
+    }
+    this.notify();
+  }
 }
 
 export const store = new GameStore();

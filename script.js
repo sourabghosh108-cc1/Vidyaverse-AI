@@ -15,6 +15,8 @@ import { learnView } from "./js/views/learnView.js";
 import { notesView } from "./js/views/notesView.js";
 import { pdfView } from "./js/views/pdfView.js";
 import { quizView } from "./js/views/quizView.js";
+import { focusTimerView } from "./js/views/focusTimerView.js";
+import { arcadeView } from "./js/views/arcadeView.js";
 import { dashboardView } from "./js/views/dashboardView.js";
 import { settingsView } from "./js/views/settingsView.js";
 
@@ -52,6 +54,16 @@ document.addEventListener("DOMContentLoaded", () => {
   router.addRoute("quiz", (params) => {
     updateActiveSidebarLink("quiz");
     quizView.render(params);
+  });
+
+  router.addRoute("focus", () => {
+    updateActiveSidebarLink("focus");
+    focusTimerView.render();
+  });
+
+  router.addRoute("arcade", () => {
+    updateActiveSidebarLink("arcade");
+    arcadeView.render();
   });
 
   router.addRoute("dashboard", () => {

@@ -56,13 +56,29 @@ class SettingsView {
             <div class="card settings-api-card" style="margin-top: 24px;">
               <h3>🤖 AI API Key (Optional)</h3>
               <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px;">
-                Enter your Anthropic API Key to enable real in-browser AI summaries of your PDFs.
+                Enter your Anthropic API Key to enable Claude-powered PDF summaries and AI-generated study notes.
               </p>
               <div class="form-group">
                 <label for="settings-api-key-input">Anthropic API Key</label>
                 <div class="input-inline-wrap">
                   <input type="password" id="settings-api-key-input" value="${store.getAnthropicApiKey()}" placeholder="sk-ant-..." />
                   <button class="btn btn-primary" id="btn-settings-save-key">Save Key</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- YouTube API Key Settings -->
+            <div class="card settings-api-card" style="margin-top: 16px;">
+              <h3>📺 YouTube API Key (Optional)</h3>
+              <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px;">
+                Enter your YouTube Data API v3 key to load real, topic-matched video lectures on every study guide page.
+                Get a free key from <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary);">Google Cloud Console</a>.
+              </p>
+              <div class="form-group">
+                <label for="settings-yt-key-input">YouTube Data API v3 Key</label>
+                <div class="input-inline-wrap">
+                  <input type="password" id="settings-yt-key-input" value="${store.getYouTubeApiKey()}" placeholder="AIza..." />
+                  <button class="btn btn-primary" id="btn-settings-save-yt-key">Save Key</button>
                 </div>
               </div>
             </div>
@@ -154,7 +170,7 @@ class SettingsView {
       }
     });
 
-    // Save API Key
+    // Save API Key (Anthropic)
     const saveKeyBtn = container.querySelector("#btn-settings-save-key");
     const keyInput = container.querySelector("#settings-api-key-input");
     if (saveKeyBtn && keyInput) {
@@ -162,12 +178,28 @@ class SettingsView {
         const newKey = keyInput.value.trim();
         store.setAnthropicApiKey(newKey);
         if (newKey) {
-          ui.showToast("API Key saved successfully!", "success");
+          ui.showToast("Anthropic API Key saved!", "success");
         } else {
-          ui.showToast("API Key cleared successfully!", "warning");
+          ui.showToast("Anthropic API Key cleared.", "warning");
         }
       });
     }
+
+    // Save YouTube API Key
+    const saveYtKeyBtn = container.querySelector("#btn-settings-save-yt-key");
+    const ytKeyInput = container.querySelector("#settings-yt-key-input");
+    if (saveYtKeyBtn && ytKeyInput) {
+      saveYtKeyBtn.addEventListener("click", () => {
+        const newKey = ytKeyInput.value.trim();
+        store.setYouTubeApiKey(newKey);
+        if (newKey) {
+          ui.showToast("YouTube API Key saved! Videos will load on study pages.", "success");
+        } else {
+          ui.showToast("YouTube API Key cleared.", "warning");
+        }
+      });
+    }
+
 
     // Save Exam
     examSelect.addEventListener("change", (e) => {
