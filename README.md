@@ -7,9 +7,9 @@
 [![Project Category](https://img.shields.io/badge/Kaggle-Intensive%20AI%20Capstone-blueviolet?style=flat-square&logo=kaggle)](https://www.kaggle.com)
 [![Offline-First](https://img.shields.io/badge/Architecture-Offline--First%20%2F%20Private-success?style=flat-square&logo=speedtest)](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps)
 
-Vidyaverse AI 2.0 is a premium, client-side, offline-first gamified study workspace and structured search engine designed for Indian students preparing for competitive national entrance exams (Class 10, Class 12, JEE, NEET, CUET, and CA Foundation). 
+Vidyaverse AI 1.0 is a premium, client-side, offline-first gamified study workspace and structured search engine designed for Indian students preparing for competitive national entrance exams (Class 10, Class 12, JEE, NEET, CUET, and CA Foundation). 
 
-Designed to combat academic fatigue, high subscription barriers, and bloated, ad-ridden alternatives, Vidyaverse AI 2.0 is completely free, secure, runs locally in the browser, and stores all user data in a private local sandbox.
+Designed to combat academic fatigue, high subscription barriers, and bloated, ad-ridden alternatives, Vidyaverse AI 1.0 is completely free, secure, runs locally in the browser, and stores all user data in a private local sandbox.
 
 ---
 
@@ -19,11 +19,11 @@ Students preparing for high-stakes Indian exams (JEE, NEET, Board exams) face im
 
 ---
 
-## 💡 The Solution: Vidyaverse AI 2.0
+## 💡 The Solution: Vidyaverse AI 1.0
 
-Vidyaverse AI 2.0 provides a single, distraction-free environment that functions offline-first, requiring no database registrations, user logins, or backend servers. It leverages the client's browser capability for fuzzy-search lookup, text-extraction, and API integration.
+Vidyaverse AI 1.0 provides a single, distraction-free environment that functions offline-first, requiring no database registrations, user logins, or backend servers. It leverages the client's browser capability for fuzzy-search lookup, text-extraction, and API integration.
 
-### Core Upgraded Capabilities in v2.0:
+### Core Upgraded Capabilities in v1.0:
 *   **Comprehensive Knowledge Database**: Replaced random mockup responses with a structured JSON curriculum consisting of **50 genuine, highly detailed chapters** across Physics, Chemistry, Mathematics, Biology, CA Foundation Accounting, and CUET Quantitative Aptitude.
 *   **Smart Fuzzy Search**: A custom search engine that combines exact matching, substring overlap, token overlap, and **Levenshtein character-distance matching** to resolve typos and aliases (e.g., searching `"Coulomb Law"`, `"Coulomb's Law"`, or `"Electrostatic Force"` all successfully map to the same Electrostatics chapter).
 *   **10-Part Interactive Study Guide**:
@@ -45,7 +45,7 @@ Vidyaverse AI 2.0 provides a single, distraction-free environment that functions
 
 ## 🤖 Agentic Architecture (Hackathon ADK Concept)
 
-Vidyaverse AI 2.0 models its modular views after a client-side multi-agent network, coordinated by a central routing dispatcher.
+Vidyaverse AI 1.0 models its modular views after a client-side multi-agent network, coordinated by a central routing dispatcher.
 
 ### Workflow Diagram
 
@@ -164,7 +164,7 @@ main().catch(console.error);
 
 ## 🔒 Security & Sandbox Features
 
-Vidyaverse AI 2.0 is built around strict data privacy and student security:
+Vidyaverse AI 1.0 is built around strict data privacy and student security:
 1.  **Zero Backend Data Collection**: All study logs, notes, levels, and badges are stored on the student's browser sandbox via `localStorage`. No analytical telemetry or trackers are active.
 2.  **API Key Safety**: If the user inputs an Anthropic API Key for PDF parsing:
     *   The key is stored strictly within the client's local browser memory.
