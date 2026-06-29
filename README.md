@@ -1,4 +1,4 @@
-# Vidyaverse AI 2.0 🚀
+# Vidyaverse AI 1.0 🚀
 > **Personalized Client‑Side Learning Universe & Gamified Study Companion**
 
 [![Vercel Deployment](https://img.shields.io/badge/Vercel-Deployed-black?style=flat-square&logo=vercel)](https://vercel.com)
@@ -7,7 +7,7 @@
 [![Project Category](https://img.shields.io/badge/Kaggle-Intensive%20AI%20Capstone-blueviolet?style=flat-square&logo=kaggle)](https://www.kaggle.com)
 [![Offline‑First](https://img.shields.io/badge/Architecture-Offline--First%20%2F%20Private-success?style=flat-square&logo=speedtest)](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps)
 
-Vidyaverse AI 2.0 is a **premium, client‑side, offline‑first gamified study workspace** and structured search engine built for Indian students preparing for competitive entrance exams (Class 10, Class 12, JEE, NEET, CUET, CA Foundation). It runs entirely in the browser, stores all data locally, and is completely free.
+Vidyaverse AI 1.0 is a **premium, client‑side, offline‑first gamified study workspace** and structured search engine built for Indian students preparing for competitive entrance exams (Class 10, Class 12, JEE, NEET, CUET, CA Foundation). It runs entirely in the browser, stores all data locally, and is completely free.
 
 ---
 
@@ -110,8 +110,6 @@ All actions automatically persist; reload the page and your progress is retained
 # Clone the repo
 git clone <repo-url>
 cd app
-# Start a simple static server (Python recommended)
-python -m http.server 8000
 # or using Node.js
 npx live-server
 ```
