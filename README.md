@@ -152,8 +152,7 @@ Open **`http://localhost:8000`** in your browser.
 - Add server‑side persistence (Firestore, IndexedDB sync).
 - Implement global & weekly leaderboards.
 - Expand the Arcade with more educational mini‑games.
-- Add dark‑mode toggle via CSS variables.
-- Internationalise the UI (i18n JSON files).
+- Internationalise the UI with multiplayer (i18n JSON files).
 
 ---
 
