@@ -234,10 +234,8 @@ To run the application locally without hitting CORS browser safety blocks for lo
 1.  Clone or download the project files.
 2.  Open your terminal in the project directory and start a web server:
     ```bash
-    # Using Python (Recommended)
-    python -m http.server 8000
     
-    # Or using Node.js
+    # Using Node.js
     npx live-server
     ```
 3.  Open **`http://localhost:8000`** in your browser.
