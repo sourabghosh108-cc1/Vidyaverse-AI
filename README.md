@@ -244,10 +244,4 @@ To run the application locally without hitting CORS browser safety blocks for lo
 
 ---
 
-## ☁️ Vercel Deployment
 
-Deploy the application instantly on Vercel:
-1.  Push the repository to GitHub.
-2.  Log into your [Vercel Dashboard](https://vercel.com) and click **Add New Project**.
-3.  Select the repository. The **Framework Preset** should be left as **"Other"**.
-4.  Click **Deploy**. Vercel will build the workspace and optimize cache control headers for JSON resources based on the local `vercel.json` configurations.
