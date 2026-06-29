@@ -52,8 +52,23 @@ class SettingsView {
               </div>
             </div>
 
+            <!-- AI API Key Settings -->
+            <div class="card settings-api-card" style="margin-top: 24px;">
+              <h3>🤖 AI API Key (Optional)</h3>
+              <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px;">
+                Enter your Anthropic API Key to enable real in-browser AI summaries of your PDFs.
+              </p>
+              <div class="form-group">
+                <label for="settings-api-key-input">Anthropic API Key</label>
+                <div class="input-inline-wrap">
+                  <input type="password" id="settings-api-key-input" value="${store.getAnthropicApiKey()}" placeholder="sk-ant-..." />
+                  <button class="btn btn-primary" id="btn-settings-save-key">Save Key</button>
+                </div>
+              </div>
+            </div>
+
             <!-- Backup & Restore -->
-            <div class="card settings-backup-card">
+            <div class="card settings-backup-card" style="margin-top: 24px;">
               <h3>📂 Study Data Backup</h3>
               <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">
                 Save your progress (XP, streaks, unlocked badges) as a JSON file to transfer between browsers or backups.
@@ -108,7 +123,7 @@ class SettingsView {
             <!-- About Vidyaverse AI -->
             <div class="card about-box-card" style="margin-top: 32px;">
               <h3>🚀 About Vidyaverse AI</h3>
-              <p style="font-size: 0.9rem; margin-bottom: 12px;"><strong>Version:</strong> 1.1.0-MVP (Beta)</p>
+              <p style="font-size: 0.9rem; margin-bottom: 12px;"><strong>Version:</strong> 2.0.0-Beta</p>
               <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
                 Vidyaverse AI is a client-side gamified study workspace designed for competitive Indian exams. We respect user privacy by saving all logs locally on your machine without server-side databases or third-party cookies.
               </p>
@@ -138,6 +153,21 @@ class SettingsView {
         ui.showToast("Username updated successfully!", "success");
       }
     });
+
+    // Save API Key
+    const saveKeyBtn = container.querySelector("#btn-settings-save-key");
+    const keyInput = container.querySelector("#settings-api-key-input");
+    if (saveKeyBtn && keyInput) {
+      saveKeyBtn.addEventListener("click", () => {
+        const newKey = keyInput.value.trim();
+        store.setAnthropicApiKey(newKey);
+        if (newKey) {
+          ui.showToast("API Key saved successfully!", "success");
+        } else {
+          ui.showToast("API Key cleared successfully!", "warning");
+        }
+      });
+    }
 
     // Save Exam
     examSelect.addEventListener("change", (e) => {

@@ -1,13 +1,31 @@
 /**
- * PDF Summarizer View Module (Upgraded to v2.0)
+ * PDF Summarizer View Module (Upgraded to v2.0 with Claude API Integration)
  * Handles document uploads, real-time PDF text extraction using PDF.js,
  * automatic matching with the topic database, fallback heuristic summarizing,
- * and summaries downloading.
+ * Claude API summaries, and summaries downloading/copying.
+ * Includes timeout protection and E2E error handling.
  */
 
 import { store } from "../store.js";
 import { ui } from "../ui.js";
 import { gamification } from "../gamification.js";
+
+// Helper to run promises with a timeout
+const withTimeout = (promise, ms, errorMessage) => {
+  let timeoutId;
+  const timeoutPromise = new Promise((_, reject) => {
+    timeoutId = setTimeout(() => {
+      reject(new Error(errorMessage));
+    }, ms);
+  });
+  return Promise.race([
+    promise.then(val => {
+      clearTimeout(timeoutId);
+      return val;
+    }),
+    timeoutPromise
+  ]);
+};
 
 // Helper to load PDF.js dynamically from CDN
 function loadPDFJS() {
@@ -47,7 +65,6 @@ async function extractTextFromPDF(file, onProgress) {
     const pageText = textContent.items.map(item => item.str).join(" ");
     fullText += pageText + "\n";
     
-    // Scale pages extraction progress from 20% to 80%
     const percent = Math.round(20 + (i / numPages) * 60);
     onProgress(`Extracting page ${i} of ${numPages}...`, percent);
   }
@@ -70,12 +87,10 @@ async function matchPDFToDatabase(text) {
     for (const t of db) {
       let count = 0;
       
-      // Match topic title (case-insensitive)
       const regexTopic = new RegExp(t.topic.toLowerCase().replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g');
       const matchesTopic = textLower.match(regexTopic);
-      if (matchesTopic) count += matchesTopic.length * 6; // High weight
+      if (matchesTopic) count += matchesTopic.length * 6;
       
-      // Match aliases
       if (t.aliases) {
         t.aliases.forEach(alias => {
           const regexAlias = new RegExp(alias.toLowerCase().replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g');
@@ -84,7 +99,6 @@ async function matchPDFToDatabase(text) {
         });
       }
 
-      // Match keywords
       if (t.keywords) {
         t.keywords.forEach(kw => {
           const regexKw = new RegExp('\\b' + kw.toLowerCase().replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + '\\b', 'g');
@@ -93,7 +107,7 @@ async function matchPDFToDatabase(text) {
         });
       }
       
-      if (count > highestCount && count > 4) { // Requires a minimum number of matches
+      if (count > highestCount && count > 4) {
         highestCount = count;
         bestMatch = t;
       }
@@ -112,14 +126,11 @@ function generateHeuristicSummary(filename, text) {
   const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
   const cleanedSentences = sentences.map(s => s.trim()).filter(s => s.length > 8);
   
-  // 1. Chapter summary (Abstract)
   const abstract = cleanedSentences.slice(0, 3).join(" ") || "This document contains parsed educational material covering the topics outlined in the file.";
   
-  // 2. Key Concepts
   const concepts = [];
   lines.forEach(line => {
     if (line.length > 5 && line.length < 50 && (line.endsWith(":") || /^[A-Z]/.test(line)) && concepts.length < 3) {
-      // Find the next line for description
       const descLine = lines[lines.indexOf(line) + 1] || "Core structural framework.";
       if (descLine.length > 10) {
         concepts.push({
@@ -136,7 +147,6 @@ function generateHeuristicSummary(filename, text) {
     });
   }
   
-  // 3. Definitions
   const definitions = [];
   const defRegex = /\b([a-zA-Z\s]{3,24})\b\s+(?:is defined as|refers to|is the|is a|means)\s+([^.]+)\./i;
   cleanedSentences.forEach(s => {
@@ -153,7 +163,6 @@ function generateHeuristicSummary(filename, text) {
     definitions.push({ term: "Equilibrium Boundary", def: "The physical limits or criteria under which the system equations remain valid." });
   }
   
-  // 4. Formulas
   const formulas = [];
   lines.forEach(line => {
     if ((line.includes("=") || line.includes("+") || line.includes("-") || line.includes("*")) && /\d|[a-zA-Z]/.test(line) && line.length < 60 && formulas.length < 3) {
@@ -172,7 +181,6 @@ function generateHeuristicSummary(filename, text) {
     });
   }
 
-  // 5. Exam Tips
   const tips = [];
   cleanedSentences.forEach(s => {
     if ((s.toLowerCase().includes("should") || s.toLowerCase().includes("must") || s.toLowerCase().includes("important") || s.toLowerCase().includes("always")) && tips.length < 3) {
@@ -181,7 +189,6 @@ function generateHeuristicSummary(filename, text) {
   });
   const examTips = tips.join(" ") || "Review standard constants, verify units before calculation, and structure answers in numbered bullet points.";
 
-  // 6. Revision Notes
   const revision = [];
   lines.forEach(line => {
     if ((line.startsWith("-") || line.startsWith("*") || /^\d+\./.test(line)) && revision.length < 5) {
@@ -209,6 +216,7 @@ class PDFView {
   constructor() {
     this.currentSummaryTitle = "";
     this.currentSummaryContent = "";
+    this.summaryLength = "medium"; // Defaults to medium
   }
 
   render() {
@@ -243,6 +251,16 @@ class PDFView {
               <button class="close-btn" id="btn-remove-file" title="Remove file">×</button>
             </div>
 
+            <!-- Summary Length Selector -->
+            <div class="summary-length-selector-container" style="margin-top:20px; margin-bottom: 20px;">
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:8px; color:var(--text-secondary);">Summary Length</label>
+              <div class="length-buttons-group" style="display:flex; gap:8px;">
+                <button class="btn btn-outline btn-sm" data-length="short" style="flex:1;">Short</button>
+                <button class="btn btn-primary btn-sm" data-length="medium" style="flex:1;">Medium</button>
+                <button class="btn btn-outline btn-sm" data-length="long" style="flex:1;">Long</button>
+              </div>
+            </div>
+
             <button class="btn btn-primary btn-block" id="btn-summarize-pdf" disabled>
               ⚡ Summarize Document
             </button>
@@ -250,11 +268,16 @@ class PDFView {
 
           <!-- Summary display workspace -->
           <div class="pdf-summary-workspace card">
-            <div class="workspace-header">
+            <div class="workspace-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
               <h3>Summarization Output</h3>
-              <button class="btn btn-outline btn-sm" id="btn-download-summary" disabled>
-                💾 Download Summary
-              </button>
+              <div style="display:flex; gap:8px;">
+                <button class="btn btn-outline btn-sm" id="btn-copy-summary" disabled>
+                  📋 Copy
+                </button>
+                <button class="btn btn-outline btn-sm" id="btn-download-summary" disabled>
+                  💾 Download
+                </button>
+              </div>
             </div>
 
             <!-- Loader Progress Bar -->
@@ -291,12 +314,28 @@ class PDFView {
     const removeBtn = container.querySelector("#btn-remove-file");
     const summarizeBtn = container.querySelector("#btn-summarize-pdf");
     const downloadBtn = container.querySelector("#btn-download-summary");
+    const copyBtn = container.querySelector("#btn-copy-summary");
     const loader = container.querySelector("#pdf-loader");
     const progressFill = container.querySelector("#pdf-progress-fill");
     const stepText = container.querySelector("#progress-step-text");
     const percentText = container.querySelector("#progress-percent-text");
     const resultsContainer = container.querySelector("#pdf-results");
     const placeholder = container.querySelector("#pdf-results-placeholder");
+
+    // Length selection buttons
+    const lengthButtons = container.querySelectorAll(".length-buttons-group button");
+    
+    lengthButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        lengthButtons.forEach(b => {
+          b.classList.remove("btn-primary");
+          b.classList.add("btn-outline");
+        });
+        btn.classList.remove("btn-outline");
+        btn.classList.add("btn-primary");
+        this.summaryLength = btn.getAttribute("data-length");
+      });
+    });
 
     let activeFile = null;
 
@@ -326,7 +365,6 @@ class PDFView {
     });
 
     const handleFileSelect = (file) => {
-      // Check file type
       if (!file.name.toLowerCase().endsWith(".pdf")) {
         ui.showToast("Only PDF files are supported.", "warning");
         return;
@@ -360,6 +398,7 @@ class PDFView {
       placeholder.style.display = "none";
       resultsContainer.innerHTML = "";
       downloadBtn.setAttribute("disabled", "true");
+      copyBtn.setAttribute("disabled", "true");
 
       const updateProgress = (step, percent) => {
         progressFill.style.width = `${percent}%`;
@@ -367,56 +406,172 @@ class PDFView {
         stepText.textContent = step;
       };
 
-      try {
-        const { text, numPages } = await extractTextFromPDF(activeFile, updateProgress);
-        
-        if (!text || text.trim().length === 0) {
-          throw new Error("Empty text extracted.");
-        }
-        
-        updateProgress("Analyzing and matching content...", 85);
-        
-        // Run matching or fallback
-        const matched = await matchPDFToDatabase(text);
-        let summaryData = null;
-        
-        if (matched) {
-          summaryData = matched;
-          updateProgress("Matched to topic: " + matched.topic, 95);
-        } else {
-          summaryData = generateHeuristicSummary(activeFile.name, text);
-          updateProgress("Generating heuristic summaries...", 95);
-        }
-        
-        setTimeout(() => {
-          loader.classList.add("hidden");
-          summarizeBtn.removeAttribute("disabled");
-          
-          const summaryHTML = this.renderGeneratedSummary(activeFile.name, summaryData);
-          resultsContainer.innerHTML = summaryHTML;
-          downloadBtn.removeAttribute("disabled");
+      console.log("PDF generation started for file:", activeFile.name);
 
-          // Gamification reward
-          store.addSummarizedPDF(activeFile.name);
-          gamification.addXP(75);
-          gamification.unlockBadge("pdf_parser");
-          ui.showToast("Document summarized! +75 XP", "success");
-        }, 500);
+      try {
+        const parsingPromise = (async () => {
+          const apiKey = store.getAnthropicApiKey();
+          
+          if (apiKey) {
+            // Real Claude API summarized path
+            updateProgress("Converting file to base64 buffer...", 30);
+            
+            const base64 = await new Promise((resolve, reject) => {
+              const reader = new FileReader();
+              reader.onload = () => {
+                const result = reader.result;
+                const base64String = result.split(',')[1];
+                resolve(base64String);
+              };
+              reader.onerror = reject;
+              reader.readAsDataURL(activeFile);
+            });
+
+            updateProgress("Sending request to Claude AI (Sonnet)...", 60);
+
+            const lengthGuide = {
+              short: '2-3 sentences',
+              medium: '4-6 sentences',
+              long: '2-3 paragraphs'
+            };
+
+            const response = await fetch('https://api.anthropic.com/v1/messages', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': apiKey,
+                'anthropic-version': '2023-06-01',
+                'anthropic-dangerous-direct-browser-access': 'true'
+              },
+              body: JSON.stringify({
+                model: 'claude-3-5-sonnet-latest',
+                max_tokens: 2000,
+                messages: [
+                  {
+                    role: 'user',
+                    content: [
+                      {
+                        type: 'document',
+                        source: {
+                          type: 'base64',
+                          media_type: 'application/pdf',
+                          data: base64
+                        }
+                      },
+                      {
+                        type: 'text',
+                        text: `Summarize this PDF document in approximately ${lengthGuide[this.summaryLength]}. Focus on the main points and key information.`
+                      }
+                    ]
+                  }
+                ]
+              })
+            });
+
+            if (!response.ok) {
+              const data = await response.json().catch(() => ({}));
+              throw new Error(data.error?.message || `API error: ${response.status}`);
+            }
+
+            const data = await response.json();
+            const summaryText = data.content[0].text;
+            
+            updateProgress("Finalizing summaries...", 95);
+            return {
+              isClaude: true,
+              overview: summaryText,
+              concepts: [],
+              definitions: [],
+              formulas: [],
+              examNotes: "",
+              revision: []
+            };
+          }
+
+          // Local offline parser fallback path
+          const { text, numPages } = await extractTextFromPDF(activeFile, updateProgress);
+          
+          if (!text || text.trim().length === 0) {
+            throw new Error("Unable to extract text from this PDF. Please try another file.");
+          }
+          
+          updateProgress("Analyzing and matching content...", 80);
+          
+          const matched = await matchPDFToDatabase(text);
+          let summaryData = null;
+          
+          if (matched) {
+            summaryData = matched;
+          } else {
+            summaryData = generateHeuristicSummary(activeFile.name, text);
+          }
+
+          // Trim/expand local summaries based on chosen length
+          if (this.summaryLength === "short") {
+            summaryData.overview = summaryData.overview.split(".").slice(0, 2).join(".") + ".";
+            summaryData.concepts = summaryData.concepts.slice(0, 1);
+            summaryData.definitions = summaryData.definitions.slice(0, 1);
+            summaryData.formulas = [];
+          } else if (this.summaryLength === "medium") {
+            summaryData.overview = summaryData.overview.split(".").slice(0, 4).join(".") + ".";
+            summaryData.concepts = summaryData.concepts.slice(0, 2);
+            summaryData.definitions = summaryData.definitions.slice(0, 2);
+          }
+
+          updateProgress("Finalizing summaries...", 95);
+          await new Promise(resolve => setTimeout(resolve, 500));
+          return summaryData;
+        })();
+
+        // Wrap parsing/summarizing in a 15s timeout
+        const summaryData = await withTimeout(parsingPromise, 15000, "Generation timed out. Please try again.");
+        
+        const summaryHTML = this.renderGeneratedSummary(activeFile.name, summaryData);
+        resultsContainer.innerHTML = summaryHTML;
+        downloadBtn.removeAttribute("disabled");
+        copyBtn.removeAttribute("disabled");
+
+        console.log("PDF generation completed successfully for file:", activeFile.name);
+        ui.showToast("Document summarized! +75 XP", "success");
+
+        store.addSummarizedPDF(activeFile.name);
+        gamification.addXP(75);
+        gamification.unlockBadge("pdf_parser");
         
       } catch (err) {
-        console.error("PDF summarization failed:", err);
-        loader.classList.add("hidden");
-        summarizeBtn.removeAttribute("disabled");
-        
+        console.error("PDF generation failed:", err);
+        console.log("PDF generation failed:", err.message);
+
+        const isTimeout = err.message.includes("timed out");
+        const displayErr = isTimeout ? "Generation timed out. Please try again." : err.message;
+
         resultsContainer.innerHTML = `
           <div class="card error-state animate-fade-in" style="border-color: var(--color-danger); padding:24px; text-align:center;">
             <span style="font-size:2.5rem; display:block; margin-bottom:12px;">⚠️</span>
             <h3 style="color: var(--color-danger); margin-bottom:8px;">Extraction Failed</h3>
-            <p>Unable to extract text from this PDF. Please try another file.</p>
+            <p>${displayErr}</p>
           </div>
         `;
-        ui.showToast("Unable to extract text from this PDF. Please try another file.", "danger");
+        ui.showToast(displayErr, "danger");
+      } finally {
+        loader.classList.add("hidden");
+        summarizeBtn.removeAttribute("disabled");
       }
+    });
+
+    copyBtn.addEventListener("click", () => {
+      if (!this.currentSummaryContent) return;
+
+      navigator.clipboard.writeText(this.currentSummaryContent).then(() => {
+        copyBtn.textContent = "✅ Copied!";
+        ui.showToast("Summary copied to clipboard!", "success");
+        setTimeout(() => {
+          copyBtn.textContent = "📋 Copy";
+        }, 2000);
+      }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+        ui.showToast("Failed to copy summary.", "danger");
+      });
     });
 
     downloadBtn.addEventListener("click", () => {
@@ -439,6 +594,26 @@ class PDFView {
   renderGeneratedSummary(filename, data) {
     const rawName = filename.replace(/\.[^/.]+$/, ""); // Strip extension
     this.currentSummaryTitle = `${rawName}-summary`;
+
+    if (data.isClaude) {
+      this.currentSummaryContent = `==================================================
+📄 CLAUDE AI SUMMARY: ${filename.toUpperCase()}
+🤖 ANALYZED BY: Anthropic Claude Sonnet 3.5
+==================================================
+
+${data.overview}`;
+
+      return `
+        <div class="summary-results-wrap animate-fade-in">
+          <div class="result-card">
+            <h4>📁 Claude AI Summary of: ${filename}</h4>
+            <div style="background: var(--bg-color); padding:20px; border-radius:var(--radius-sm); border:1px solid var(--border-color); color:var(--text-primary); white-space:pre-wrap; line-height:1.6; max-height:400px; overflow-y:auto; margin-top:12px; font-size: 0.95rem;">
+              ${data.overview}
+            </div>
+          </div>
+        </div>
+      `;
+    }
 
     const summaryText = `==================================================
 📄 DOCUMENT SUMMARY: ${filename.toUpperCase()}

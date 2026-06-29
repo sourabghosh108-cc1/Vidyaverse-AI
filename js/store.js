@@ -85,7 +85,7 @@ class GameStore {
   getState() {
     return this.state;
   }
-  
+
   getProfile() {
     return this.state.profile;
   }
@@ -135,6 +135,19 @@ class GameStore {
   incrementQuizzesCompleted() {
     this.state.profile.quizzesCompletedCount += 1;
     this.saveState();
+  }
+
+  getAnthropicApiKey() {
+    return localStorage.getItem("vidyaverse_ai_claude_key") || "";
+  }
+
+  setAnthropicApiKey(key) {
+    if (key) {
+      localStorage.setItem("vidyaverse_ai_claude_key", key);
+    } else {
+      localStorage.removeItem("vidyaverse_ai_claude_key");
+    }
+    this.notify();
   }
 }
 

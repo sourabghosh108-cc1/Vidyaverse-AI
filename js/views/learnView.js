@@ -14,7 +14,7 @@ class LearnView {
   constructor() {
     this.activeFlashcardIndex = 0;
     this.isFlashcardFlipped = false;
-    
+
     this.activeQuizIndex = 0;
     this.quizSelectedOption = null;
     this.quizAnswered = false;
@@ -324,10 +324,10 @@ class LearnView {
           <div class="card search-info-card">
             <h4>🕒 Recent Searches</h4>
             <div class="recent-searches-list" id="recent-searches-list">
-              ${recentUnique.length > 0 
-                ? recentUnique.map(t => `<button class="recent-search-item" data-topic="${t}">${t}</button>`).join("") 
-                : `<span class="no-recent-searches">No recent searches yet.</span>`
-              }
+              ${recentUnique.length > 0
+        ? recentUnique.map(t => `<button class="recent-search-item" data-topic="${t}">${t}</button>`).join("")
+        : `<span class="no-recent-searches">No recent searches yet.</span>`
+      }
             </div>
           </div>
           
@@ -605,8 +605,8 @@ class LearnView {
             <div class="section-badge">11. Suggested Video Lectures</div>
             <div class="videos-grid">
               ${(topicData.videos || []).map(v => {
-                const ytThumb = `https://img.youtube.com/vi/${v.videoId}/mqdefault.jpg`;
-                return `
+      const ytThumb = `https://img.youtube.com/vi/${v.videoId}/mqdefault.jpg`;
+      return `
                   <div class="card video-card">
                     <div class="video-thumbnail-wrapper">
                       <img class="video-thumb" src="${ytThumb}" alt="${v.title}" />
@@ -621,7 +621,7 @@ class LearnView {
                     </div>
                   </div>
                 `;
-              }).join("")}
+    }).join("")}
             </div>
           </section>
         </div>
@@ -634,7 +634,7 @@ class LearnView {
   resetTopicStates() {
     this.activeFlashcardIndex = 0;
     this.isFlashcardFlipped = false;
-    
+
     this.activeQuizIndex = 0;
     this.quizSelectedOption = null;
     this.quizAnswered = false;
@@ -645,7 +645,7 @@ class LearnView {
   renderFlashcardWidget(topicData) {
     const flashcards = topicData.flashcards || [];
     if (flashcards.length === 0) return `<p class="no-recent-searches">No flashcards available for this topic.</p>`;
-    
+
     const card = flashcards[this.activeFlashcardIndex];
     return `
       <div class="flashcard-section-container">
@@ -747,23 +747,23 @@ class LearnView {
         </div>
         <div class="mini-quiz-options">
           ${q.options.map((opt, idx) => {
-            let cls = "";
-            if (this.quizAnswered) {
-              if (idx === q.correctAnswerIndex) {
-                cls = "correct";
-              } else if (idx === this.quizSelectedOption) {
-                cls = "incorrect";
-              }
-            } else if (this.quizSelectedOption === idx) {
-              cls = "selected";
-            }
-            return `
+      let cls = "";
+      if (this.quizAnswered) {
+        if (idx === q.correctAnswerIndex) {
+          cls = "correct";
+        } else if (idx === this.quizSelectedOption) {
+          cls = "incorrect";
+        }
+      } else if (this.quizSelectedOption === idx) {
+        cls = "selected";
+      }
+      return `
               <button class="mini-quiz-option-btn ${cls}" data-idx="${idx}" ${this.quizAnswered ? "disabled" : ""}>
                 <strong style="color: var(--text-muted)">${String.fromCharCode(65 + idx)}</strong>
                 <span>${opt}</span>
               </button>
             `;
-          }).join("")}
+    }).join("")}
         </div>
 
         ${this.quizAnswered ? `
@@ -854,26 +854,26 @@ class LearnView {
   renderLearningPathWidget(topicData) {
     const path = topicData.learningPath || [];
     if (path.length === 0) return "";
-    
+
     return `
       <div class="card" style="margin: 20px 0;">
         <h4>🗺️ Learning Path</h4>
         <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Follow this recommended syllabus order to master this unit.</p>
         <div class="learning-path-timeline">
           ${path.map((step, idx) => {
-            const isActive = step.toLowerCase() === topicData.topic.toLowerCase() ? "active" : "";
-            const elements = [];
-            elements.push(`
+      const isActive = step.toLowerCase() === topicData.topic.toLowerCase() ? "active" : "";
+      const elements = [];
+      elements.push(`
               <div class="learning-path-step ${isActive}" title="${step}">
                 <div class="step-num">${idx + 1}</div>
                 <div class="step-name">${step}</div>
               </div>
             `);
-            if (idx < path.length - 1) {
-              elements.push(`<div class="learning-path-arrow">➔</div>`);
-            }
-            return elements.join("");
-          }).join("")}
+      if (idx < path.length - 1) {
+        elements.push(`<div class="learning-path-arrow">➔</div>`);
+      }
+      return elements.join("");
+    }).join("")}
         </div>
       </div>
     `;
@@ -889,13 +889,13 @@ class LearnView {
         <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Students who studied ${topicData.topic} also studied these related chapters:</p>
         <div class="recent-searches-list" id="related-topics-list">
           ${related.map(r => {
-            const label = r.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-            return `
+      const label = r.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+      return `
               <button class="recent-search-item" data-related-id="${r}">
                 🔗 ${label}
               </button>
             `;
-          }).join("")}
+    }).join("")}
         </div>
       </div>
     `;

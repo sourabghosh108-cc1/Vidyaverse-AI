@@ -2,12 +2,30 @@
  * Notes View Module (AI Notes Generator - Upgraded to v2.0)
  * Builds structured study sheets, provides manual editing,
  * and handles downloading files, using the educational database.
+ * Includes timeout protection and E2E error handling.
  */
 
 import { store } from "../store.js";
 import { ui } from "../ui.js";
 import { gamification } from "../gamification.js";
 import { mockSearch } from "../mockSearch.js";
+
+// Helper to run promises with a timeout
+const withTimeout = (promise, ms, errorMessage) => {
+  let timeoutId;
+  const timeoutPromise = new Promise((_, reject) => {
+    timeoutId = setTimeout(() => {
+      reject(new Error(errorMessage));
+    }, ms);
+  });
+  return Promise.race([
+    promise.then(val => {
+      clearTimeout(timeoutId);
+      return val;
+    }),
+    timeoutPromise
+  ]);
+};
 
 class NotesView {
   constructor() {
@@ -122,27 +140,47 @@ class NotesView {
       loader.classList.remove("hidden");
       generateBtn.disabled = true;
 
+      console.log("Notes generation started for topic:", topic, "mode:", mode);
+
       try {
-        const notesData = await this.generateNotes(topic, mode);
+        const notesPromise = (async () => {
+          // Add a 1.5s delay so the spinner is visible to the user
+          await new Promise(resolve => setTimeout(resolve, 1500));
+          return await this.generateNotes(topic, mode);
+        })();
+
+        // Wrap note generation in a 10s timeout
+        const notesData = await withTimeout(notesPromise, 10000, "Generation timed out. Please try again.");
+
         this.currentNoteTitle = `${topic.toLowerCase().replace(/\s+/g, '-')}-${mode}-notes`;
         this.currentNoteContent = notesData;
 
         editor.value = notesData;
         editor.removeAttribute("disabled");
         downloadBtn.removeAttribute("disabled");
-        loader.classList.add("hidden");
-        generateBtn.removeAttribute("disabled");
+        
+        console.log("Notes generation completed successfully for topic:", topic);
+        ui.showToast("Notes generated! +50 XP", "success");
 
         // Gamification reward
         store.addGeneratedNote(topic, notesData);
         gamification.addXP(50);
         gamification.unlockBadge("note_creator");
-        ui.showToast("Notes generated! +50 XP", "success");
+
       } catch (err) {
-        console.error("Failed to generate notes:", err);
+        console.error("Notes generation failed:", err);
+        console.log("Notes generation failed:", err.message);
+
+        const isTimeout = err.message.includes("timed out");
+        const displayErr = isTimeout ? "Generation timed out. Please try again." : "Unable to generate notes for this topic. Please try again.";
+
+        editor.value = `⚠️ ERROR: ${displayErr}\n\nDetails: ${err.message}`;
+        editor.removeAttribute("disabled");
+        ui.showToast(displayErr, "danger");
+      } finally {
+        // ALWAYS close loader and re-enable button
         loader.classList.add("hidden");
         generateBtn.removeAttribute("disabled");
-        ui.showToast("Unable to generate notes for this topic. Please try again.", "danger");
       }
     });
 
