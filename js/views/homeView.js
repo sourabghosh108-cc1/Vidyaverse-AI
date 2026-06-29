@@ -6,6 +6,7 @@
 import { store } from "../store.js";
 import { router } from "../router.js";
 import { ui } from "../ui.js";
+import { mockSearch } from "../mockSearch.js";
 
 class HomeView {
   render() {
@@ -161,6 +162,52 @@ class HomeView {
   }
 
   bindEvents(container) {
+    // Add suggestions styles inline
+    if (!document.getElementById("suggestions-style")) {
+      const style = document.createElement("style");
+      style.id = "suggestions-style";
+      style.innerHTML = `
+        .search-suggestions-dropdown {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background-color: var(--surface-color);
+          border: 1px solid var(--border-color);
+          border-radius: var(--radius-md);
+          box-shadow: var(--box-shadow);
+          z-index: 1000;
+          max-height: 250px;
+          overflow-y: auto;
+          margin-top: 4px;
+        }
+        .search-suggestions-dropdown.hidden {
+          display: none;
+        }
+        .suggestion-item {
+          padding: 12px 16px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          border-bottom: 1px solid var(--border-color);
+          transition: background-color var(--transition-fast);
+          color: var(--text-primary);
+          text-align: left;
+        }
+        .suggestion-item:last-child {
+          border-bottom: none;
+        }
+        .suggestion-item:hover {
+          background-color: var(--surface-hover);
+        }
+        .suggestion-icon {
+          font-size: 1.1rem;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
     const searchInput = container.querySelector("#universal-search-input");
     const searchBtn = container.querySelector("#btn-universal-search");
 
@@ -179,6 +226,55 @@ class HomeView {
       searchInput.addEventListener("keypress", (e) => {
         if (e.key === "Enter") {
           executeSearch();
+        }
+      });
+
+      // Autocomplete Suggestions setup
+      let suggestionsBox = container.querySelector("#home-search-suggestions");
+      if (!suggestionsBox) {
+        suggestionsBox = document.createElement("div");
+        suggestionsBox.id = "home-search-suggestions";
+        suggestionsBox.className = "search-suggestions-dropdown hidden";
+        searchInput.parentNode.appendChild(suggestionsBox);
+        searchInput.parentNode.style.position = "relative";
+      }
+
+      searchInput.addEventListener("input", async () => {
+        const q = searchInput.value.trim();
+        if (q.length < 2) {
+          suggestionsBox.innerHTML = "";
+          suggestionsBox.classList.add("hidden");
+          return;
+        }
+        
+        const suggestions = await mockSearch.getSuggestions(q);
+        if (suggestions.length > 0) {
+          suggestionsBox.innerHTML = suggestions.map(s => `
+            <div class="suggestion-item" data-val="${s}">
+              <span class="suggestion-icon">🔍</span>
+              <span class="suggestion-text">${s}</span>
+            </div>
+          `).join("");
+          suggestionsBox.classList.remove("hidden");
+          
+          suggestionsBox.querySelectorAll(".suggestion-item").forEach(item => {
+            item.addEventListener("click", () => {
+              const val = item.getAttribute("data-val");
+              searchInput.value = val;
+              suggestionsBox.classList.add("hidden");
+              router.navigate(`learn?query=${encodeURIComponent(val)}`);
+            });
+          });
+        } else {
+          suggestionsBox.innerHTML = "";
+          suggestionsBox.classList.add("hidden");
+        }
+      });
+
+      // Close suggestions when clicking outside
+      document.addEventListener("click", (e) => {
+        if (e.target !== searchInput && e.target !== suggestionsBox && !suggestionsBox.contains(e.target)) {
+          suggestionsBox.classList.add("hidden");
         }
       });
     }
