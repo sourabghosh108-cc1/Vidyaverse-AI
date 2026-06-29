@@ -1,4 +1,4 @@
-# Vidyaverse AI 2.0 🚀
+# Vidyaverse AI 1.0 🚀
 > **Personalized Client-Side Learning Universe & Gamified Study Companion**
 
 [![Vercel Deployment](https://img.shields.io/badge/Vercel-Deployed-black?style=flat-square&logo=vercel)](https://vercel.com)
