@@ -139,7 +139,7 @@ class SettingsView {
             <!-- About Vidyaverse AI -->
             <div class="card about-box-card" style="margin-top: 32px;">
               <h3>🚀 About Vidyaverse AI</h3>
-              <p style="font-size: 0.9rem; margin-bottom: 12px;"><strong>Version:</strong> 2.0.0-Beta</p>
+              <p style="font-size: 0.9rem; margin-bottom: 12px;"><strong>Version:</strong> 1.0.0 </p>
               <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
                 Vidyaverse AI is a client-side gamified study workspace designed for competitive Indian exams. We respect user privacy by saving all logs locally on your machine without server-side databases or third-party cookies.
               </p>
