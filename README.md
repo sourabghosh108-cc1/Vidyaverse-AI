@@ -109,7 +109,7 @@ All actions automatically persist; reload the page and your progress is retained
 ```bash
 # Clone the repo
 git clone https://github.com/sourabghosh108-cc1/Vidyaverse-AI
-cd app
+cd Vidyaverse-AI
 # or using Node.js
 npx live-server
 ```
