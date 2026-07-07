@@ -1,10 +1,5 @@
 # Vidyaverse AI — Implementation Plan
 
-**Track**: Agents for Good  
-**Platform**: Kaggle Capstone Project  
-**Live Demo**: [vidyaverse-ai.vercel.app](https://vidyaverse-ai.vercel.app) *(update with your URL)*  
-**Repository**: [github.com/your-username/vidyaverse-ai](https://github.com) *(update with your URL)*
-
 ---
 
 ## 1. Problem Statement
