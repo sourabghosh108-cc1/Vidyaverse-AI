@@ -1,95 +1,121 @@
 # Vidyaverse AI 2.0 🚀
 > **Autonomous Agentic Study Mentor & Gamified Learning Workspace**  
-> *Built for Tech Zephyr 4.0 — Agentic AI Hackathon (IIT Bhubaneswar) & Evolved from Kaggle Community Project*
+> **Events & Awards**:  
+> 🏅 **Tech Zephyr 4.0 — Agentic AI Hackathon** *(Indian Institute of Technology Bhubaneswar)*  
+> 🏆 **AI Agents: Intensive Vibe Coding Capstone** *(Kaggle & Google DeepMind)* — *Agents for Good Track* (DOI: [`10.34740/kaggle/w/94423`](https://doi.org/10.34740/kaggle/w/94423))
 
-[![Vercel Deployment](https://img.shields.io/badge/Vercel-Deployed-black?style=flat-square&logo=vercel)](https://vidyaverse-ai.vercel.app)
-[![Language](https://img.shields.io/badge/Language-Vanilla%20JS%20%2F%20ES6-yellow?style=flat-square&logo=javascript)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![AI Engine](https://img.shields.io/badge/AI%20Engine-OpenRouter%20GPT--3.5%20%2F%20Llama%203.3-blueviolet?style=flat-square&logo=meta)](https://openrouter.ai)
-[![Architecture](https://img.shields.io/badge/Architecture-Autonomous%20ReAct%20Loop-success?style=flat-square)](#)
-
-Vidyaverse AI 2.0 is an **autonomous agentic study companion** and gamified workspace tailored for Indian competitive exams (JEE Main & Advanced, NEET, CUET, CA Foundation, Class 10 & 12 Boards).
-
-Originally developed and featured in the **Kaggle Community Competition**, this version has been significantly upgraded for **IIT Bhubaneswar's Tech Zephyr 4.0** with full offline fallbacks, responsive dark styling, real-time PDF analysis, and direct conversational integrations.
+[![Vercel Deployment](https://img.shields.io/badge/Vercel-Live%20Application-black?style=flat-square&logo=vercel)](https://vidyaverse-ai-study.vercel.app)
+[![Kaggle DOI](https://img.shields.io/badge/Kaggle%20DOI-10.34740%2Fkaggle%2Fw%2F94423-blue?style=flat-square&logo=kaggle)](https://doi.org/10.34740/kaggle/w/94423)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-181717?style=flat-square&logo=github)](https://github.com/sourabghosh108-cc1/Vidyaverse-AI)
+[![Architecture](https://img.shields.io/badge/Architecture-Observe--Decide--Act--Evaluate--Adapt-success?style=flat-square)](#)
 
 ---
 
-## 📌 Problem Statement
+## 📌 Project Overview & Evolution
 
-Students preparing for high-stakes entrance exams face:
-1. **Cognitive Fragmentation**: Juggling disparate notes, YouTube playlists, mock tests, and syllabus tracking spreadsheets.
-2. **Passive AI Tutoring**: Traditional AI tools wait for a prompt, answer statically, and terminate—failing to evaluate retention or adapt to student mistakes.
-3. **API Downtime & Expense**: Standard AI tools stop working when credit limits or internet connectivity issues occur.
+**Vidyaverse AI** is an intelligent, offline-first, client-side gamified study workspace designed for competitive Indian examinations (Class 10, Class 12, JEE Main & Advanced, NEET, CUET, and CA Foundation).
+
+Originally created during **Kaggle's 5-Day AI Agents: Intensive Vibe Coding Course with Google** (*Agents for Good Track*), the application has been evolved into **Vidyaverse AI 2.0** for **IIT Bhubaneswar's Tech Zephyr 4.0 Agentic AI Hackathon**. It transitions standard passive AI text generation into an active **`Observe → Decide → Act → Evaluate → Adapt`** autonomous feedback loop.
+
+### 🎥 Project Videos & Links
+- 🌐 **Live Web Application**: [vidyaverse-ai-study.vercel.app](https://vidyaverse-ai-study.vercel.app)
+- 💻 **GitHub Repository**: [github.com/sourabghosh108-cc1/Vidyaverse-AI](https://github.com/sourabghosh108-cc1/Vidyaverse-AI)
+- 🎬 **YouTube Demo Video 1 (Full Overview)**: [youtu.be/GkMr3lLC4hw](https://youtu.be/GkMr3lLC4hw?si=gi8-qyRV0IZgKON7)
+- 🎬 **YouTube Demo Video 2 (Features & ReAct Deep Dive)**: [youtu.be/Op7VxjoOx6k](https://youtu.be/Op7VxjoOx6k?si=uVONdnP6OY_882H6)
+- 📄 **Kaggle DOI Citation**: `https://doi.org/10.34740/kaggle/w/94423`
 
 ---
 
-## 💡 The Solution: Autonomous "Observe → Decide → Act → Evaluate → Adapt" Loop
+## 💡 Problem Statement
 
-Vidyaverse AI implements a complete closed-loop agentic cycle:
+Indian students preparing for national competitive exams face steep academic obstacles:
+1. **High Cognitive Load**: Bulk study materials make extracting formula sheets, concise outlines, and quick flashcards exhausting.
+2. **Subscription Paywalls & Commercial Lock-in**: Premium edtech platforms place basic tutoring tools behind expensive recurring paywalls.
+3. **Passive AI Tutoring**: Standard LLM chat prompts stop as soon as text is generated—failing to test retention, search real-time syllabus changes, or structure dynamic practice.
+4. **Data Security & Privacy Vulnerabilities**: Commercial platforms track and monetize student study logs.
+
+---
+
+## 🛠️ System Architecture & Course Concepts
+
+Vidyaverse AI 2.0 is designed as a Single Page Application (SPA) utilizing vanilla HTML5, modern CSS3 (Glass-morphism layout), and modular ES6 JavaScript.
 
 ```text
-                               +-------------------------------------------+
-                               |              STUDENT INTENT               |
-                               |  "Prepare me for JEE Electrostatics..."   |
-                               +-------------------------------------------+
-                                                     |
-                                                     v
-                               +-------------------------------------------+
-                               |             1. OBSERVE (State)            |
-                               |    Detect syllabus, goals, and gaps       |
-                               +-------------------------------------------+
-                                                     |
-                                                     v
-                               +-------------------------------------------+
-                               |             2. DECIDE (Planner)           |
-                               |    Decompose goal into action steps       |
-                               +-------------------------------------------+
-                                                     |
-                                                     v
-                               +-------------------------------------------+
-                               |             3. ACT (Executors)            |
-                               | - 📚 query_curriculum (50 chapters)       |
-                               | - 🌐 web_search (Live PYQs & updates)     |
-                               | - 📺 find_youtube_lectures (Video cards)  |
-                               | - 🎯 generate_quiz (Active recall MCQs)   |
-                               | - ⏱️ start_focus_session (Pomodoro)       |
-                               +-------------------------------------------+
-                                                     |
-                                                     v
-                               +-------------------------------------------+
-                               |             4. EVALUATE & ADAPT           |
-                               |  Analyze answers, award XP, and adjust    |
-                               |  future study roadmaps dynamically        |
-                               +-------------------------------------------+
+                  +------------------------------------------------------+
+                  |              STUDENT WEB APP SHELL                   |
+                  |     (index.html, css/style.css, script.js)           |
+                  +------------------------------------------------------+
+                                   |
+                                   v
+                  +------------------------------------------------------+
+                  |            CLIENT-SIDE STATE STORE                   |
+                  |      (js/store.js <---> LocalStorage Sandbox)        |
+                  +------------------------------------------------------+
+                                   |
+                  +----------------+----------------+
+                  |                                 |
+                  v                                 v
+   +------------------------------+  +------------------------------+
+   |     AGENTIC REACT LOOPS      |  |     GAMIFICATION ENGINE      |
+   |      (js/views/*.js)         |  |     (js/gamification.js)     |
+   | - Observe: Exam Context      |  | - XP Accrual & Levels        |
+   | - Decide: Tool Orchestrator  |  | - Consecutive Streaks        |
+   | - Act: Tool Executors        |  | - Achievements Cabinet       |
+   | - Evaluate: Quiz & Feedback  |  |                              |
+   | - Adapt: Profile Refinement  |  |                              |
+   +------------------------------+  +------------------------------+
+                  |
+                  +---------------------------------+
+                                                    | (Interoperability)
+                                                    v
+                                     +------------------------------+
+                                     |   MODEL CONTEXT PROTOCOL     |
+                                     |  (mcp/server.ts via Stdio)   |
+                                     +------------------------------+
 ```
 
+### 1. The Autonomous Agentic Loop (`Observe → Decide → Act → Evaluate → Adapt`)
+- **Observe**: Agent reads student exam goals, XP levels, past quiz performance, and active target syllabus (`JEE`, `NEET`, `Class 10/12`).
+- **Decide**: Agent chooses appropriate tools from its registry rather than giving static text output.
+- **Act**: Executes tool calls (`query_curriculum`, `web_search`, `find_youtube_lectures`, `generate_quiz`, `start_focus_session`).
+- **Evaluate**: Automatically grades active recall quizzes, awards XP, tracks streaks, and diagnoses misconceptions.
+- **Adapt**: Adjusts future quiz difficulties, roadmap milestones, and study recommendations.
+
+### 2. Model Context Protocol (MCP) Server Blueprint (`mcp/server.ts`)
+- **Stdio Transport**: Provides standard stdin/stdout stream queries compatible with AI desktop environments like Claude Desktop and Cursor.
+- **Schema Registration**: Exposes `get_exam_curriculum` and `query_chapter_details`.
+- **Database Bridging**: Connects external LLM agents directly to the 50-chapter curriculum dataset.
+
 ---
 
-## 🛠️ Tool Suite & Autonomous Capabilities
+## 🧰 Agent Tool Registry
 
-| Tool | Capability | Execution Context |
+| Tool Name | Action / Function | Execution Context |
 |---|---|---|
-| `query_curriculum` | Retrieves structured syllabus, formulas, and study guides. | Local 50-chapter curriculum database & MCP server. |
-| `web_search` | Real-time web grounding for latest 2025/2026 exam trends. | Serverless proxy (`/api/search.js`) via Google/Serper. |
-| `find_youtube_lectures` | Pulls video lectures with player cards. | YouTube Data API v3 proxy (`/api/youtube.js`). |
-| `generate_quiz` | Generates diagnostic MCQs with instant grading and explanations. | Interactive client-side active recall engine. |
-| `create_study_roadmap` | Generates multi-day milestones and schedule cards. | Autonomous planner engine. |
-| `start_focus_session` | Triggers Pomodoro cycles linked to study tasks. | Focus Timer subsystem. |
+| `query_curriculum` | Fetches structured syllabus, formulas, derivations, and exam tips. | Local 50-chapter curriculum database & MCP server. |
+| `web_search` | Real-time web search for 2025/2026 exam trends & PYQs. | Serverless proxy (`/api/search.js`) via Google/Serper. |
+| `find_youtube_lectures` | Pulls topic-matched one-shot video masterclasses with direct player cards. | YouTube Data API v3 proxy (`/api/youtube.js`). |
+| `generate_quiz` | Generates diagnostic MCQs with instant grading, explanations, and XP rewards. | Interactive client-side active recall engine. |
+| `create_study_roadmap` | Generates adaptive multi-day milestones and schedule cards. | Autonomous planner engine. |
+| `start_focus_session` | Automatically triggers Pomodoro cycles linked to study tasks. | Focus Timer subsystem. |
 
 ---
 
-## 🎮 Gamification & Student Engagement
+## 🎮 Gamification & Engagement Mechanics
 
-- **XP & Levels**: Every agentic inquiry, quiz solved, and focus cycle completed awards XP (1,000 XP per level).
-- **Streak Tracker**: Tracks daily consecutive study check-ins.
-- **Achievements Cabinet**: 10+ unlockable badges (e.g., *Welcome Achiever*, *Diligent Scholar*, *Scribe Elite*, *Quiz Master*).
-- **Arcade Hub**: 13 interactive educational mini-games (Debate Arena, Professor Challenge, ELI10) for cognitive breaks.
+- **Radial XP Ring Dashboard**: Real-time SVG circular track rendering progress toward the next level (1,000 XP per level).
+- **Streak Tracker Engine**: Monitors consecutive daily study check-ins.
+- **Achievements Cabinet**: 10+ unlockable badges (*Welcome Achiever*, *Diligent Scholar*, *Scribe Elite*, *Quiz Master*, *Arcade Star*).
+- **13-Game Learning Arcade**:
+  - **10 Offline Games**: Flashcard Battle, Memory Match, Formula Sprint, True/False Rush, Concept Bingo, Knowledge Tower (15-floor climb), Boss Battles, Detect the Mistake, Streak Master, Treasure Hunt.
+  - **3 AI-Powered Games**: AI Debate Arena, Professor Challenge, and Explain Like I'm 10 (ELI10).
 
 ---
 
-## 📁 Project Structure
+## 📁 Project Directory Map
 
 ```text
-app/
+Vidyaverse-AI/
 ├── api/                        # Vercel Serverless API Proxy (Secure environment keys)
 │   ├── chat.js                 # OpenRouter LLM proxy (GPT-3.5 Turbo / Llama 3.3)
 │   ├── search.js               # Real-time Web Search proxy
@@ -101,52 +127,66 @@ app/
 │   ├── class10.json, class12.json, jee.json, neet.json, cuet.json, cafoundation.json
 ├── js/
 │   ├── agent/
-│   │   ├── studyAgent.js       # Autonomous ReAct Agent Loop & Fallbacks
+│   │   ├── studyAgent.js       # Autonomous ReAct Agent Loop & Fail-Safe Fallbacks
 │   │   └── tools.js            # Executable Tool Registry & Handlers
 │   ├── views/
-│   │   ├── chatView.js         # ChatGPT-style Agent Copilot with live widgets
-│   │   ├── homeView.js         # Hub Dashboard & Agent Visualizer
+│   │   ├── chatView.js         # ChatGPT-style Agent Copilot interface
+│   │   ├── homeView.js         # Hub Dashboard & Visualizer
 │   │   ├── learnView.js        # Universal Study Search & Guides
 │   │   ├── notesView.js        # AI Notes & Formula Sheet Generator
 │   │   ├── pdfView.js          # PDF Document Scanner & Summarizer
 │   │   ├── quizView.js         # Timed MCQ Arena
 │   │   ├── focusTimerView.js   # Pomodoro Focus Timer
-│   │   └── settingsView.js     # User Profile & API Key Manager
+│   │   ├── arcadeView.js       # 13 AI & Offline Study Mini-Games
+│   │   ├── dashboardView.js    # Radial XP & Analytics Dashboard
+│   │   └── settingsView.js     # Profile & Sandbox Backup Manager
 │   ├── store.js                # State store (LocalStorage sandbox)
 │   ├── gamification.js         # XP, Streaks & Badge Logic
-│   └── router.js               # Hash SPA Router
-├── .env.example                # Template for environment variables
+│   └── router.js               # SPA Hash Router
+├── mcp/
+│   └── server.ts               # Model Context Protocol (MCP) Server Blueprint
+├── .env.example                # Template for environment variables (Zero secrets)
+├── .gitignore                  # Git privacy guard
 ├── index.html                  # Main SPA entry point
-└── vercel.json                 # Vercel deployment & routing config
+├── package.json                # Project metadata
+├── server.js                   # Local Node.js development server
+└── vercel.json                 # Vercel cloud deployment config
 ```
 
 ---
 
-## 🚀 Setup & Local Execution
+## 🚀 Setup & Execution Guide
 
-### 1. Local Run
+### 1. Local Execution
 ```bash
-# Install dependencies
+# Clone the repository
+git clone https://github.com/sourabghosh108-cc1/Vidyaverse-AI.git
+cd Vidyaverse-AI
+
+# Install dependencies (Optional)
 npm install
 
 # Start local server
 node server.js
 ```
-Visit `http://localhost:8000` in your browser.
+Open `http://localhost:8000` in your browser.
 
 ### 2. Vercel Cloud Deployment
-1. Import the repository into [Vercel](https://vercel.com).
-2. Under **Project Settings → Environment Variables**, add your keys:
+1. Import repository into [Vercel](https://vercel.com).
+2. Set Environment Variables under **Project Settings → Environment Variables**:
    - `OPENROUTER_API_KEY`: Your OpenRouter API Key
-   - `YOUTUBE_API_KEY`: Google Cloud YouTube Data API v3 Key
-   - `SEARCH_API_KEY`: Serper Key
-3. Click **Deploy**. Vercel will automatically build and host the serverless functions and frontend SPA.
+   - `YOUTUBE_API_KEY`: Google YouTube Data API v3 Key (Optional)
+   - `SEARCH_API_KEY`: Serper Key (Optional)
+3. Click **Deploy**.
 
 ---
 
-## 🔐 Security & Hackathon Compliance
+## 🔐 Security & Hackathon Regulations Compliance
 
-- **No Hardcoded Secrets**: In strict compliance with IIT Bhubaneswar regulations, no private credentials, tokens, or API keys are stored in the repository.
-- **Serverless Key Guard**: All cloud LLM and external API requests route through serverless proxies that access server-side environment variables.
-- **Offline & Local Sandbox**: When no external keys are present, the system defaults to autonomous local mock engines and client-side database search.
-- **Kaggle Roots**: Proudly building upon our verified Kaggle machine learning and conceptual database engines.
+- **Zero Hardcoded Secrets**: Strictly compliant with competition security regulations—no private credentials, tokens, or API keys are stored in the repository.
+- **Serverless Key Guard**: Cloud LLM and API requests route through serverless endpoints consuming server-side environment variables.
+- **Local Fallback Engine**: If external APIs are unavailable, the system seamlessly defaults to client-side database synthesis so learning never stops.
+
+---
+**Author**: Sourab Ghosh (`sourabghosh108@gmail.com`)  
+**Kaggle DOI**: `10.34740/kaggle/w/94423` | **License**: CC BY 4.0 / MIT
