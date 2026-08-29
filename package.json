@@ -1,0 +1,21 @@
+{
+  "name": "vidyaverse-ai",
+  "version": "2.0.0",
+  "description": "Autonomous Agentic AI Study Mentor and Gamified Workspace for Indian Competitive Exams",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "agentic-ai",
+    "edtech",
+    "hackathon",
+    "gemini",
+    "mcp",
+    "react-loop",
+    "gamification"
+  ],
+  "author": "Vidyaverse AI Team",
+  "license": "MIT"
+}

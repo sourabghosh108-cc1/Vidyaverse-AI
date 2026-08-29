@@ -1,0 +1,161 @@
+{
+  "roadmaps": {
+    "jee": {
+      "title": "Engineering Pathway (JEE)",
+      "subtitle": "Joint Entrance Examination - Gateway to IITs, NITs, and IIITs",
+      "options": [
+        "Software Development Engineer (SDE)",
+        "Data Scientist / AI Engineer",
+        "Robotics & Control Systems Specialist",
+        "Automotive Design Engineer",
+        "Civil & Infrastructure Planner"
+      ],
+      "degreePaths": [
+        "Bachelor of Technology (B.Tech) - 4 Years",
+        "Bachelor of Engineering (B.E.) - 4 Years",
+        "Integrated Dual Degree (B.Tech + M.Tech) - 5 Years"
+      ],
+      "colleges": [
+        {"name": "IIT Bombay", "cutoffPct": "JEE Advanced Rank < 100", "details": "Top placement packages and startup incubation cell."},
+        {"name": "IIT Delhi", "cutoffPct": "JEE Advanced Rank < 150", "details": "Superb research environment and technological hub."},
+        {"name": "IIT Madras", "cutoffPct": "JEE Advanced Rank < 200", "details": "Ranked #1 in NIRF consistently for engineering."},
+        {"name": "NIT Trichy", "cutoffPct": "JEE Main Percentile > 99.5", "details": "Top-tier NIT with exceptional core engineering opportunities."},
+        {"name": "IIIT Hyderabad", "cutoffPct": "JEE Main Percentile > 99.8", "details": "World-class coding culture and research focus."}
+      ],
+      "skillsRequired": [
+        "Strong Analytical & Problem-Solving Skills",
+        "Advanced Mathematics and Numerical Aptitude",
+        "Programming Principles (C++, Python, Data Structures)",
+        "Understanding of Physics Laws and Mechanics"
+      ],
+      "opportunities": [
+        "Core Tech (FAANG, global startups, high-frequency trading)",
+        "R&D Labs (ISRO, DRDO, global research institutes)",
+        "Higher Studies (MS/PhD in US, Europe, IISc)",
+        "Core PSU jobs (ONGC, NTPC, BHEL) via GATE exam"
+      ],
+      "milestones": [
+        {"phase": "Class 11 & 12 Study", "description": "Master NCERT Concepts + standard reference guides (HC Verma, Irodov, Cengage)."},
+        {"phase": "JEE Main", "description": "Attempt JEE Main (Session 1 in Jan, Session 2 in April) to qualify for NITs and JEE Advanced."},
+        {"phase": "JEE Advanced", "description": "Crack JEE Advanced (May/June) to rank in top 15,000 for IIT Admissions."},
+        {"phase": "JoSAA Counseling", "description": "Choose branches based on rank list in the centralized counseling portal."}
+      ]
+    },
+    "neet": {
+      "title": "Medical & Healthcare Pathway (NEET)",
+      "subtitle": "National Eligibility cum Entrance Test - Entrance for Medical Schools",
+      "options": [
+        "Specialist Physician / Surgeon (MD/MS)",
+        "Dentist (BDS)",
+        "Pharmacologist / Pharmaceutical Scientist",
+        "Bio-medical Researcher / Virologist",
+        "Hospital Administrator"
+      ],
+      "degreePaths": [
+        "MBBS (Bachelor of Medicine & Bachelor of Surgery) - 5.5 Years",
+        "BDS (Bachelor of Dental Surgery) - 5 Years",
+        "BAMS/BHMS (Alternative Medicine) - 5.5 Years"
+      ],
+      "colleges": [
+        {"name": "AIIMS New Delhi", "cutoffPct": "NEET Rank < 50", "details": "The absolute pinnacle of medical education and clinical research in India."},
+        {"name": "JIPMER Puducherry", "cutoffPct": "NEET Rank < 200", "details": "Premier medical school with excellent infrastructure."},
+        {"name": "Maulana Azad Medical College (MAMC)", "cutoffPct": "NEET Rank < 100 (State quota available)", "details": "Highly clinical patient flow, prestigious legacy."},
+        {"name": "Armed Forces Medical College (AFMC)", "cutoffPct": "Cutoff score + Interview process", "details": "Prepares medical cadets directly for the Indian Armed Forces."}
+      ],
+      "skillsRequired": [
+        "In-depth rote and understanding of Biological systems",
+        "Logical reasoning and Organic Chemistry reaction mechanisms",
+        "High empathy, emotional resilience, and stamina",
+        "Precision, observation skills, and scientific inquiry"
+      ],
+      "opportunities": [
+        "Clinical Practice (Private practice or corporate hospitals like Apollo, Max)",
+        "Government Medical Services (UPSC CMS exam)",
+        "Post-graduation (MD/MS/DNB) for specialization",
+        "Global Medical Career (USMLE for US, PLAB for UK)"
+      ],
+      "milestones": [
+        {"phase": "Class 11 & 12 Study", "description": "Rote learn NCERT Biology line-by-line + practice Chemistry and Physics numericals."},
+        {"phase": "NEET UG Exam", "description": "Attempt the 720-mark offline paper in May. Score 620+ for general category government seats."},
+        {"phase": "MCC Counseling", "description": "Participate in AIQ (15%) and State Quota (85%) counseling rounds."},
+        {"phase": "MBBS & Internship", "description": "Complete 4.5 years of coursework and 1 year of compulsory rotating internship."}
+      ]
+    },
+    "cuet": {
+      "title": "Liberal Arts, Sciences & Commerce Pathway (CUET)",
+      "subtitle": "Common University Entrance Test - Gateway to Central Universities",
+      "options": [
+        "Financial Analyst / Investment Banker",
+        "Journalist / Media Correspondent",
+        "Civil Servant (IAS/IPS) via UPSC preparation",
+        "Research Scholar in Humanities / Pure Sciences",
+        "Corporate HR Manager / Marketer"
+      ],
+      "degreePaths": [
+        "B.A. (Hons) / B.Sc (Hons) / B.Com (Hons) - 3 to 4 Years",
+        "Integrated Programs (BBA + MBA) - 5 Years",
+        "B.El.Ed (Elementary Education) - 4 Years"
+      ],
+      "colleges": [
+        {"name": "St. Stephen's College, DU", "cutoffPct": "CUET Score > 98 percentile", "details": "Top-tier humanities and science college of Delhi University."},
+        {"name": "SRCC (Shri Ram College of Commerce), DU", "cutoffPct": "CUET Score > 99 percentile", "details": "India's premier college for Economics and Commerce studies."},
+        {"name": "Hindu College, DU", "cutoffPct": "CUET Score > 98 percentile", "details": "Prestigious legacy in arts, commerce, and science courses."},
+        {"name": "Banaras Hindu University (BHU)", "cutoffPct": "Subject-specific thresholds", "details": "Immense campus with world-class faculty and heritage."}
+      ],
+      "skillsRequired": [
+        "Strong Reading Comprehension & Writing",
+        "Quantitative reasoning and general awareness",
+        "Domain-specific expertise (Economics, Physics, History, etc.)",
+        "Critical analysis and synthesis of texts"
+      ],
+      "opportunities": [
+        "Corporate Roles (Consulting, Finance, Marketing, HR)",
+        "Research & Academia (Masters, UGC-NET, PhD)",
+        "Public Policy and Non-Governmental Organizations",
+        "Government Exams (UPSC, SSC, Banking exams)"
+      ],
+      "milestones": [
+        {"phase": "Class 12 Boards Prep", "description": "Perfect the Class 12 NCERT curriculum which matches the CUET syllabus exactly."},
+        {"phase": "Domain & General Test Prep", "description": "Focus on CUET Sections: Section IA/IB (Languages), Section II (Domain Subjects), Section III (General Test)."},
+        {"phase": "CUET Exam", "description": "Take the computer-based exam in May. Maximize marks to clear cutoffs for top colleges."},
+        {"phase": "CSAS Portal (DU/Other Univs)", "description": "Apply to individual university portals using CUET scorecard for counseling."}
+      ]
+    },
+    "cafoundation": {
+      "title": "Chartered Accountancy Pathway (CA)",
+      "subtitle": "ICA India - Premium Finance, Audit and Tax Certification",
+      "options": [
+        "Statutory Auditor / Internal Auditor",
+        "Tax Consultant (Direct/Indirect Taxes)",
+        "Chief Financial Officer (CFO)",
+        "Investment Analyst / Corporate Valuer",
+        "Forensic Auditor"
+      ],
+      "degreePaths": [
+        "CA Certification (administered by ICAI) - ~4.5 Years",
+        "Can be pursued concurrently with B.Com or BBA"
+      ],
+      "colleges": [
+        {"name": "ICAI (Institute of Chartered Accountants of India)", "cutoffPct": "Registration based, Pass marks 50% aggregate", "details": "The sole body in India authorized to award the CA designation."}
+      ],
+      "skillsRequired": [
+        "Exemplary Command of Accounting & Auditing Rules",
+        "Interpretive capability for Commercial & Taxation laws",
+        "Precision in mathematical computations and analysis",
+        "Professional ethics, persistence, and focus"
+      ],
+      "opportunities": [
+        "Big 4 Auditing Firms (Deloitte, EY, KPMG, PwC)",
+        "Corporate Finance Departments of MNCs",
+        "Independent Practicing CA / Consulting Partnership",
+        "Banking, Investment, and Regulatory Bodies (SEBI, RBI)"
+      ],
+      "milestones": [
+        {"phase": "CA Foundation", "description": "Register after Class 10; attempt after Class 12 Boards. Clear 4 papers (Accounting, Law, Math, Economics)."},
+        {"phase": "CA Intermediate", "description": "Clear 8 papers divided into 2 groups. Pass marks are 40% per paper, 50% aggregate."},
+        {"phase": "Articleship training", "description": "Complete 2 years of mandatory practical training under a practicing Chartered Accountant."},
+        {"phase": "CA Final", "description": "Pass 8 advanced papers and complete mandatory software training to become a member of ICAI."}
+      ]
+    }
+  }
+}

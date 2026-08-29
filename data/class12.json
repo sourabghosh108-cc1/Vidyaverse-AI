@@ -1,0 +1,144 @@
+{
+  "examId": "class12",
+  "examName": "Class 12 CBSE Board Prep",
+  "subjects": [
+    {
+      "subjectId": "physics",
+      "subjectName": "Physics",
+      "chapters": [
+        {
+          "chapterId": "electrostatics",
+          "chapterName": "Electrostatic Potential and Capacitance",
+          "summary": "This chapter covers electrostatic potential due to a point charge, dipole, system of charges, equipotential surfaces, electrical potential energy, capacitors and capacitance, combination of capacitors, and dielectrics.",
+          "keyConcepts": [
+            {
+              "title": "Equipotential Surface",
+              "description": "A surface which has the same electrostatic potential at every point. No work is done in moving a charge on an equipotential surface."
+            },
+            {
+              "title": "Dielectrics and Polarization",
+              "description": "Non-conducting substances that develop an electric dipole moment in the presence of an external electric field, reducing the net field within."
+            }
+          ],
+          "formulas": [
+            {
+              "name": "Electrostatic Potential (V)",
+              "equation": "V = q / (4 * pi * epsilon_0 * r)",
+              "description": "Potential at distance r due to point charge q."
+            },
+            {
+              "name": "Capacitance of Parallel Plate Capacitor",
+              "equation": "C = K * epsilon_0 * A / d",
+              "description": "A is plate area, d is plate separation, K is dielectric constant."
+            }
+          ],
+          "resources": {
+            "videos": [
+              {
+                "title": "Electrostatic Potential & Capacitance Class 12 One Shot",
+                "videoId": "9_wL4c-U2eE",
+                "duration": "1h 45m",
+                "thumbnail": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=320&q=80"
+              }
+            ],
+            "practiceResources": [
+              {
+                "title": "Class 12 Electrostatics Concept Sheets",
+                "url": "https://example.com/class12-electro-practice"
+              }
+            ],
+            "websites": [
+              {
+                "name": "HC Verma Solutions - Electrostatics",
+                "url": "https://example.com/hcv-electrostatics"
+              }
+            ]
+          },
+          "quizzes": [
+            {
+              "questionId": "c12_ph_el_q1",
+              "question": "If a dielectric slab of dielectric constant K is inserted between the plates of a parallel plate capacitor, its capacitance becomes:",
+              "options": [
+                "K times its original value",
+                "1/K times its original value",
+                "Remains unchanged",
+                "Increases by K^2 times"
+              ],
+              "correctAnswerIndex": 0,
+              "explanation": "Inserting a dielectric of constant K increases the capacitance by a factor of K (C' = K * C) due to polarization within the dielectric."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "subjectId": "chemistry",
+      "subjectName": "Chemistry",
+      "chapters": [
+        {
+          "chapterId": "chemical-kinetics",
+          "chapterName": "Chemical Kinetics",
+          "summary": "Covers rate of reaction, factors affecting rate (concentration, temperature, catalyst), order and molecularity, integrated rate equations for zero and first order, half-life, and collision theory.",
+          "keyConcepts": [
+            {
+              "title": "Order of Reaction",
+              "description": "The sum of powers of the concentration of reactants in the rate law expression. It can be zero, fractional, or an integer."
+            },
+            {
+              "title": "Arrhenius Equation",
+              "description": "Describes the temperature dependence of reaction rates: k = A * exp(-Ea / RT), where Ea is activation energy."
+            }
+          ],
+          "formulas": [
+            {
+              "name": "First-Order Integrated Rate Equation",
+              "equation": "k = (2.303 / t) * log( [A]0 / [A]t )",
+              "description": "[A]0 is initial concentration, [A]t is concentration at time t."
+            },
+            {
+              "name": "First-Order Half Life",
+              "equation": "t_1/2 = 0.693 / k",
+              "description": "Independent of initial concentration."
+            }
+          ],
+          "resources": {
+            "videos": [
+              {
+                "title": "Chemical Kinetics Class 12 Full Chapter Revision",
+                "videoId": "p3pnd1L0q8A",
+                "duration": "1h 12m",
+                "thumbnail": "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?auto=format&fit=crop&w=320&q=80"
+              }
+            ],
+            "practiceResources": [
+              {
+                "title": "Chemical Kinetics Practice Sheet & Numericals",
+                "url": "https://example.com/kinetics-numericals"
+              }
+            ],
+            "websites": [
+              {
+                "name": "NCERT Chemistry Class 12 Solutions",
+                "url": "https://ncert.nic.in"
+              }
+            ]
+          },
+          "quizzes": [
+            {
+              "questionId": "c12_ch_ck_q1",
+              "question": "The rate constant of a reaction depends on:",
+              "options": [
+                "Concentration of reactants",
+                "Time of reaction",
+                "Temperature",
+                "Extent of reaction"
+              ],
+              "correctAnswerIndex": 2,
+              "explanation": "According to the Arrhenius equation, the rate constant (k) depends exponentially on the absolute temperature (T)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

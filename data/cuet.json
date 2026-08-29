@@ -1,0 +1,75 @@
+{
+  "examId": "cuet",
+  "examName": "CUET (Common University Entrance Test)",
+  "subjects": [
+    {
+      "subjectId": "general-test",
+      "subjectName": "General Test",
+      "chapters": [
+        {
+          "chapterId": "quantitative-aptitude",
+          "chapterName": "Quantitative Aptitude: Percentage & Ratios",
+          "summary": "Covers basics of percentages, calculation shortcuts, successive percentage changes, ratio and proportion, division of quantities in ratios, and mixture/allegation concepts.",
+          "keyConcepts": [
+            {
+              "title": "Successive Percentage Change",
+              "description": "If a value changes by a% and then by b%, the net percentage change is given by (a + b + ab/100)%."
+            },
+            {
+              "title": "Rule of Allegation",
+              "description": "Used to find the ratio in which two ingredients of different prices must be mixed to produce a mixture of a mean price."
+            }
+          ],
+          "formulas": [
+            {
+              "name": "Percentage Increase/Decrease",
+              "equation": "% Change = (Change / Original Value) * 100",
+              "description": "Calculates growth rate or reduction."
+            },
+            {
+              "name": "Compound Ratio",
+              "equation": "Compound ratio of (a:b) and (c:d) is (ac:bd)",
+              "description": "Multiplying the terms of two or more ratios."
+            }
+          ],
+          "resources": {
+            "videos": [
+              {
+                "title": "CUET Quantitative Aptitude - Percentages Class",
+                "videoId": "FasL7u-e6yI",
+                "duration": "45m",
+                "thumbnail": "https://images.unsplash.com/photo-1518173946687-a4c8a383392e?auto=format&fit=crop&w=320&q=80"
+              }
+            ],
+            "practiceResources": [
+              {
+                "title": "CUET Quant Practice Worksheet with Solutions",
+                "url": "https://example.com/cuet-quant-practice"
+              }
+            ],
+            "websites": [
+              {
+                "name": "Indiabix - Quantitative Aptitude",
+                "url": "https://www.indiabix.com"
+              }
+            ]
+          },
+          "quizzes": [
+            {
+              "questionId": "cuet_gt_qa_q1",
+              "question": "If A's salary is 25% more than B's salary, then B's salary is how much percent less than A's salary?",
+              "options": [
+                "25%",
+                "20%",
+                "15%",
+                "33.33%"
+              ],
+              "correctAnswerIndex": 1,
+              "explanation": "Let B's salary be 100. Then A's salary = 125. B's salary is less than A's by (125-100)=25. Percentage less = (25 / 125) * 100 = 20%."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

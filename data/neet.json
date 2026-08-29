@@ -1,0 +1,82 @@
+{
+  "examId": "neet",
+  "examName": "NEET (National Eligibility cum Entrance Test)",
+  "subjects": [
+    {
+      "subjectId": "biology",
+      "subjectName": "Biology",
+      "chapters": [
+        {
+          "chapterId": "cell-biology",
+          "chapterName": "Cell: The Unit of Life",
+          "summary": "Covers overview of cell structure, prokaryotic and eukaryotic cells, cell membrane models (Fluid Mosaic), cell wall, endomembrane system (ER, Golgi, Lysosomes, Vacuoles), mitochondria, plastids, ribosomes, cytoskeleton, nucleus, and microbodies.",
+          "keyConcepts": [
+            {
+              "title": "Fluid Mosaic Model",
+              "description": "Proposed by Singer and Nicolson (1972) to explain cell membrane structure. Lipids are arranged as a bilayer with embedded integral and peripheral proteins."
+            },
+            {
+              "title": "Endomembrane System",
+              "description": "Group of membranes and organelles that work together to modify, package, and transport lipids and proteins. Includes ER, Golgi apparatus, lysosomes, and vacuoles."
+            }
+          ],
+          "formulas": [
+            {
+              "name": "Note on Calculations",
+              "equation": "Cell Size vs. Resolution",
+              "description": "Prokaryotes: 1-10 micrometers, Eukaryotes: 10-100 micrometers. Ribosomes in prokaryotes are 70S; in eukaryotes, they are 80S (cytoplasm) and 70S (organelles)."
+            }
+          ],
+          "resources": {
+            "videos": [
+              {
+                "title": "Cell: The Unit of Life One Shot for NEET",
+                "videoId": "q1AOm6b_Oas",
+                "duration": "1h 20m",
+                "thumbnail": "https://images.unsplash.com/photo-1530026405186-ed1ea0ac7a63?auto=format&fit=crop&w=320&q=80"
+              }
+            ],
+            "practiceResources": [
+              {
+                "title": "NEET NCERT Exemplar MCQ Practice Sheet",
+                "url": "https://example.com/neet-cell-exemplar"
+              }
+            ],
+            "websites": [
+              {
+                "name": "Biology Online - Cell Biology",
+                "url": "https://www.biologyonline.com"
+              }
+            ]
+          },
+          "quizzes": [
+            {
+              "questionId": "neet_bio_cell_q1",
+              "question": "Which of the following cell organelles is responsible for extracting energy from carbohydrates to form ATP?",
+              "options": [
+                "Ribosome",
+                "Chloroplast",
+                "Mitochondrion",
+                "Lysosome"
+              ],
+              "correctAnswerIndex": 2,
+              "explanation": "Mitochondria are the sites of aerobic respiration. They generate ATP through cellular respiration, extracting energy from carbohydrates and lipids (powerhouse of the cell)."
+            },
+            {
+              "questionId": "neet_bio_cell_q2",
+              "question": "The fluid mosaic model of cell membrane was proposed by:",
+              "options": [
+                "Watson and Crick",
+                "Singer and Nicolson",
+                "Schleiden and Schwann",
+                "Robert Brown"
+              ],
+              "correctAnswerIndex": 1,
+              "explanation": "The fluid mosaic model of the cell membrane, which describes the cell membrane as a tapestry of molecules, was proposed by S.J. Singer and G.L. Nicolson in 1972."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

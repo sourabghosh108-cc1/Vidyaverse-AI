@@ -1,0 +1,2710 @@
+import json
+import os
+
+topics = []
+
+# Helper to construct a topic
+def add_topic(id, topic, subject, exam, aliases, keywords, difficulty, tags, overview, explanation, concepts, definitions, formulas, examNotes, mistakes, revision, questions, flashcards, videos, related, learningPath):
+    topics.append({
+        "id": id,
+        "topic": topic,
+        "subject": subject,
+        "exam": exam,
+        "aliases": aliases,
+        "keywords": keywords,
+        "difficulty": difficulty,
+        "tags": tags,
+        "overview": overview,
+        "explanation": explanation,
+        "concepts": concepts,
+        "definitions": definitions,
+        "formulas": formulas,
+        "examNotes": examNotes,
+        "mistakes": mistakes,
+        "revision": revision,
+        "questions": questions,
+        "flashcards": flashcards,
+        "videos": videos,
+        "related": related,
+        "learningPath": learningPath
+    })
+
+# ----------------------------------------------------
+# PHYSICS (10 Topics)
+# ----------------------------------------------------
+add_topic(
+    id="coulombs_law",
+    topic="Coulomb's Law",
+    subject="physics",
+    exam="jee",
+    aliases=["coulomb law", "coulomb's law", "electrostatic force"],
+    keywords=["charge", "electrostatic", "force", "attraction", "repulsion", "dielectric", "permittivity"],
+    difficulty="Medium",
+    tags=["Electrostatics", "Physics", "JEE", "Class 12"],
+    overview="Coulomb's Law is a fundamental law of physics that quantifies the electrostatic force of attraction or repulsion between two stationary, point electric charges in a vacuum or a medium.",
+    explanation="Coulomb's Law states that the magnitude of the electrostatic force between two stationary point charges is directly proportional to the product of the magnitudes of the charges and inversely proportional to the square of the distance between them. The force acts along the straight line joining the charges. In vector form, the force exerted by charge 1 on charge 2 is opposite to the force exerted by charge 2 on charge 1, satisfying Newton's Third Law.",
+    concepts=[
+        {"title": "Point Charge Assumption", "desc": "Coulomb's law applies strictly to point charges, meaning the physical dimensions of the charged objects are negligible compared to the separation distance between them."},
+        {"title": "Superposition Principle", "desc": "When multiple charges are present, the net force on a single charge is the vector sum of the forces exerted by all other charges individually, with each force unaffected by the presence of other charges."}
+    ],
+    definitions=[
+        {"term": "Electrostatic Force", "def": "The attractive or repulsive force between electric charges at rest."},
+        {"term": "Permittivity of Free Space (ε₀)", "def": "A physical constant representing the capability of a vacuum to permit electric field lines, equal to 8.854 × 10⁻¹² C²/N·m²."}
+    ],
+    formulas=[
+        {"name": "Coulomb's Law (Scalar)", "eq": "F = k * (|q1 * q2|) / r^2", "desc": "k = 1 / (4πε₀) ≈ 8.99 × 10⁹ N·m²/C² in vacuum. F is force in Newtons, q1,q2 are charges in Coulombs, and r is distance in meters."},
+        {"name": "Force in Medium", "eq": "F_med = F_vac / K", "desc": "K is the dielectric constant (relative permittivity ε_r) of the medium."}
+    ],
+    examNotes="Always resolve forces vectorially. Do not plug positive/negative signs of charges directly into the scalar formula; calculate the magnitude first, then determine the direction based on like/opposite attraction rules.",
+    mistakes=[
+        {"title": "Ignoring Medium Permittivity", "desc": "Using the vacuum constant k when the charges are immersed in a medium like water (K = 80)."},
+        {"title": "Algebraic Addition", "desc": "Adding electrostatic forces algebraically instead of taking their vector sum."}
+    ],
+    revision=[
+        "Like charges repel; opposite charges attract.",
+        "Electrostatic force is a conservative central force.",
+        "The constant k depends on the surrounding medium."
+    ],
+    questions=[
+        {
+            "q": "Two point charges of +2μC and -6μC are placed 3 meters apart in a vacuum. What is the magnitude and nature of the force between them?",
+            "options": ["0.012 N, Repulsive", "0.012 N, Attractive", "0.108 N, Attractive", "0.108 N, Repulsive"],
+            "correctAnswerIndex": 1,
+            "explanation": "F = (9e9 * 2e-6 * 6e-6) / 3^2 = 0.012 N. Since they are opposite charges, the force is attractive.",
+            "a": "F = 0.012 N (Attractive)"
+        }
+    ],
+    flashcards=[
+        {"front": "What is the value of k in a vacuum?", "back": "k ≈ 9 × 10⁹ N·m²/C²"},
+        {"front": "How does force change if distance is halved?", "back": "The force becomes 4 times greater (inverse square law)."}
+    ],
+    videos=[
+        {"title": "Electrostatics 01: Electric Charge & Coulomb's Law", "channel": "Physics Wallah", "duration": "1h 15m", "videoId": "T8S4tC4eB5c"}
+    ],
+    related=["electric_field", "electric_potential", "gausss_law"],
+    learningPath=["Electric Charge", "Coulomb's Law", "Electric Field", "Electric Potential"]
+)
+
+add_topic(
+    id="electric_field",
+    topic="Electric Field",
+    subject="physics",
+    exam="jee",
+    aliases=["electric field", "electric field intensity", "electric lines of force"],
+    keywords=["field", "intensity", "lines of force", "test charge", "superposition"],
+    difficulty="Medium",
+    tags=["Electrostatics", "Physics", "JEE", "Class 12"],
+    overview="An Electric Field is a vector field around a charged particle or object within which a force would be exerted on other charged particles.",
+    explanation="The electric field intensity E at any point is defined as the electrostatic force experienced per unit positive test charge placed at that point, without disturbing the source charge configuration. Field lines flow away from positive charges and towards negative charges. The density of these field lines represents the field strength.",
+    concepts=[
+        {"title": "Electric Field Intensity (E)", "desc": "A vector quantity representing the force per unit charge. Its SI unit is N/C or V/m."},
+        {"title": "Electric Field Lines", "desc": "Imaginary continuous curves drawn such that the tangent at any point gives the direction of E at that point. They never intersect."}
+    ],
+    definitions=[
+        {"term": "Electric Field", "def": "A region around a charged particle where its influence can be felt by other charges."},
+        {"term": "Test Charge", "def": "An infinitesimally small positive charge used to measure the electric field without altering it."}
+    ],
+    formulas=[
+        {"name": "Electric Field due to Point Charge", "eq": "E = k * Q / r^2", "desc": "E is the field intensity at distance r from charge Q in a vacuum."},
+        {"name": "Force on Charge in Field", "eq": "F = q * E", "desc": "Force F experienced by a charge q placed in an electric field E."}
+    ],
+    examNotes="Electric field inside a hollow charged conductor in electrostatic equilibrium is always zero. Electric field lines are perpendicular to the surface of a conductor.",
+    mistakes=[
+        {"title": "Intersecting Field Lines", "desc": "Drawing field lines that cross. Since the field direction at a point is unique, lines can never intersect."},
+        {"title": "Wrong direction for negative charge", "desc": "Assuming the force on a negative charge is in the direction of E. The force is in the opposite direction."}
+    ],
+    revision=[
+        "Electric field is a vector quantity.",
+        "Field lines start on positive charges and end on negative charges.",
+        "The electric field is zero inside a conductor."
+    ],
+    questions=[
+        {
+            "q": "What is the magnitude of an electric field that exerts a force of 3 × 10⁻⁴ N on a charge of 2 × 10⁻⁸ C?",
+            "options": ["1.5 × 10⁴ N/C", "1.5 × 10⁻⁴ N/C", "6 × 10⁴ N/C", "6 × 10⁻¹² N/C"],
+            "correctAnswerIndex": 0,
+            "explanation": "E = F / q = (3e-4) / (2e-8) = 1.5e4 N/C.",
+            "a": "E = 1.5 × 10⁴ N/C"
+        }
+    ],
+    flashcards=[
+        {"front": "What is the SI unit of electric field?", "back": "Newtons per Coulomb (N/C) or Volts per meter (V/m)"},
+        {"front": "What is the electric field inside a charged sphere?", "back": "Zero"}
+    ],
+    videos=[
+        {"title": "Electric Field Concepts & Problems", "channel": "Khan Academy", "duration": "18m", "videoId": "8t4e_yB6-oo"}
+    ],
+    related=["coulombs_law", "electric_potential", "gausss_law"],
+    learningPath=["Coulomb's Law", "Electric Field", "Electric Potential", "Gauss's Law"]
+)
+
+add_topic(
+    id="electric_potential",
+    topic="Electric Potential",
+    subject="physics",
+    exam="jee",
+    aliases=["electric potential", "electrostatic potential", "potential difference"],
+    keywords=["potential", "voltage", "work done", "potential energy", "equipotential"],
+    difficulty="Medium",
+    tags=["Electrostatics", "Physics", "JEE", "Class 12"],
+    overview="Electric Potential is the amount of work needed to move a unit positive charge from a reference point (usually infinity) to a specific point inside an electric field without acceleration.",
+    explanation="Unlike electric field which is a vector, electric potential is a scalar quantity. The electric potential difference between two points is the work done per unit charge in moving it between those points. Equipotential surfaces are surfaces where the electric potential is constant at every point, meaning no work is done in moving charges along the surface.",
+    concepts=[
+        {"title": "Scalar Nature", "desc": "Electric potential can be added algebraically. Positive charges produce positive potentials, and negative charges produce negative potentials."},
+        {"title": "Equipotential Surfaces", "desc": "Surfaces where potential is constant. Electric field lines are always perpendicular to equipotential surfaces."}
+    ],
+    definitions=[
+        {"term": "Volt", "def": "The SI unit of electric potential, equal to one Joule per Coulomb (J/C)."},
+        {"term": "Electrostatic Potential Energy", "def": "Energy stored in a system of charges due to their configurations."}
+    ],
+    formulas=[
+        {"name": "Potential due to Point Charge", "eq": "V = k * Q / r", "desc": "V is the potential at a distance r from point charge Q."},
+        {"name": "Relation between E and V", "eq": "E = -dV / dr", "desc": "Electric field is the negative gradient of electric potential."}
+    ],
+    examNotes="No work is done in moving a charge on an equipotential surface. Always calculate potential algebraically including the signs of the charges.",
+    mistakes=[
+        {"title": "Vector Addition of Potential", "desc": "Attempting to resolve electric potential into components like electric fields. Potential is a scalar, just add them up!"},
+        {"title": "Wrong sign in work done", "desc": "Confusing work done by the electric field (W = -qΔV) with work done by an external agent (W = qΔV)."}
+    ],
+    revision=[
+        "Electric potential is a scalar.",
+        "Potential is constant inside a charged conductor and equal to its value on the surface.",
+        "Electric field lines point in the direction of decreasing potential."
+    ],
+    questions=[
+        {
+            "q": "What is the electric potential at a distance of 10 cm from a 5μC point charge in a vacuum?",
+            "options": ["4.5 × 10⁵ V", "4.5 × 10⁴ V", "4.5 × 10⁶ V", "4.5 × 10³ V"],
+            "correctAnswerIndex": 0,
+            "explanation": "V = k * Q / r = (9e9 * 5e-6) / 0.1 = 4.5e5 Volts.",
+            "a": "V = 4.5 × 10⁵ V"
+        }
+    ],
+    flashcards=[
+        {"front": "Is electric potential scalar or vector?", "back": "Scalar"},
+        {"front": "How much work is done moving a charge on an equipotential surface?", "back": "Zero"}
+    ],
+    videos=[
+        {"title": "Electrostatic Potential & Equipotential Surfaces", "channel": "Unacademy JEE", "duration": "45m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["coulombs_law", "electric_field", "gausss_law"],
+    learningPath=["Electric Field", "Electric Potential", "Gauss's Law", "Ohm's Law"]
+)
+
+add_topic(
+    id="gausss_law",
+    topic="Gauss's Law",
+    subject="physics",
+    exam="jee",
+    aliases=["gauss law", "gauss's law", "electric flux"],
+    keywords=["gauss", "flux", "gaussian surface", "enclosed charge", "symmetry"],
+    difficulty="Hard",
+    tags=["Electrostatics", "Physics", "JEE", "Class 12"],
+    overview="Gauss's Law relates the net electric flux through a closed surface to the net electric charge enclosed within that surface.",
+    explanation="Gauss's Law is one of Maxwell's four equations, which form the foundation of classical electrodynamics. It is highly useful for calculating electric fields of highly symmetric charge distributions, such as infinitely long wires, thin sheets of charge, and spheres, by choosing an appropriate 'Gaussian surface' that matches the symmetry.",
+    concepts=[
+        {"title": "Electric Flux (Φ)", "desc": "A measure of the number of electric field lines passing through a given surface area. Formally, it is the surface integral of E·dA."},
+        {"title": "Gaussian Surface", "desc": "A closed, imaginary 3D surface over which the electric field can be computed using Gauss's Law."}
+    ],
+    definitions=[
+        {"term": "Electric Flux", "def": "The dot product of electric field and area vector, representing lines of force passing through a surface."},
+        {"term": "Enclosed Charge", "def": "The net algebraic sum of all electric charges situated inside a closed boundary."}
+    ],
+    formulas=[
+        {"name": "Gauss's Law", "eq": "Φ = ∮ E · dA = Q_enclosed / ε₀", "desc": "Integral is over a closed surface. Q_enclosed is net charge inside, ε₀ is permittivity of free space."}
+    ],
+    examNotes="Gauss's Law is valid for any closed surface, regardless of its shape or size. Choose a surface where E is either parallel or perpendicular to the area vector to make calculations easy.",
+    mistakes=[
+        {"title": "Including Outside Charges", "desc": "Including charges that lie outside the Gaussian surface when calculating the enclosed charge."},
+        {"title": "Using Open Surfaces", "desc": "Applying Gauss's Law to an open surface (like a flat sheet) without closing it."}
+    ],
+    revision=[
+        "Flux depends only on enclosed charge, not on charge position.",
+        "Charges outside the Gaussian surface do not contribute to net flux, but they do contribute to the electric field at any point on the surface.",
+        "Gaussian surface must be closed."
+    ],
+    questions=[
+        {
+            "q": "A charge of 8.85 × 10⁻¹² C is placed at the center of a cube. What is the electric flux through any one face of the cube?",
+            "options": ["1 N·m²/C", "6 N·m²/C", "0.167 N·m²/C", "1.67 N·m²/C"],
+            "correctAnswerIndex": 2,
+            "explanation": "Total flux Φ = Q / ε₀ = 8.85e-12 / 8.854e-12 ≈ 1 N·m²/C. A cube has 6 faces, so flux through one face is Φ/6 = 1/6 = 0.167 N·m²/C.",
+            "a": "Flux = 0.167 N·m²/C"
+        }
+    ],
+    flashcards=[
+        {"front": "What does flux depend on in Gauss's Law?", "back": "The net charge enclosed inside the closed surface."},
+        {"front": "Does flux change if the Gaussian surface size is doubled?", "back": "No, it remains the same."}
+    ],
+    videos=[
+        {"title": "Gauss's Law & Electric Flux Explained", "channel": "Khan Academy", "duration": "22m", "videoId": "yA3iGki8L-o"}
+    ],
+    related=["coulombs_law", "electric_field", "electric_potential"],
+    learningPath=["Electric Potential", "Gauss's Law", "Ohm's Law", "Newton's Laws of Motion"]
+)
+
+add_topic(
+    id="ohms_law",
+    topic="Ohm's Law",
+    subject="physics",
+    exam="class10",
+    aliases=["ohm law", "ohm's law", "electrical resistance"],
+    keywords=["resistance", "current", "voltage", "resistivity", "conductor"],
+    difficulty="Easy",
+    tags=["Electricity", "Physics", "Class 10", "Class 12"],
+    overview="Ohm's Law states that the current flowing through a conductor is directly proportional to the potential difference across its ends, provided physical conditions (like temperature) remain constant.",
+    explanation="Ohm's Law establishes the relationship between voltage (V), current (I), and resistance (R). Materials that obey this law are called ohmic conductors and exhibit a linear V-I graph. Materials that deviate are non-ohmic (like diodes and transistors). Resistance depends on length, cross-sectional area, and temperature of the conductor.",
+    concepts=[
+        {"title": "Resistance (R)", "desc": "The opposition offered by a conductor to the flow of electric current. Unit is Ohm (Ω)."},
+        {"title": "Resistivity (ρ)", "desc": "A characteristic property of the material of a conductor, independent of length or area. Unit is Ohm-meter (Ω·m)."}
+    ],
+    definitions=[
+        {"term": "Electric Current", "def": "The rate of flow of electric charge through a cross-section, measured in Amperes (A)."},
+        {"term": "Potential Difference", "def": "Work done in moving a unit charge between two points in an electrical circuit."}
+    ],
+    formulas=[
+        {"name": "Ohm's Law", "eq": "V = I * R", "desc": "V is voltage in Volts, I is current in Amperes, and R is resistance in Ohms."},
+        {"name": "Factors affecting Resistance", "eq": "R = ρ * L / A", "desc": "L is length of wire, A is cross-sectional area, and ρ is resistivity."}
+    ],
+    examNotes="When temperature increases, the resistance of a metallic conductor increases, but the resistance of a semiconductor (like silicon) decreases.",
+    mistakes=[
+        {"title": "Confusing Resistance and Resistivity", "desc": "Believing resistivity changes when a wire is stretched. Stretching changes length and area, so R changes, but resistivity ρ remains constant because the material is the same."},
+        {"title": "Applying to non-ohmic devices", "desc": "Applying V = IR directly to calculate static resistance of diodes without accounting for dynamic changes."}
+    ],
+    revision=[
+        "V is proportional to I at constant temperature.",
+        "Slope of V vs I graph gives Resistance (R).",
+        "Resistivity depends only on material and temperature."
+    ],
+    questions=[
+        {
+            "q": "A wire of resistance R is stretched to double its original length. What is its new resistance?",
+            "options": ["R/2", "2R", "4R", "R/4"],
+            "correctAnswerIndex": 2,
+            "explanation": "Stretching to double length (L' = 2L) halves cross-sectional area (A' = A/2) since volume remains constant. R' = ρ * (2L) / (A/2) = 4 * (ρL/A) = 4R.",
+            "a": "New resistance is 4R"
+        }
+    ],
+    flashcards=[
+        {"front": "What does the slope of a V-I graph represent?", "back": "Resistance R"},
+        {"front": "What is the unit of resistivity?", "back": "Ohm-meter (Ω·m)"}
+    ],
+    videos=[
+        {"title": "Ohm's Law & Resistance", "channel": "Khan Academy Class 10", "duration": "12m", "videoId": "FasL7u-e6yI"}
+    ],
+    related=["electric_potential", "work_energy_power"],
+    learningPath=["Gauss's Law", "Ohm's Law", "Newton's Laws of Motion", "Kinematics"]
+)
+
+add_topic(
+    id="newtons_laws_of_motion",
+    topic="Newton's Laws of Motion",
+    subject="physics",
+    exam="class11",
+    aliases=["newton's laws", "newtons laws", "laws of motion"],
+    keywords=["inertia", "force", "acceleration", "action", "reaction", "momentum", "fbd"],
+    difficulty="Easy",
+    tags=["Mechanics", "Physics", "Class 11", "Class 10"],
+    overview="Newton's Laws of Motion describe the relationship between a body and the forces acting upon it, and its motion in response to those forces, forming the basis of classical mechanics.",
+    explanation="Newton's first law defines inertia (objects resist state changes). The second law defines force quantitatively as the rate of change of momentum (F=ma). The third law states that forces occur in equal and opposite action-reaction pairs acting on different bodies.",
+    concepts=[
+        {"title": "Inertia", "desc": "The natural tendency of an object to resist changes in its state of motion or rest."},
+        {"title": "Action-Reaction Pairs", "desc": "Forces always come in pairs. The action force and reaction force act on two different bodies and therefore never cancel each other out."}
+    ],
+    definitions=[
+        {"term": "Force", "def": "Any interaction that, when unopposed, will change the motion of an object."},
+        {"term": "Linear Momentum", "def": "The product of an object's mass and its velocity (p = mv)."}
+    ],
+    formulas=[
+        {"name": "Newton's Second Law", "eq": "F = m * a", "desc": "F is net force in Newtons, m is mass in kg, and a is acceleration in m/s²."},
+        {"name": "Linear Momentum", "eq": "p = m * v", "desc": "p is momentum in kg·m/s, v is velocity."}
+    ],
+    examNotes="Always draw a Free Body Diagram (FBD) representing all forces (Normal, Gravity, Friction, Tension) acting ON the object before writing Newton's equations.",
+    mistakes=[
+        {"title": "Normal Force Assumption", "desc": "Assuming normal force N is always equal to mg. On an incline, N = mg cos(θ)."},
+        {"title": "Action-Reaction Cancelling", "desc": "Thinking action and reaction forces cancel out because they are equal and opposite. They act on different objects, so they cannot cancel."}
+    ],
+    revision=[
+        "First Law defines Inertia.",
+        "Second Law quantifies Force (F = ma).",
+        "Third Law states forces exist in pairs (Action = -Reaction)."
+    ],
+    questions=[
+        {
+            "q": "A 5 kg block on a frictionless table is pulled by a force of 20 N. What is its acceleration?",
+            "options": ["100 m/s²", "4 m/s²", "0.25 m/s²", "2 m/s²"],
+            "correctAnswerIndex": 1,
+            "explanation": "a = F / m = 20 N / 5 kg = 4 m/s².",
+            "a": "a = 4 m/s²"
+        }
+    ],
+    flashcards=[
+        {"front": "Which law describes action and reaction?", "back": "Newton's Third Law"},
+        {"front": "What is the formula for momentum?", "back": "p = mv"}
+    ],
+    videos=[
+        {"title": "Newton's Laws of Motion - Visual Lecture", "channel": "SciShow Physics", "duration": "14m", "videoId": "G0U9s7_J610"}
+    ],
+    related=["kinematics", "work_energy_power"],
+    learningPath=["Ohm's Law", "Newton's Laws of Motion", "Kinematics", "Work, Energy, and Power"]
+)
+
+add_topic(
+    id="kinematics",
+    topic="Kinematics",
+    subject="physics",
+    exam="jee",
+    aliases=["kinematics", "projectile motion", "equations of motion"],
+    keywords=["motion", "projectile", "trajectory", "velocity", "acceleration", "displacement"],
+    difficulty="Hard",
+    tags=["Mechanics", "Physics", "JEE", "Class 11"],
+    overview="Kinematics is the branch of mechanics concerned with the motion of objects without reference to the forces which cause the motion.",
+    explanation="Kinematics models displacement, velocity, acceleration, and time. For constant acceleration, motion is governed by the three equations of motion. Projectile motion is 2D motion with constant acceleration in the vertical direction (gravity) and zero acceleration in the horizontal direction, resulting in a parabolic trajectory.",
+    concepts=[
+        {"title": "1D vs 2D Motion", "desc": "1D motion is in a straight line. 2D motion (like projectiles) is resolved into two independent perpendicular 1D motions."},
+        {"title": "Equation of Trajectory", "desc": "The mathematical equation representing the path of a projectile, showing y as a quadratic function of x."}
+    ],
+    definitions=[
+        {"term": "Velocity", "def": "The rate of change of displacement, a vector quantity."},
+        {"term": "Acceleration", "def": "The rate of change of velocity, a vector quantity."}
+    ],
+    formulas=[
+        {"name": "Equations of Motion", "eq": "v = u + at | s = ut + 0.5*a*t^2 | v^2 = u^2 + 2as", "desc": "Applicable ONLY when acceleration 'a' is constant. u is initial velocity, v is final, s is displacement, t is time."},
+        {"name": "Time of Flight (Projectile)", "eq": "T = 2 * u * sin(θ) / g", "desc": "u is initial speed, θ is projection angle, g is gravity."},
+        {"name": "Maximum Height (Projectile)", "eq": "H = u^2 * sin^2(θ) / 2g", "desc": "Maximum vertical displacement of projectile."}
+    ],
+    examNotes="For incline projectile problems, resolve gravity components along the incline (g sin θ) and perpendicular to the incline (g cos θ) to simplify variables.",
+    mistakes=[
+        {"title": "Using Equations with Variable Accel", "desc": "Applying v = u + at when acceleration is a function of time (e.g. a = 2t). Use integration/differentiation instead."},
+        {"title": "Relative Velocity Direction", "desc": "Subtracting relative velocities without vector geometry: V_ab = V_a - V_b."}
+    ],
+    revision=[
+        "Horizontal velocity in projectile motion remains constant (no gravity horizontally).",
+        "At maximum height, vertical velocity component is zero.",
+        "Equations of motion are vector equations."
+    ],
+    questions=[
+        {
+            "q": "For a projectile, what angle θ with the horizontal gives the maximum range?",
+            "options": ["30°", "45°", "60°", "90°"],
+            "correctAnswerIndex": 1,
+            "explanation": "Range R = u^2 sin(2θ)/g. R is max when sin(2θ) = 1, which means 2θ = 90°, or θ = 45°.",
+            "a": "θ = 45°"
+        }
+    ],
+    flashcards=[
+        {"front": "What is the shape of a projectile path?", "back": "Parabola"},
+        {"front": "When can you use equations of motion?", "back": "Only when acceleration is constant."}
+    ],
+    videos=[
+        {"title": "JEE Advanced Kinematics Complete", "channel": "IIT Prep Engine", "duration": "1h 55m", "videoId": "2yQcKk5eZ9U"}
+    ],
+    related=["newtons_laws_of_motion", "work_energy_power"],
+    learningPath=["Newton's Laws of Motion", "Kinematics", "Work, Energy, and Power", "Electromagnetic Induction"]
+)
+
+add_topic(
+    id="work_energy_power",
+    topic="Work, Energy, and Power",
+    subject="physics",
+    exam="jee",
+    aliases=["work energy power", "kinetic energy", "work energy theorem"],
+    keywords=["work", "kinetic energy", "potential energy", "power", "conservative force"],
+    difficulty="Medium",
+    tags=["Mechanics", "Physics", "JEE", "Class 11"],
+    overview="Work, Energy, and Power deals with the quantitative definitions of physical work, conservation of mechanical energy, and the rate of doing work.",
+    explanation="Work is done when a force causes displacement. The Work-Energy Theorem states that the net work done by all forces on an object equals its change in kinetic energy. In a conservative force field (like gravity or electrostatic), total mechanical energy (potential + kinetic) is conserved.",
+    concepts=[
+        {"title": "Work-Energy Theorem", "desc": "W_net = ΔK. It applies to both conservative and non-conservative forces, and is a powerful shortcut for complex mechanics problems."},
+        {"title": "Conservative Force", "desc": "A force for which work done in moving an object depends only on start/end positions, not the path taken (e.g. Gravity, Spring force)."}
+    ],
+    definitions=[
+        {"term": "Work", "def": "The scalar product of force and displacement vectors (W = F · d)."},
+        {"term": "Power", "def": "The rate at which work is done or energy is transferred, measured in Watts (W)."}
+    ],
+    formulas=[
+        {"name": "Work Done (Constant Force)", "eq": "W = F * d * cos(θ)", "desc": "θ is the angle between Force F and Displacement d."},
+        {"name": "Kinetic Energy", "eq": "K = 0.5 * m * v^2", "desc": "Energy of motion of an object of mass m and speed v."},
+        {"name": "Power", "eq": "P = dW / dt = F · v", "desc": "P is power, F is force, v is instantaneous velocity vector."}
+    ],
+    examNotes="Always check if non-conservative forces like friction are doing work. If friction is present, W_friction + W_gravity = ΔK. Friction converts mechanical energy into thermal energy.",
+    mistakes=[
+        {"title": "Negative Work Confusion", "desc": "Thinking work is always positive. When force opposes displacement (e.g. braking force), work done is negative."},
+        {"title": "Potential Energy of Spring", "desc": "Using U = 0.5*k*x instead of U = 0.5*k*x^2 for spring potential energy."}
+    ],
+    revision=[
+        "Work is a scalar quantity.",
+        "Work-Energy theorem is valid in all frames of reference.",
+        "Power is dot product of Force and Velocity."
+    ],
+    questions=[
+        {
+            "q": "A constant force of 10 N acts on an object displacing it by 5 meters at an angle of 60° to the force. What is the work done?",
+            "options": ["50 J", "25 J", "43.3 J", "0 J"],
+            "correctAnswerIndex": 1,
+            "explanation": "W = F * d * cos(60°) = 10 * 5 * 0.5 = 25 Joules.",
+            "a": "W = 25 J"
+        }
+    ],
+    flashcards=[
+        {"front": "State the Work-Energy Theorem.", "back": "Net work done equals change in Kinetic Energy (W_net = ΔK)."},
+        {"front": "What is the SI unit of power?", "back": "Watt (W) which is 1 Joule/second"}
+    ],
+    videos=[
+        {"title": "Work Energy Power One Shot JEE", "channel": "Unacademy JEE", "duration": "1h 10m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["newtons_laws_of_motion", "kinematics"],
+    learningPath=["Kinematics", "Work, Energy, and Power", "Electromagnetic Induction", "Wave Optics"]
+)
+
+add_topic(
+    id="electromagnetic_induction",
+    topic="Electromagnetic Induction",
+    subject="physics",
+    exam="jee",
+    aliases=["electromagnetic induction", "emi", "faraday's law", "lenz's law"],
+    keywords=["flux", "induced emf", "induction", "lenz", "faraday", "solenoid"],
+    difficulty="Hard",
+    tags=["Electromagnetism", "Physics", "JEE", "Class 12"],
+    overview="Electromagnetic Induction (EMI) is the process by which a changing magnetic flux induces an electromotive force (emf) and current in a conductor.",
+    explanation="Faraday's Law of Induction states that the magnitude of induced EMF is proportional to the rate of change of magnetic flux. Lenz's Law dictates that the direction of the induced current opposes the change in magnetic flux that produced it, satisfying conservation of energy.",
+    concepts=[
+        {"title": "Magnetic Flux (Φ_B)", "desc": "The measure of magnetic field passing through a loop area, Φ_B = B · A · cos(θ)."},
+        {"title": "Lenz's Law", "desc": "A consequence of the law of conservation of energy. The induced EMF acts to oppose the change in magnetic flux."}
+    ],
+    definitions=[
+        {"term": "Induced EMF", "def": "Voltage generated across a conductor due to a changing magnetic field."},
+        {"term": "Self Induction", "def": "The production of induced EMF in a circuit when the current in that same circuit changes."}
+    ],
+    formulas=[
+        {"name": "Faraday's Law", "eq": "ε = -N * dΦ / dt", "desc": "ε is induced EMF, N is number of turns, dΦ/dt is rate of change of magnetic flux. Negative sign represents Lenz's Law."},
+        {"name": "Motional EMF", "eq": "ε = B * L * v", "desc": "EMF induced in a rod of length L moving with velocity v perpendicular to magnetic field B."}
+    ],
+    examNotes="The negative sign in Faraday's formula is Lenz's Law. Do not forget it when determining polarities of induced emf in circuits.",
+    mistakes=[
+        {"title": "Lenz Law Direction Error", "desc": "Drawing the induced current in a direction that supports the flux change instead of opposing it."},
+        {"title": "Flux Calculation area", "desc": "Using the total area of the loop instead of only the area that is inside the magnetic field region."}
+    ],
+    revision=[
+        "EMI requires a change in magnetic flux.",
+        "Flux can change by changing magnetic field, loop area, or orientation.",
+        "Lenz's law is based on energy conservation."
+    ],
+    questions=[
+        {
+            "q": "A magnetic flux through a coil changes from 10 Wb to 2 Wb in 2 seconds. What is the magnitude of the induced EMF?",
+            "options": ["8 V", "4 V", "12 V", "16 V"],
+            "correctAnswerIndex": 1,
+            "explanation": "ε = |dΦ / dt| = |(2 - 10) / 2| = 4 Volts.",
+            "a": "EMF = 4 V"
+        }
+    ],
+    flashcards=[
+        {"front": "What does Lenz's Law state?", "back": "The induced current opposes the change in magnetic flux that caused it."},
+        {"front": "What is the formula for motional EMF?", "back": "ε = BLv"}
+    ],
+    videos=[
+        {"title": "EMI Concept Booster Lecture", "channel": "Physics Wallah", "duration": "55m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["electric_field", "electric_potential"],
+    learningPath=["Work, Energy, and Power", "Electromagnetic Induction", "Wave Optics", "Chemical Bonding"]
+)
+
+add_topic(
+    id="wave_optics",
+    topic="Wave Optics",
+    subject="physics",
+    exam="jee",
+    aliases=["wave optics", "young's double slit", "interference of light"],
+    keywords=["interference", "ydse", "diffraction", "wavefront", "coherent", "fringes"],
+    difficulty="Hard",
+    tags=["Optics", "Physics", "JEE", "Class 12"],
+    overview="Wave Optics treats light as a wave, explaining phenomena like interference, diffraction, and polarization that ray optics cannot account for.",
+    explanation="Wave optics operates on Huygens' Principle, which states that every point on a wavefront is a source of secondary wavelets. The most famous experiment is Young's Double Slit Experiment (YDSE), which proves the wave nature of light by displaying an interference pattern of bright and dark fringes on a screen.",
+    concepts=[
+        {"title": "Coherent Sources", "desc": "Sources that emit light waves of the same frequency/wavelength and have a constant phase difference. Necessary for stable interference."},
+        {"title": "Interference", "desc": "Superposition of two waves resulting in constructive (bright fringe) or destructive (dark fringe) interference based on path difference."}
+    ],
+    definitions=[
+        {"term": "Wavefront", "def": "The locus of all points in a medium vibrating in the same phase."},
+        {"term": "Path Difference", "def": "The difference in distance travelled by two waves from their respective sources to a point."}
+    ],
+    formulas=[
+        {"name": "Bright Fringe Position (YDSE)", "eq": "y_n = n * λ * D / d", "desc": "y_n is distance of nth bright fringe from central maximum, λ is wavelength, D is screen distance, d is slit separation."},
+        {"name": "Fringe Width (β)", "eq": "β = λ * D / d", "desc": "Distance between two consecutive bright or dark fringes."}
+    ],
+    examNotes="For constructive interference, path difference Δx = nλ. For destructive interference, Δx = (2n-1)λ/2. Remember that intensity is proportional to square of amplitude (I ∝ A²).",
+    mistakes=[
+        {"title": "Slit Distance Confusion", "desc": "Mixing up capital D (distance to screen, usually ~1m) and small d (distance between slits, usually ~0.1mm)."},
+        {"title": "Medium wavelength shift", "desc": "Forgetting that when YDSE is immersed in water, wavelength shifts to λ/μ, reducing fringe width."}
+    ],
+    revision=[
+        "Light behaves as a transverse electromagnetic wave.",
+        "Interference requires coherent light sources.",
+        "Fringe width increases if screen distance increases or slit spacing decreases."
+    ],
+    questions=[
+        {
+            "q": "In YDSE, if slit separation is halved and screen distance is doubled, the fringe width becomes:",
+            "options": ["Double", "Half", "Four times", "Unchanged"],
+            "correctAnswerIndex": 2,
+            "explanation": "β = λ*D/d. New β' = λ*(2D)/(d/2) = 4 * (λ*D/d) = 4β.",
+            "a": "Fringe width becomes 4 times"
+        }
+    ],
+    flashcards=[
+        {"front": "What is the condition for bright fringe in YDSE?", "back": "Path difference is integral multiple of wavelength (Δx = nλ)."},
+        {"front": "Define coherent sources.", "back": "Sources emitting waves of same frequency and zero or constant phase difference."}
+    ],
+    videos=[
+        {"title": "Wave Optics & YDSE Class 12 Boards", "channel": "Khan Academy", "duration": "25m", "videoId": "8t4e_yB6-oo"}
+    ],
+    related=["electromagnetic_induction", "atomic_structure"],
+    learningPath=["Electromagnetic Induction", "Wave Optics", "Chemical Bonding", "Periodic Table"]
+)
+
+# ----------------------------------------------------
+# CHEMISTRY (10 Topics)
+# ----------------------------------------------------
+add_topic(
+    id="chemical_bonding",
+    topic="Chemical Bonding",
+    subject="chemistry",
+    exam="jee",
+    aliases=["chemical bonding", "covalent bond", "vsepr theory", "hybridization"],
+    keywords=["bonding", "hybridization", "vsepr", "covalent", "ionic", "dipole moment"],
+    difficulty="Medium",
+    tags=["Inorganic Chemistry", "Chemistry", "JEE", "Class 11"],
+    overview="Chemical Bonding describes the attractive forces that hold atoms or ions together to form molecules and compounds, explaining molecular geometry and properties.",
+    explanation="Chemical bonding includes ionic bonds (electrostatic attraction between ions) and covalent bonds (sharing of electrons). Hybridization explains how atomic orbitals mix to form new equivalent hybrid orbitals (sp, sp², sp³, etc.) that determine molecular shape. Valence Shell Electron Pair Repulsion (VSEPR) theory predicts geometry based on minimizing repulsion between bonding and lone pairs.",
+    concepts=[
+        {"title": "Hybridization", "desc": "Mixing of atomic orbitals of slightly different energies in an atom to produce equivalent hybrid orbitals of equal energy."},
+        {"title": "VSEPR Theory", "desc": "Repulsion order: Lone Pair - Lone Pair > Lone Pair - Bond Pair > Bond Pair - Bond Pair. Lone pairs distort standard bond angles."}
+    ],
+    definitions=[
+        {"term": "Electronegativity", "def": "The tendency of an atom in a molecule to attract shared electron pairs towards itself."},
+        {"term": "Dipole Moment (μ)", "def": "The product of charge magnitude and distance of separation, representing molecular polarity."}
+    ],
+    formulas=[
+        {"name": "Dipole Moment", "eq": "μ = q * d", "desc": "q is charge, d is distance vector between charges. Unit is Debye (D)."},
+        {"name": "Steric Number (Hybridization)", "eq": "SN = (Number of bonded atoms) + (Number of lone pairs on central atom)", "desc": "SN=2 is sp, SN=3 is sp², SN=4 is sp³, SN=5 is sp³d."}
+    ],
+    examNotes="BCl3 has sp² hybridization (trigonal planar), while NH3 has sp³ hybridization with 1 lone pair, resulting in a trigonal pyramidal shape with a bond angle of 107° due to lone pair repulsion.",
+    mistakes=[
+        {"title": "Neglecting Lone Pairs", "desc": "Predicting molecular geometry by looking only at bonded atoms and forgetting lone pairs, e.g., calling H2O linear instead of bent/V-shaped."},
+        {"title": "Dipole Moment Vector direction", "desc": "Drawing dipole vectors from electropositive to electronegative atoms instead of opposite (in chemistry, the arrow points to the more electronegative atom)."}
+    ],
+    revision=[
+        "Ionic bonds form between metals and non-metals.",
+        "Covalent bonds involve sharing of electrons.",
+        "Lone pairs occupy more space than bond pairs."
+    ],
+    questions=[
+        {
+            "q": "What is the hybridization and shape of the XeF2 molecule?",
+            "options": ["sp³d, Linear", "sp³, Bent", "sp³d², Linear", "sp², Trigonal Planar"],
+            "correctAnswerIndex": 0,
+            "explanation": "Xe has 8 valence electrons. With 2 F atoms, it forms 2 single bonds and has 3 lone pairs. Steric Number = 2 + 3 = 5. Hybridization is sp³d. The 3 lone pairs occupy equatorial positions, so geometry of atoms is linear.",
+            "a": "sp³d, Linear"
+        }
+    ],
+    flashcards=[
+        {"front": "What is the shape of H2O?", "back": "Bent / V-shaped"},
+        {"front": "What is the hybridization of carbon in methane (CH4)?", "back": "sp³"}
+    ],
+    videos=[
+        {"title": "Chemical Bonding & Molecular Shapes", "channel": "Khan Academy", "duration": "20m", "videoId": "8t4e_yB6-oo"}
+    ],
+    related=["periodic_table", "coordination_compounds"],
+    learningPath=["Wave Optics", "Chemical Bonding", "Periodic Table", "Thermodynamics"]
+)
+
+add_topic(
+    id="periodic_table",
+    topic="Periodic Table",
+    subject="chemistry",
+    exam="class10",
+    aliases=["periodic table", "periodic properties", "electronegativity", "ionization enthalpy"],
+    keywords=["periodic", "trends", "radius", "electronegativity", "ionization", "halogens", "alkali"],
+    difficulty="Easy",
+    tags=["Inorganic Chemistry", "Chemistry", "Class 10", "Class 11"],
+    overview="The Periodic Table is a tabular display of chemical elements organized by increasing atomic number, showing periodic trends in chemical and physical properties.",
+    explanation="Modern Periodic Law states that properties of elements are periodic functions of their atomic numbers. Important trends across periods (left to right) and groups (top to bottom) include: Atomic Radius (decreases across period, increases down group), Ionization Enthalpy (increases across period, decreases down group), and Electronegativity (increases across period, decreases down group).",
+    concepts=[
+        {"title": "Atomic Radius Trend", "desc": "Decreases left-to-right across a period due to increased effective nuclear charge pulling electrons closer. Increases down a group as new electronic shells are added."},
+        {"title": "Ionization Enthalpy", "desc": "The energy required to remove the most loosely bound electron from an isolated gaseous atom. Higher nuclear charge means higher ionization energy."}
+    ],
+    definitions=[
+        {"term": "Effective Nuclear Charge (Z_eff)", "def": "The net positive charge experienced by an electron in a multi-electron atom, accounting for shielding by inner electrons."},
+        {"term": "Electron Gain Enthalpy", "def": "The enthalpy change when an electron is added to an isolated gaseous atom."}
+    ],
+    formulas=[
+        {"name": "Effective Nuclear Charge", "eq": "Z_eff = Z - σ", "desc": "Z is atomic number (proton count), σ is the shielding/screening constant calculated using Slater's rules."}
+    ],
+    examNotes="Fluorine is the most electronegative element in the periodic table. Noble gases have positive electron gain enthalpies because they have stable closed-shell configurations.",
+    mistakes=[
+        {"title": "Noble Gas Size Mistake", "desc": "Thinking noble gases are the smallest in their period. Because we measure their van der Waals radius instead of covalent radius, they appear larger than halogens."},
+        {"title": "Halogen Electron Gain Exception", "desc": "Assuming Fluorine has higher electron gain enthalpy than Chlorine. Chlorine actually has the highest because Fluorine is small, creating high electron-electron repulsion."}
+    ],
+    revision=[
+        "Electronegativity increases across a period and decreases down a group.",
+        "Metallic character decreases across a period and increases down a group.",
+        "Valency increases from 1 to 4 and then decreases to 0 across a period."
+    ],
+    questions=[
+        {
+            "q": "Which of the following elements has the highest first ionization enthalpy?",
+            "options": ["Nitrogen", "Oxygen", "Carbon", "Boron"],
+            "correctAnswerIndex": 0,
+            "explanation": "Nitrogen has a half-filled p-orbital (1s² 2s² 2p³), which is extra stable. Thus, removing an electron from Nitrogen requires more energy than Oxygen, which has a 2p⁴ configuration.",
+            "a": "Nitrogen (due to stable half-filled 2p³ orbital)"
+        }
+    ],
+    flashcards=[
+        {"front": "Which group contains the halogens?", "back": "Group 17"},
+        {"front": "What is the trend of metallic character down a group?", "back": "Increases"}
+    ],
+    videos=[
+        {"title": "Periodic Table Classification and Trends", "channel": "ChemAcademy", "duration": "30m", "videoId": "9_wL4c-U2eE"}
+    ],
+    related=["chemical_bonding", "atomic_structure"],
+    learningPath=["Chemical Bonding", "Periodic Table", "Thermodynamics", "Chemical Kinetics"]
+)
+
+add_topic(
+    id="thermodynamics",
+    topic="Chemical Thermodynamics",
+    subject="chemistry",
+    exam="jee",
+    aliases=["thermodynamics", "chemical thermodynamics", "enthalpy", "entropy"],
+    keywords=["thermodynamics", "entropy", "enthalpy", "gibbs", "internal energy", "spontaneous"],
+    difficulty="Hard",
+    tags=["Physical Chemistry", "Chemistry", "JEE", "Class 11"],
+    overview="Chemical Thermodynamics deals with the study of energy transformations in chemical reactions and the feasibility/spontaneity of reactions.",
+    explanation="Thermodynamics is built on three laws. The First Law states conservation of energy (ΔU = q + w). The Second Law introduces entropy (S), stating that the entropy of the universe increases in any spontaneous process. Gibbs Free Energy (G) combines enthalpy and entropy to predict reaction spontaneity: a reaction is spontaneous if ΔG is negative.",
+    concepts=[
+        {"title": "State Functions", "desc": "Properties that depend only on the current state of the system, not on the path taken to reach it (e.g. U, H, S, G). Work (w) and heat (q) are path functions."},
+        {"title": "Gibbs Free Energy (G)", "desc": "The maximum useful work that can be obtained from a thermodynamic system at constant temperature and pressure."}
+    ],
+    definitions=[
+        {"term": "Enthalpy (H)", "def": "The total heat content of a system, defined as H = U + PV."},
+        {"term": "Entropy (S)", "def": "A measure of the molecular disorder or randomness of a system."}
+    ],
+    formulas=[
+        {"name": "First Law of Thermodynamics", "eq": "ΔU = q + w", "desc": "ΔU is change in internal energy, q is heat absorbed, w is work done ON the system (IUPAC convention)."},
+        {"name": "Gibbs-Helmholtz Equation", "eq": "ΔG = ΔH - T * ΔS", "desc": "Used to calculate spontaneity. ΔG < 0 is spontaneous, ΔG > 0 is non-spontaneous, ΔG = 0 is equilibrium."}
+    ],
+    examNotes="For an adiabatic process, q = 0, which means ΔU = w. Pay attention to sign conventions: work done by the system is negative, and work done on the system is positive in chemistry.",
+    mistakes=[
+        {"title": "Gibbs and Rate Confusion", "desc": "Assuming a spontaneous reaction (ΔG < 0) occurs quickly. Thermodynamics only predicts IF a reaction will happen, not how FAST it happens (which is kinetics)."},
+        {"title": "Sign of Work", "desc": "Using chemistry w = -PΔV and physics w = PΔV interchangeably. In chemistry, IUPAC convention makes w = -P_ext * ΔV."}
+    ],
+    revision=[
+        "Entropy of a perfect crystal at absolute zero is zero (Third Law).",
+        "Exothermic reactions have negative ΔH; endothermic have positive ΔH.",
+        "Reactions are spontaneous if ΔG is negative."
+    ],
+    questions=[
+        {
+            "q": "For a reaction, ΔH = -110 kJ/mol and ΔS = -300 J/K·mol. At what temperature range will the reaction be spontaneous?",
+            "options": ["Below 366.7 K", "Above 366.7 K", "At all temperatures", "Never spontaneous"],
+            "correctAnswerIndex": 0,
+            "explanation": "ΔG = ΔH - TΔS. For spontaneity, ΔG < 0 => ΔH < TΔS => -110,000 < T * (-300) => T < -110,000 / -300 => T < 366.7 K. The reaction is spontaneous at low temperatures (below 366.7 K).",
+            "a": "Spontaneous below 366.7 K"
+        }
+    ],
+    flashcards=[
+        {"front": "State the condition for equilibrium in terms of ΔG.", "back": "ΔG = 0"},
+        {"front": "What is an adiabatic process?", "back": "A process in which no heat enters or leaves the system (q = 0)."}
+    ],
+    videos=[
+        {"title": "Chemical Thermodynamics in One Shot", "channel": "Unacademy JEE", "duration": "1h 45m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["chemical_kinetics", "solutions"],
+    learningPath=["Periodic Table", "Thermodynamics", "Chemical Kinetics", "Coordination Compounds"]
+)
+
+add_topic(
+    id="chemical_kinetics",
+    topic="Chemical Kinetics",
+    subject="chemistry",
+    exam="jee",
+    aliases=["chemical kinetics", "rate of reaction", "order of reaction", "arrhenius equation"],
+    keywords=["kinetics", "rate", "order", "half life", "arrhenius", "activation energy"],
+    difficulty="Medium",
+    tags=["Physical Chemistry", "Chemistry", "JEE", "Class 12"],
+    overview="Chemical Kinetics is the branch of chemistry that addresses the rates of chemical reactions, the factors affecting these rates, and the reaction mechanisms.",
+    explanation="Unlike thermodynamics, kinetics focuses on speed. Reaction rate depends on reactant concentrations, temperature, and catalysts. The rate law expresses the rate as a function of concentrations raised to powers (orders). The Arrhenius equation models how the rate constant changes exponentially with temperature based on activation energy.",
+    concepts=[
+        {"title": "Order of Reaction", "desc": "The sum of the exponents of the concentration terms in the rate law. It is experimentally determined and can be fractional or zero."},
+        {"title": "Activation Energy (Ea)", "desc": "The minimum energy that colliding molecules must possess to undergo a chemical reaction."}
+    ],
+    definitions=[
+        {"term": "Rate Constant (k)", "def": "A proportionality constant in the rate law, specific to a reaction at a given temperature."},
+        {"term": "Half-Life (t₁/₂)", "def": "The time required for the concentration of a reactant to decrease to half of its initial value."}
+    ],
+    formulas=[
+        {"name": "First-Order Integrated Rate Law", "eq": "k = (2.303 / t) * log( [A]₀ / [A] )", "desc": "[A]₀ is initial concentration, [A] is concentration at time t."},
+        {"name": "First-Order Half-Life", "eq": "t₁/₂ = 0.693 / k", "desc": "Independent of the initial concentration for first-order reactions."},
+        {"name": "Arrhenius Equation", "eq": "k = A * e^(-Ea / R * T)", "desc": "k is rate constant, A is pre-exponential factor, Ea is activation energy, R is gas constant, T is Kelvin temperature."}
+    ],
+    examNotes="For zero-order reactions, half-life is directly proportional to initial concentration (t₁/₂ = [A]₀/2k). For first-order, it is independent of concentration.",
+    mistakes=[
+        {"title": "Confusing Order and Molecularity", "desc": "Assuming molecularity (stoichiometric coefficients of balanced equation) is always equal to the reaction order. Order must be determined experimentally."},
+        {"title": "Using wrong units for k", "desc": "Using the same unit for rate constant across different orders. Zero-order k is M/s, first-order is s⁻¹, second-order is M⁻¹s⁻¹."}
+    ],
+    revision=[
+        "Catalysts increase reaction rate by lowering the activation energy.",
+        "Reaction order can only be found experimentally.",
+        "Arrhenius equation relates temperature and reaction rate."
+    ],
+    questions=[
+        {
+            "q": "If a first-order reaction has a rate constant of 0.0693 min⁻¹, what is its half-life?",
+            "options": ["10 min", "5 min", "100 min", "20 min"],
+            "correctAnswerIndex": 0,
+            "explanation": "t₁/₂ = 0.693 / k = 0.693 / 0.0693 = 10 minutes.",
+            "a": "t₁/₂ = 10 minutes"
+        }
+    ],
+    flashcards=[
+        {"front": "What is the unit of rate constant for a first-order reaction?", "back": "s⁻¹ (or time⁻¹)"},
+        {"front": "How does temperature affect reaction rate?", "back": "Increases rate exponentially by increasing the fraction of molecules with E >= Ea."}
+    ],
+    videos=[
+        {"title": "Chemical Kinetics Complete Lecture", "channel": "Physics Wallah", "duration": "1h 10m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["thermodynamics", "electrochemistry"],
+    learningPath=["Thermodynamics", "Chemical Kinetics", "Coordination Compounds", "Solutions"]
+)
+
+add_topic(
+    id="coordination_compounds",
+    topic="Coordination Compounds",
+    subject="chemistry",
+    exam="jee",
+    aliases=["coordination compounds", "ligands", "crystal field theory", "werner's theory"],
+    keywords=["coordination", "ligand", "cft", "hybridization", "isomerism", "magnetic moment"],
+    difficulty="Hard",
+    tags=["Inorganic Chemistry", "Chemistry", "JEE", "Class 12"],
+    overview="Coordination Compounds consist of a central metal atom or ion bonded to surrounding molecules or ions (ligands) via coordinate covalent bonds.",
+    explanation="Coordination chemistry is explained by Werner's Theory (primary and secondary valencies) and Crystal Field Theory (CFT). CFT describes the splitting of d-orbitals in octrahedral and tetrahedral fields due to electrostatic repulsion from ligands, which accounts for the magnetic properties and intense colors of transition metal complexes.",
+    concepts=[
+        {"title": "Ligands", "desc": "Ions or molecules that can donate a pair of electrons to the central metal atom. Can be monodentate, bidentate, or polydentate (like EDTA)."},
+        {"title": "Crystal Field Splitting (Δ₀)", "desc": "The energy difference between split d-orbitals. Strong field ligands (like CN⁻, CO) cause large splitting, forcing electron pairing (low spin). Weak field ligands (like Cl⁻, F⁻) cause small splitting (high spin)."}
+    ],
+    definitions=[
+        {"term": "Coordination Number", "def": "The total number of coordinate bonds formed between ligands and the central metal ion."},
+        {"term": "Chelate Effect", "def": "The enhanced stability of complexes containing ring-forming multidentate ligands compared to unidentate ligands."}
+    ],
+    formulas=[
+        {"name": "Spin-Only Magnetic Moment", "eq": "μ = sqrt(n * (n + 2))", "desc": "μ is magnetic moment in Bohr Magnetons (BM), n is the number of unpaired electrons in the central metal ion."}
+    ],
+    examNotes="Fe(CN)6³⁻ is a low-spin complex because CN⁻ is a strong field ligand, whereas FeF6³⁻ is a high-spin complex because F⁻ is a weak field ligand.",
+    mistakes=[
+        {"title": "Primary vs Secondary Valency", "desc": "Confusing primary valency (oxidation state of metal, ionizable) with secondary valency (coordination number, non-ionizable)."},
+        {"title": "Weak vs Strong Ligands on CFT", "desc": "Forgetting to pair electrons when using strong field ligands, leading to incorrect unpaired electron counts and magnetic moments."}
+    ],
+    revision=[
+        "Werner proposed primary (ionizable) and secondary (coordination) valencies.",
+        "Color in complexes is due to d-d electronic transitions.",
+        "EDTA is a hexadentate ligand."
+    ],
+    questions=[
+        {
+            "q": "What is the spin-only magnetic moment of [Fe(H2O)6]²⁺? (Fe atomic number is 26)",
+            "options": ["4.90 BM", "5.92 BM", "0 BM", "2.83 BM"],
+            "correctAnswerIndex": 0,
+            "explanation": "Fe²⁺ has d⁶ configuration. H2O is a weak field ligand, so no pairing occurs: 4 unpaired electrons (n=4). μ = sqrt(4 * 6) = sqrt(24) = 4.90 BM.",
+            "a": "4.90 BM (4 unpaired electrons)"
+        }
+    ],
+    flashcards=[
+        {"front": "What does a d-d transition produce in coordination compounds?", "back": "Color"},
+        {"front": "What is the coordination number of Fe in [Fe(ox)3]³⁻? (ox is oxalate)", "back": "6 (oxalate is bidentate, so 3 * 2 = 6)"}
+    ],
+    videos=[
+        {"title": "Coordination Chemistry & CFT Class 12", "channel": "Khan Academy", "duration": "35m", "videoId": "8t4e_yB6-oo"}
+    ],
+    related=["chemical_bonding", "solutions"],
+    learningPath=["Chemical Kinetics", "Coordination Compounds", "Solutions", "Organic Chemistry Basics"]
+)
+
+add_topic(
+    id="solutions",
+    topic="Solutions",
+    subject="chemistry",
+    exam="jee",
+    aliases=["solutions", "raoult's law", "colligative properties", "osmotic pressure"],
+    keywords=["solution", "raoult", "colligative", "osmotic", "boiling", "freezing", "van't hoff"],
+    difficulty="Medium",
+    tags=["Physical Chemistry", "Chemistry", "JEE", "Class 12"],
+    overview="Solutions is the study of homogeneous mixtures, focusing on vapor pressures of liquid-liquid mixtures and colligative properties of dilute solutions.",
+    explanation="A solution consists of solute and solvent. Raoult's Law states that the partial vapor pressure of each volatile component in a solution is directly proportional to its mole fraction. Colligative properties depend only on the number of solute particles, not their identity, and include: relative lowering of vapor pressure, elevation of boiling point, depression of freezing point, and osmotic pressure.",
+    concepts=[
+        {"title": "Colligative Properties", "desc": "Properties that depend on the ratio of the number of solute particles to solvent molecules. They increase with solute concentration and ionization."},
+        {"title": "Van't Hoff Factor (i)", "desc": "A ratio representing the actual concentration of particles produced when the substance is dissolved, accounting for dissociation or association."}
+    ],
+    definitions=[
+        {"term": "Raoult's Law", "def": "The vapor pressure of a solvent in a solution is equal to the vapor pressure of the pure solvent multiplied by its mole fraction in the solution."},
+        {"term": "Azeotrope", "def": "A liquid mixture that boils at a constant temperature and has the same composition in liquid and vapor phases."}
+    ],
+    formulas=[
+        {"name": "Boiling Point Elevation", "eq": "ΔT_b = i * K_b * m", "desc": "ΔT_b is boiling point elevation, i is van't Hoff factor, K_b is molal elevation constant, m is molality."},
+        {"name": "Osmotic Pressure", "eq": "π = i * C * R * T", "desc": "π is osmotic pressure, C is molarity, R is gas constant, T is Kelvin temperature."}
+    ],
+    examNotes="For non-electrolytes (like glucose or urea), i = 1. For electrolytes, calculate i based on degree of dissociation (α): i = 1 + (n - 1)α.",
+    mistakes=[
+        {"title": "Forgetting van't Hoff Factor", "desc": "Calculating colligative properties of ionic solutes (like NaCl, CaCl2) without multiplying by the van't Hoff factor i (e.g. i=2 for NaCl)."},
+        {"title": "Molarity vs Molality", "desc": "Using molarity (volume dependent) instead of molality (mass dependent) when calculating boiling point or freezing point changes."}
+    ],
+    revision=[
+        "Raoult's law applies to ideal solutions.",
+        "Boiling point rises and freezing point drops when a non-volatile solute is added.",
+        "Osmotic pressure is a colligative property."
+    ],
+    questions=[
+        {
+            "q": "What is the boiling point of a 0.5 m aqueous NaCl solution? (K_b for water is 0.52 K kg/mol, assume 100% dissociation)",
+            "options": ["100.26 °C", "100.52 °C", "101.04 °C", "99.48 °C"],
+            "correctAnswerIndex": 1,
+            "explanation": "NaCl dissociates into Na⁺ and Cl⁻ (n=2). For 100% dissociation, i = 2. ΔT_b = i * K_b * m = 2 * 0.52 * 0.5 = 0.52 °C. Boiling point of solution is 100 + 0.52 = 100.52 °C.",
+            "a": "Boiling point is 100.52 °C"
+        }
+    ],
+    flashcards=[
+        {"front": "Define osmotic pressure.", "back": "The pressure required to stop the flow of pure solvent into a solution through a semipermeable membrane."},
+        {"front": "What is the van't Hoff factor of Al2(SO4)3 assuming complete ionization?", "back": "5 (dissociates into 2 Al³⁺ and 3 SO₄²⁻ ions)"}
+    ],
+    videos=[
+        {"title": "Colligative Properties in Solutions", "channel": "Khan Academy", "duration": "18m", "videoId": "8t4e_yB6-oo"}
+    ],
+    related=["thermodynamics", "electrochemistry"],
+    learningPath=["Coordination Compounds", "Solutions", "Organic Chemistry Basics", "Aldehydes, Ketones and Carboxylic Acids"]
+)
+
+add_topic(
+    id="organic_chemistry_basics",
+    topic="Organic Chemistry Basics",
+    subject="chemistry",
+    exam="class12",
+    aliases=["organic chemistry", "organic chemistry basics", "iupac nomenclature", "isomerism", "inductive effect"],
+    keywords=["organic", "nomenclature", "iupac", "isomerism", "inductive", "resonance", "carbocation"],
+    difficulty="Medium",
+    tags=["Organic Chemistry", "Chemistry", "Class 11", "Class 12"],
+    overview="Organic Chemistry Basics covers structural representations, IUPAC nomenclature, isomerism, and electronic effects governing organic molecules and reactivity.",
+    explanation="Carbon forms stable chains (catenation). Naming follows IUPAC rules based on parent chains and substituent hierarchies. Reactivity is driven by electron delocalizations: Inductive effect (sigma-electron pull), Electromeric effect (pi-electron shifts), Resonance/Mesomeric effect (conjugate delocalization), and Hyperconjugation (C-H sigma and p-orbital overlap). These determine intermediate stability (carbocations, carbanions, free radicals).",
+    concepts=[
+        {"title": "Resonance Effect (R or M)", "desc": "The transfer of electrons in a conjugate system of double bonds and lone pairs. Stronger than inductive effect and key to benzene's stability."},
+        {"title": "Carbocation Stability", "desc": "Stability order: Tertiary > Secondary > Primary > Methyl. Stabilized by electron-donating groups (+I effect) and hyperconjugation."}
+    ],
+    definitions=[
+        {"term": "Isomerism", "def": "The existence of two or more compounds with the same molecular formula but different structural configurations or spatial arrangements."},
+        {"term": "Nucleophile", "def": "An electron-rich species (neutral or negative) containing a lone pair that donates electrons to form a bond."}
+    ],
+    formulas=[
+        {"name": "Alkanes General Formula", "eq": "C_n H_(2n+2)", "desc": "Saturated hydrocarbons with single C-C bonds."},
+        {"name": "Alkenes & Alkynes Formulas", "eq": "C_n H_(2n) | C_n H_(2n-2)", "desc": "Unsaturated hydrocarbons with double and triple bonds respectively."}
+    ],
+    examNotes="Always select the longest carbon chain containing the principal functional group for IUPAC naming. Number the chain to give the principal functional group the lowest locant number.",
+    mistakes=[
+        {"title": "Pentavalent Carbon", "desc": "Drawing carbon with 5 bonds. Double check that every carbon in structural formulas has exactly 4 bonds."},
+        {"title": "Wrong IUPAC Numbering", "desc": "Numbering the parent chain from the side that gives substituents lower numbers, while neglecting functional group priority (functional groups always take lowest numbers)."}
+    ],
+    revision=[
+        "Carbon is tetravalent and forms tetrahedral networks.",
+        "Resonance structures are imaginary; the actual molecule is a resonance hybrid.",
+        "Electrophiles are electron-loving; nucleophiles are nucleus-loving."
+    ],
+    questions=[
+        {
+            "q": "What is the IUPAC name of the compound CH3-CH(Cl)-CH(CH3)-CH3?",
+            "options": ["2-Chloro-3-methylbutane", "3-Chloro-2-methylbutane", "2-Methyl-3-chlorobutane", "1-Chloro-1,2-dimethylethane"],
+            "correctAnswerIndex": 0,
+            "explanation": "Longest chain has 4 carbons (butane). Numbering from left to right gives substituents at positions 2 (chloro) and 3 (methyl). Alphabetically, 'chloro' comes before 'methyl'. So the name is 2-Chloro-3-methylbutane.",
+            "a": "2-Chloro-3-methylbutane"
+        }
+    ],
+    flashcards=[
+        {"front": "Which carbocation is more stable: primary or tertiary?", "back": "Tertiary (due to inductive effect (+I) and hyperconjugation)"},
+        {"front": "Define functional isomers.", "back": "Compounds with the same molecular formula but different functional groups (e.g. ethanol and dimethyl ether)."}
+    ],
+    videos=[
+        {"title": "IUPAC Nomenclature & Basics", "channel": "ChemAcademy", "duration": "22m", "videoId": "9_wL4c-U2eE"}
+    ],
+    related=["aldehydes_ketones_carboxylic", "coordination_compounds"],
+    learningPath=["Solutions", "Organic Chemistry Basics", "Aldehydes, Ketones and Carboxylic Acids", "Electrochemistry"]
+)
+
+add_topic(
+    id="aldehydes_ketones_carboxylic",
+    topic="Aldehydes, Ketones and Carboxylic Acids",
+    subject="chemistry",
+    exam="class12",
+    aliases=["aldehydes ketones carboxylic", "nucleophilic addition", "aldol condensation"],
+    keywords=["carbonyl", "aldehyde", "ketone", "carboxylic", "aldol", "cannizzaro", "nucleophilic"],
+    difficulty="Hard",
+    tags=["Organic Chemistry", "Chemistry", "Class 12", "JEE"],
+    overview="This topic covers carbonyl compounds (Aldehydes and Ketones) and Carboxylic Acids, focusing on nucleophilic addition reactions and named organic reactions.",
+    explanation="Carbonyl compounds contain the C=O group. The carbonyl carbon is electrophilic, making nucleophilic addition the characteristic reaction of aldehydes and ketones. Important reactions include Aldol Condensation (for compounds with alpha-hydrogen) and Cannizzaro Reaction (for compounds without alpha-hydrogen). Carboxylic acids are acidic due to resonance stabilization of the carboxylate anion.",
+    concepts=[
+        {"title": "Nucleophilic Addition", "desc": "Nucleophile attacks the electrophilic carbonyl carbon, breaking the C=O pi-bond to form an alkoxide intermediate, which protonates to form the product."},
+        {"title": "Aldol Condensation", "desc": "Aldehydes or ketones containing at least one alpha-hydrogen undergo reaction in the presence of dilute alkali to form beta-hydroxy aldehydes (aldols) or beta-hydroxy ketones."}
+    ],
+    definitions=[
+        {"term": "Carbonyl Group", "def": "A functional group composed of a carbon atom double-bonded to an oxygen atom (C=O)."},
+        {"term": "Cannizzaro Reaction", "def": "A self redox reaction of aldehydes without alpha-hydrogens in the presence of concentrated alkali, yielding an alcohol and a carboxylic acid salt."}
+    ],
+    formulas=[
+        {"name": "Carboxylic Acid Dissociation", "eq": "R-COOH + H2O <=> R-COO⁻ + H3O⁺", "desc": "Acidic behavior represented by the equilibrium constant Ka."}
+    ],
+    examNotes="Aldehydes are generally more reactive than ketones in nucleophilic additions due to steric hindrance and the +I inductive effect of two alkyl groups in ketones reducing the positive charge on carbonyl carbon.",
+    mistakes=[
+        {"title": "Applying Aldol to Benzaldehyde", "desc": "Attempting an Aldol condensation on benzaldehyde without another partner. Benzaldehyde has no alpha-hydrogens, so it undergoes Cannizzaro reaction instead when reacted with concentrated base."},
+        {"title": "Forgetting dehydration step in Aldol", "desc": "Stopping at the aldol (addition) product. In examinations, heating is usually implied, causing loss of water to form alpha,beta-unsaturated carbonyl compound."}
+    ],
+    revision=[
+        "Aldehydes reduce Tollens' reagent and Fehling's solution; ketones do not.",
+        "Carboxylic acids turn blue litmus red and react with sodium bicarbonate to release CO2.",
+        "Cannizzaro is a disproportionation reaction."
+    ],
+    questions=[
+        {
+            "q": "Which of the following compounds will NOT undergo Aldol condensation in the presence of dilute NaOH?",
+            "options": ["Acetaldehyde", "Acetone", "Formaldehyde", "Propanal"],
+            "correctAnswerIndex": 2,
+            "explanation": "Aldol condensation requires alpha-hydrogens. Formaldehyde (HCHO) does not have any alpha-hydrogens and will instead undergo Cannizzaro reaction.",
+            "a": "Formaldehyde (HCHO)"
+        }
+    ],
+    flashcards=[
+        {"front": "What does Tollens' reagent test for?", "back": "Aldehydes (produces a silver mirror)"},
+        {"front": "Why are carboxylic acids stronger acids than alcohols?", "back": "The carboxylate conjugate base is stabilized by resonance between two equivalent oxygen atoms."}
+    ],
+    videos=[
+        {"title": "Aldehydes, Ketones and Carboxylic Acids Class 12 Boards", "channel": "Physics Wallah", "duration": "1h 15m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["organic_chemistry_basics", "electrochemistry"],
+    learningPath=["Organic Chemistry Basics", "Aldehydes, Ketones and Carboxylic Acids", "Electrochemistry", "Atomic Structure"]
+)
+
+add_topic(
+    id="electrochemistry",
+    topic="Electrochemistry",
+    subject="chemistry",
+    exam="jee",
+    aliases=["electrochemistry", "nernst equation", "galvanic cell", "faraday's laws of electrolysis"],
+    keywords=["galvanic", "electrolysis", "nernst", "faraday", "cell", "conductivity", "salt bridge"],
+    difficulty="Hard",
+    tags=["Physical Chemistry", "Chemistry", "JEE", "Class 12"],
+    overview="Electrochemistry studies chemical reactions that produce electricity or occur due to electrical input, covering galvanic cells and electrolytic processes.",
+    explanation="Galvanic cells convert chemical energy of spontaneous redox reactions into electrical energy. The Nernst equation calculates cell potential under non-standard concentrations. Electrolysis is the reverse process, where electrical energy drives a non-spontaneous reaction, governed quantitatively by Faraday's Laws of Electrolysis.",
+    concepts=[
+        {"title": "Galvanic Cell (Daniel Cell)", "desc": "Contains an anode (oxidation, negative electrode) and a cathode (reduction, positive electrode) connected by a salt bridge which maintains electrical neutrality."},
+        {"title": "Nernst Equation", "desc": "Calculates the cell potential (E_cell) at any temperature and concentration based on the standard cell potential (E°_cell)."}
+    ],
+    definitions=[
+        {"term": "Electrochemical Cell", "def": "A device capable of either generating electrical energy from chemical reactions or facilitating chemical reactions through electrical energy."},
+        {"term": "Salt Bridge", "def": "A tube containing an inert electrolyte gel used to connect the oxidation and reduction half-cells in a galvanic cell."}
+    ],
+    formulas=[
+        {"name": "Nernst Equation (at 298 K)", "eq": "E_cell = E°_cell - (0.0591 / n) * log(Q)", "desc": "n is number of moles of electrons transferred, Q is the reaction quotient."},
+        {"name": "Gibbs Free Energy & Cell Potential", "eq": "ΔG = -n * F * E_cell", "desc": "F is Faraday's constant ≈ 96500 C/mol. For a spontaneous process, E_cell must be positive (ΔG < 0)."},
+        {"name": "Faraday's First Law of Electrolysis", "eq": "w = Z * I * t", "desc": "w is mass of substance deposited, I is current in Amperes, t is time in seconds, and Z is electrochemical equivalent."}
+    ],
+    examNotes="Anode is always where oxidation occurs. In a galvanic cell, anode is negative; in an electrolytic cell, anode is positive. Use the mnemonic LOAN: Left, Oxidation, Anode, Negative.",
+    mistakes=[
+        {"title": "Incorrect Reaction Quotient (Q)", "desc": "Including solid phases in the expression for Q. Only include concentration of aqueous ions and partial pressures of gases."},
+        {"title": "Confusing E° and E", "desc": "Assuming standard potential (E°_cell) changes when ion concentrations change. E°_cell is a constant; it is the non-standard potential E_cell that changes."}
+    ],
+    revision=[
+        "E_cell is positive for spontaneous reactions.",
+        "Faraday's constant F is the charge of one mole of electrons (96487 C).",
+        "Salt bridge completes the circuit and prevents liquid junction potential."
+    ],
+    questions=[
+        {
+            "q": "What is the cell potential of a Daniel Cell when the concentrations of Zn²⁺ and Cu²⁺ are both 1.0 M? (E° for Zn²⁺/Zn = -0.76 V, E° for Cu²⁺/Cu = +0.34 V)",
+            "options": ["1.10 V", "0.42 V", "-1.10 V", "1.52 V"],
+            "correctAnswerIndex": 0,
+            "explanation": "E°_cell = E°_cathode - E°_anode = E°(Cu²⁺/Cu) - E°(Zn²⁺/Zn) = 0.34 - (-0.76) = 1.10 V. Since concentrations are both 1.0 M, Q = [Zn²⁺]/[Cu²⁺] = 1, so log(Q) = 0. E_cell = E°_cell = 1.10 V.",
+            "a": "E_cell = 1.10 V"
+        }
+    ],
+    flashcards=[
+        {"front": "What does the salt bridge contain?", "back": "An inert electrolyte like KCl, KNO3, or NH4NO3 in agar-agar gel."},
+        {"front": "State Faraday's constant value.", "back": "96,487 (usually approximated as 96,500) Coulombs per mole of electrons."}
+    ],
+    videos=[
+        {"title": "Electrochemistry JEE Main & Advanced", "channel": "Unacademy JEE", "duration": "1h 20m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["chemical_kinetics", "solutions"],
+    learningPath=["Aldehydes, Ketones and Carboxylic Acids", "Electrochemistry", "Atomic Structure", "Quadratic Equations"]
+)
+
+add_topic(
+    id="atomic_structure",
+    topic="Atomic Structure",
+    subject="chemistry",
+    exam="class11",
+    aliases=["atomic structure", "bohr's model", "quantum numbers", "photoelectric effect"],
+    keywords=["atom", "bohr", "quantum", "photoelectric", "heisenberg", "orbitals", "node"],
+    difficulty="Medium",
+    tags=["Physical Chemistry", "Chemistry", "Class 11", "JEE"],
+    overview="Atomic Structure explores the subatomic models of the atom, focusing on Bohr's hydrogen model, the photoelectric effect, wave-particle duality, and quantum numbers.",
+    explanation="The classical atomic models evolved from Rutherford's planetary model to Bohr's quantized orbit model. Quantum mechanics replaced fixed orbits with orbitals (probability regions) defined by four quantum numbers: Principal (n), Azimuthal (l), Magnetic (m), and Spin (s). The photoelectric effect demonstrates the particle nature of light, while de Broglie's relation shows wave-particle duality for matter.",
+    concepts=[
+        {"title": "Quantum Numbers", "desc": "Define energy level (n), orbital shape (l), spatial orientation (m), and electron spin direction (s). No two electrons in an atom can have the same four quantum numbers (Pauli Exclusion Principle)."},
+        {"title": "Heisenberg Uncertainty Principle", "desc": "It is impossible to determine simultaneously and precisely both the position and momentum of a subatomic particle (Δx · Δp >= h / 4π)."}
+    ],
+    definitions=[
+        {"term": "Orbital", "def": "A three-dimensional space around the nucleus where the probability of finding an electron is maximum (usually 90%)."},
+        {"term": "Work Function (W₀)", "def": "The minimum energy of incident radiation required to eject an electron from a metal surface."}
+    ],
+    formulas=[
+        {"name": "Bohr Orbit Radius", "eq": "r_n = 0.529 * n^2 / Z (in Å)", "desc": "n is the orbit number, Z is the atomic number of the hydrogen-like species."},
+        {"name": "Einstein's Photoelectric Equation", "eq": "h * ν = W₀ + K_max", "desc": "hν is incident photon energy, W₀ is work function, K_max is maximum kinetic energy of emitted photoelectron."},
+        {"name": "de Broglie Wavelength", "eq": "λ = h / p = h / (m * v)", "desc": "Relates wavelength λ of a particle to its mass m and velocity v."}
+    ],
+    examNotes="For d-orbitals, the azimuthal quantum number l = 2. The number of radial nodes in an orbital is given by n - l - 1, and angular nodes is l.",
+    mistakes=[
+        {"title": "Applying Bohr to Multi-electron atoms", "desc": "Applying Bohr's formulas to Helium or Lithium neutral atoms. Bohr's model is valid ONLY for single-electron systems (H, He⁺, Li²⁺)."},
+        {"title": "Incorrect Magnetic Quantum values", "desc": "Writing magnetic quantum numbers m outside the range -l to +l. For l=1 (p orbital), m can only be -1, 0, +1."}
+    ],
+    revision=[
+        "Light has wave-particle dual nature.",
+        "Principal quantum number n determines the size and energy of orbital.",
+        "Aufbau Principle: Orbitals are filled in order of increasing energy (n+l rule)."
+    ],
+    questions=[
+        {
+            "q": "What are the allowed quantum numbers (n, l, m) for a 3d orbital?",
+            "options": ["n=3, l=2, m=-2,-1,0,1,2", "n=3, l=1, m=-1,0,1", "n=3, l=3, m=-3 to 3", "n=2, l=1, m=-1,0,1"],
+            "correctAnswerIndex": 0,
+            "explanation": "For a 3d orbital, the shell is 3 (n=3). The subshell is d, which corresponds to l=2. The magnetic quantum number m can take values from -l to +l, which is -2, -1, 0, 1, 2.",
+            "a": "n=3, l=2, m ∈ {-2, -1, 0, 1, 2}"
+        }
+    ],
+    flashcards=[
+        {"front": "State the Pauli Exclusion Principle.", "back": "No two electrons in an atom can have the same set of four quantum numbers."},
+        {"front": "What is the wavelength formula for a matter wave?", "back": "λ = h / mv (de Broglie)"}
+    ],
+    videos=[
+        {"title": "Structure of Atom Class 11", "channel": "Khan Academy", "duration": "28m", "videoId": "8t4e_yB6-oo"}
+    ],
+    related=["periodic_table", "chemical_bonding"],
+    learningPath=["Electrochemistry", "Atomic Structure", "Quadratic Equations", "Limits and Continuity"]
+)
+
+# ----------------------------------------------------
+# MATHEMATICS (10 Topics)
+# ----------------------------------------------------
+add_topic(
+    id="quadratic_equations",
+    topic="Quadratic Equations",
+    subject="mathematics",
+    exam="jee",
+    aliases=["quadratic equations", "quadratic equation", "roots of quadratic", "discriminant"],
+    keywords=["quadratic", "roots", "discriminant", "vertex", "parabola", "nature of roots"],
+    difficulty="Easy",
+    tags=["Algebra", "Mathematics", "JEE", "Class 10"],
+    overview="A Quadratic Equation is a second-order polynomial equation in a single variable, expressed as ax² + bx + c = 0, where a ≠ 0.",
+    explanation="Quadratic equations have exactly two roots, which can be real or complex. The nature of these roots is determined by the discriminant (D = b² - 4ac). Sum of roots is -b/a and product is c/a. Structurally, the graph of a quadratic expression forms a parabola, opening upwards if a > 0 and downwards if a < 0.",
+    concepts=[
+        {"title": "Discriminant (D)", "desc": "D = b² - 4ac. If D > 0, roots are real and distinct. If D = 0, roots are real and equal. If D < 0, roots are complex conjugates."},
+        {"title": "Symmetric Functions of Roots", "desc": "Expressions that remain unchanged when roots are swapped. E.g., α² + β² = (α+β)² - 2αβ = (b²/a²) - 2c/a."}
+    ],
+    definitions=[
+        {"term": "Roots", "def": "The values of x that satisfy the quadratic equation ax² + bx + c = 0."},
+        {"term": "Vertex of Parabola", "def": "The extreme point (minimum or maximum) of the quadratic curve, located at (-b/2a, -D/4a)."}
+    ],
+    formulas=[
+        {"name": "Quadratic Formula", "eq": "x = (-b ± sqrt(b^2 - 4*a*c)) / (2*a)", "desc": "Calculates the two roots of the equation."},
+        {"name": "Sum and Product of Roots", "eq": "α + β = -b / a | α * β = c / a", "desc": "Sum and product relationships derived from the coefficients."}
+    ],
+    examNotes="For quadratic equations with rational coefficients, if one root is irrational (p + sqrt(q)), the other root must be its conjugate (p - sqrt(q)).",
+    mistakes=[
+        {"title": "Dividing by Variable", "desc": "Dividing both sides of a quadratic equation by x (e.g. x² = 2x => x = 2). This discards the valid root x = 0. Factorize instead: x(x-2) = 0."},
+        {"title": "Sign Error in Sum of Roots", "desc": "Forgetting the negative sign in the sum of roots formula, writing α + β = b/a instead of -b/a."}
+    ],
+    revision=[
+        "Quadratic equations have degree 2.",
+        "Roots are equal when D = 0.",
+        "If a+b+c = 0, then the roots are 1 and c/a."
+    ],
+    questions=[
+        {
+            "q": "Find the roots of the quadratic equation x² - 5x + 6 = 0.",
+            "options": ["2, 3", "-2, -3", "1, 6", "-1, -6"],
+            "correctAnswerIndex": 0,
+            "explanation": "Factorizing: (x-2)(x-3) = 0, so roots are x = 2 and x = 3.",
+            "a": "x = 2, 3"
+        }
+    ],
+    flashcards=[
+        {"front": "What is the formula for the sum of roots?", "back": "α + β = -b/a"},
+        {"front": "What does a negative discriminant imply?", "back": "The roots are imaginary (complex conjugates)."}
+    ],
+    videos=[
+        {"title": "Quadratic Equations in One Shot JEE", "channel": "Unacademy JEE", "duration": "1h 05m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["limits_continuity", "differentiation"],
+    learningPath=["Atomic Structure", "Quadratic Equations", "Limits and Continuity", "Differentiation"]
+)
+
+add_topic(
+    id="limits_continuity",
+    topic="Limits and Continuity",
+    subject="mathematics",
+    exam="jee",
+    aliases=["limits and continuity", "limits", "continuity", "l'hopital's rule", "indeterminate forms"],
+    keywords=["limits", "continuity", "indeterminate", "l'hopital", "sandwich", "continuous"],
+    difficulty="Hard",
+    tags=["Calculus", "Mathematics", "JEE", "Class 12"],
+    overview="Limits and Continuity analyzes the behavior of functions as they approach specific points, establishing the foundation for derivatives and integrals.",
+    explanation="A limit describes the value a function approaches as the input approaches a value. Indeterminate forms (like 0/0 and inf/inf) are solved using factorization, rationalization, standard limits, or L'Hopital's rule. A function is continuous at a point if its left-hand limit, right-hand limit, and function value at that point are all equal.",
+    concepts=[
+        {"title": "L'Hopital's Rule", "desc": "For 0/0 or inf/inf forms, lim f(x)/g(x) = lim f'(x)/g'(x), provided the derivative limit exists."},
+        {"title": "Three Conditions for Continuity", "desc": "A function f(x) is continuous at x = a if: 1. f(a) is defined. 2. lim (x->a) f(x) exists. 3. lim (x->a) f(x) = f(a)."}
+    ],
+    definitions=[
+        {"term": "Limit", "def": "The value that a function approaches as the input approaches some value."},
+        {"term": "Indeterminate Form", "def": "An algebraic expression obtained in limits whose value cannot be determined directly (e.g. 0/0, ∞/∞, 1^∞)."}
+    ],
+    formulas=[
+        {"name": "Standard Trigonometric Limit", "eq": "lim (x->0) sin(x)/x = 1", "desc": "Angle x must be in radians."},
+        {"name": "Standard Exponential Limit", "eq": "lim (x->0) (e^x - 1)/x = 1", "desc": "Fundamental limit for natural exponent."},
+        {"name": "1^infinity Form Shortcut", "eq": "lim [f(x)]^g(x) = e^(lim (f(x)-1)*g(x))", "desc": "Applied when lim f(x) = 1 and lim g(x) = infinity."}
+    ],
+    examNotes="Always check if L'Hopital's rule is applicable. Only use it if you have 0/0 or inf/inf forms. Do not use it for defined forms like 0/1 or 1/0.",
+    mistakes=[
+        {"title": "Blind L'Hopital Application", "desc": "Applying L'Hopital's rule to a limit that is not in 0/0 or inf/inf form, yielding incorrect answers."},
+        {"title": "Forgetting Radian Conversion", "desc": "Evaluating lim (x->0) sin(x°)/x = 1. The formula requires x to be in radians. In degrees, the limit is π/180."}
+    ],
+    revision=[
+        "Continuity means LHL = RHL = f(a).",
+        "If a function is differentiable, it is always continuous.",
+        "Sandwich theorem is useful for limits involving trigonometric inequalities."
+    ],
+    questions=[
+        {
+            "q": "What is the value of lim (x->0) [1 - cos(x)] / x²?",
+            "options": ["1", "0", "1/2", "Undefined"],
+            "correctAnswerIndex": 2,
+            "explanation": "Applying L'Hopital (since it is 0/0 form): lim sin(x)/(2x) = 0.5 * lim sin(x)/x = 0.5 * 1 = 1/2.",
+            "a": "Limit is 1/2"
+        }
+    ],
+    flashcards=[
+        {"front": "State the limit of (1 + x)^(1/x) as x approaches 0.", "back": "e"},
+        {"front": "Is a differentiable function always continuous?", "back": "Yes"}
+    ],
+    videos=[
+        {"title": "Limits for JEE Main & Advanced Complete", "channel": "IIT Prep Engine", "duration": "1h 30m", "videoId": "k-W0aE8-Wdg"}
+    ],
+    related=["quadratic_equations", "differentiation"],
+    learningPath=["Quadratic Equations", "Limits and Continuity", "Differentiation", "Integration"]
+)
+
+add_topic(
+    id="differentiation",
+    topic="Differentiation",
+    subject="mathematics",
+    exam="class12",
+    aliases=["differentiation", "derivatives", "chain rule", "rate of change"],
+    keywords=["derivative", "chain rule", "tangent", "differentiation", "product rule", "slope"],
+    difficulty="Easy",
+    tags=["Calculus", "Mathematics", "Class 11", "Class 12"],
+    overview="Differentiation is the mathematical process of finding the derivative, which represents the instantaneous rate of change of a function with respect to its variable.",
+    explanation="Geometrically, the derivative of a function at a point is the slope of the tangent line to the graph at that point. Differentiation is performed using standard derivative formulas and rules like the Product Rule, Quotient Rule, and Chain Rule (for composite functions). It is extensively used to find velocity, acceleration, and optimization points (maxima/minima).",
+    concepts=[
+        {"title": "Chain Rule", "desc": "Used to differentiate composite functions. If y = f(g(x)), then dy/dx = f'(g(x)) * g'(x)."},
+        {"title": "Geometric Meaning", "desc": "The value of dy/dx at x = x0 is the slope (m = tan θ) of the tangent to the curve y = f(x) at the point (x0, f(x0))."}
+    ],
+    definitions=[
+        {"term": "Derivative", "def": "The limit of the ratio of the change in a function to the change in its variable as the change in the variable tends to zero."},
+        {"term": "Differentiability", "def": "A function is differentiable at a point if its derivative exists at that point, which requires a smooth curve without sharp corners or breaks."}
+    ],
+    formulas=[
+        {"name": "Power Rule", "eq": "d(x^n)/dx = n * x^(n-1)", "desc": "For any real number n."},
+        {"name": "Product Rule", "eq": "d(uv)/dx = u * dv/dx + v * du/dx", "desc": "Used for product of two functions u and v."},
+        {"name": "Quotient Rule", "eq": "d(u/v)/dx = (v * du/dx - u * dv/dx) / v^2", "desc": "Used for division of two functions u and v."}
+    ],
+    examNotes="At sharp corners (like x = 0 in f(x) = |x|), a function is continuous but NOT differentiable because left-hand and right-hand derivatives are different.",
+    mistakes=[
+        {"title": "Quotient Rule Sign Error", "desc": "Writing the numerator of the quotient rule as u*v' - v*u'. The correct order is v*u' - u*v'."},
+        {"title": "Forgetting Chain Rule", "desc": "Differentiating sin(2x) as cos(2x) instead of 2*cos(2x). Always multiply by the derivative of the inner function."}
+    ],
+    revision=[
+        "Derivative of a constant is zero.",
+        "If dy/dx > 0, the function is increasing; if dy/dx < 0, it is decreasing.",
+        "Derivatives of trigonometric functions: sin -> cos, cos -> -sin, tan -> sec²."
+    ],
+    questions=[
+        {
+            "q": "What is the derivative of y = sin(x²)?",
+            "options": ["cos(x²)", "2x * cos(x²)", "2x * sin(x²)", "-2x * cos(x²)"],
+            "correctAnswerIndex": 1,
+            "explanation": "Using Chain Rule: dy/dx = cos(x²) * d(x²)/dx = cos(x²) * 2x = 2x * cos(x²).",
+            "a": "dy/dx = 2x * cos(x²)"
+        }
+    ],
+    flashcards=[
+        {"front": "What is the derivative of ln(x)?", "back": "1/x"},
+        {"front": "What does a derivative represent geometrically?", "back": "The slope of the tangent to the curve at a given point."}
+    ],
+    videos=[
+        {"title": "Basic Differentiation Rules", "channel": "Khan Academy", "duration": "15m", "videoId": "8t4e_yB6-oo"}
+    ],
+    related=["limits_continuity", "integration"],
+    learningPath=["Limits and Continuity", "Differentiation", "Integration", "Matrices and Determinants"]
+)
+
+add_topic(
+    id="integration",
+    topic="Integration",
+    subject="mathematics",
+    exam="jee",
+    aliases=["integration", "definite integrals", "indefinite integrals", "integration by parts"],
+    keywords=["integral", "integration", "area", "antiderivative", "parts", "definite"],
+    difficulty="Hard",
+    tags=["Calculus", "Mathematics", "JEE", "Class 12"],
+    overview="Integration is the reverse process of differentiation, representing the summation of continuous data to find areas under curves.",
+    explanation="Integration is split into indefinite integration (finding the general antiderivative family with an arbitrary constant C) and definite integration (evaluating the net signed area between two boundaries). Techniques include integration by substitution, integration by parts (using ILATE rule), and partial fractions.",
+    concepts=[
+        {"title": "Indefinite vs Definite", "desc": "Indefinite integral yields a function: ∫ f(x) dx = F(x) + C. Definite integral yields a value: ∫[a to b] f(x) dx = F(b) - F(a)."},
+        {"title": "Integration by Parts", "desc": "∫ u dv = u*v - ∫ v du. Choose the first function u using the ILATE order: Inverse trig, Logarithmic, Algebraic, Trigonometric, Exponential."}
+    ],
+    definitions=[
+        {"term": "Antiderivative", "def": "A differentiable function F whose derivative is equal to the original function f (F' = f)."},
+        {"term": "Definite Integral", "def": "The limit of a Riemann sum as the width of intervals approaches zero, representing the area under a curve."}
+    ],
+    formulas=[
+        {"name": "Standard Integral: x^n", "eq": "∫ x^n dx = (x^(n+1)) / (n+1) + C", "desc": "Valid for all n ≠ -1. For n = -1, ∫ (1/x) dx = ln(|x|) + C."},
+        {"name": "Integration by Parts", "eq": "∫ u * v dx = u * ∫ v dx - ∫ [ du/dx * ∫ v dx ] dx", "desc": "u is chosen based on ILATE priority."}
+    ],
+    examNotes="For definite integrals of odd functions between symmetric limits [-a, a], the integral is always zero: ∫[-a to a] f(x) dx = 0 if f(-x) = -f(x). This is a massive time saver in JEE.",
+    mistakes=[
+        {"title": "Forgetting Constant of Integration", "desc": "Writing ∫ f(x)dx = F(x) without adding the constant '+ C' for indefinite integrals."},
+        {"title": "Wrong ILATE Order", "desc": "Selecting the wrong function as 'u' in integration by parts, making the resulting integral more complicated instead of simpler."}
+    ],
+    revision=[
+        "Integration is the inverse process of differentiation.",
+        "Definite integral represents the net area under a curve.",
+        "∫ sin(x) dx = -cos(x) + C (note the negative sign!)."
+    ],
+    questions=[
+        {
+            "q": "Evaluate ∫[0 to π] cos(x) dx.",
+            "options": ["2", "1", "0", "-1"],
+            "correctAnswerIndex": 2,
+            "explanation": "∫ cos(x) dx = [sin(x)] from 0 to π = sin(π) - sin(0) = 0 - 0 = 0. Also, cos(x) is symmetric and odd about π/2, so the area cancels.",
+            "a": "Integral is 0"
+        }
+    ],
+    flashcards=[
+        {"front": "What is the integral of 1/x?", "back": "ln(|x|) + C"},
+        {"front": "What does the ILATE acronym stand for?", "back": "Inverse Trigonometric, Logarithmic, Algebraic, Trigonometric, Exponential"}
+    ],
+    videos=[
+        {"title": "Integration Techniques & Definite Integrals", "channel": "Unacademy JEE", "duration": "1h 45m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["differentiation", "matrices_determinants"],
+    learningPath=["Differentiation", "Integration", "Matrices and Determinants", "Vectors"]
+)
+
+add_topic(
+    id="matrices_determinants",
+    topic="Matrices and Determinants",
+    subject="mathematics",
+    exam="jee",
+    aliases=["matrices and determinants", "matrix operations", "cramer's rule", "inverse of matrix"],
+    keywords=["matrix", "determinant", "cramer", "inverse", "transpose", "system of equations"],
+    difficulty="Medium",
+    tags=["Algebra", "Mathematics", "JEE", "Class 12"],
+    overview="Matrices and Determinants provides structural methods for organizing linear data and solving systems of linear equations.",
+    explanation="A matrix is a rectangular array of numbers. Matrix multiplication is non-commutative (AB ≠ BA). A determinant is a scalar value calculated from a square matrix. Cramer's rule uses determinants to solve systems of linear equations. Inverse of matrix A (A⁻¹) exists if and only if det(A) ≠ 0.",
+    concepts=[
+        {"title": "Cramer's Rule", "desc": "Method for solving linear systems: x = Dx/D, y = Dy/D, z = Dz/D. If D = 0, the system has either infinitely many solutions or no solution."},
+        {"title": "Matrix Inverse", "desc": "A⁻¹ = (1/det(A)) * adj(A), where adj(A) is the transpose of the cofactor matrix."}
+    ],
+    definitions=[
+        {"term": "Matrix", "def": "A rectangular array of numbers, symbols, or expressions arranged in rows and columns."},
+        {"term": "Singular Matrix", "def": "A square matrix whose determinant is zero, meaning it does not have an inverse."}
+    ],
+    formulas=[
+        {"name": "Determinant of 2x2 Matrix", "eq": "det(A) = a*d - b*c", "desc": "For a matrix [[a, b], [c, d]]."},
+        {"name": "Inverse Property", "eq": "A * A⁻¹ = I", "desc": "Where I is the identity matrix."}
+    ],
+    examNotes="If det(A) = 0 and at least one of Dx, Dy, Dz is non-zero, the system of equations has no solution (inconsistent). If all Dx, Dy, Dz are 0, it has infinitely many solutions.",
+    mistakes=[
+        {"title": "Matrix Multiplication Commutativity", "desc": "Assuming AB = BA. Except in special cases, matrix multiplication order matters."},
+        {"title": "Determinant Scaling Error", "desc": "Assuming det(k*A) = k*det(A). For an n x n matrix, det(k*A) = k^n * det(A)."}
+    ],
+    revision=[
+        "Transpose of matrix swaps rows and columns.",
+        "Determinant value changes sign if any two rows are interchanged.",
+        "Only square matrices have determinants and inverses."
+    ],
+    questions=[
+        {
+            "q": "For a 3x3 matrix A, if det(A) = 4, what is det(2A)?",
+            "options": ["8", "16", "32", "12"],
+            "correctAnswerIndex": 2,
+            "explanation": "For an n x n matrix, det(k*A) = k^n * det(A). Here n = 3, k = 2. So det(2A) = 2³ * det(A) = 8 * 4 = 32.",
+            "a": "det(2A) = 32"
+        }
+    ],
+    flashcards=[
+        {"front": "What is a singular matrix?", "back": "A square matrix whose determinant is zero (cannot be inverted)."},
+        {"front": "State the condition for a unique solution in Cramer's Rule.", "back": "The main determinant D must be non-zero (D ≠ 0)."}
+    ],
+    videos=[
+        {"title": "Matrices & Determinants One Shot", "channel": "JEE Prep Engine", "duration": "55m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["integration", "vectors"],
+    learningPath=["Integration", "Matrices and Determinants", "Vectors", "Probability"]
+)
+
+add_topic(
+    id="vectors",
+    topic="Vectors",
+    subject="mathematics",
+    exam="jee",
+    aliases=["vectors", "vector algebra", "dot product", "cross product"],
+    keywords=["vector", "dot product", "cross product", "scalar", "projection", "unit vector"],
+    difficulty="Easy",
+    tags=["Geometry", "Mathematics", "JEE", "Class 12"],
+    overview="Vectors studies quantities that possess both magnitude and direction, exploring vector algebra and dot/cross product operations in 3D space.",
+    explanation="Vectors are represented as components (a = xî + yĵ + zk̂). The dot product (scalar) evaluates projections and orthogonality (a · b = 0 if perpendicular). The cross product (vector) calculates perpendicular vectors and areas of parallelograms/triangles (a × b = 0 if parallel).",
+    concepts=[
+        {"title": "Dot Product (Scalar Product)", "desc": "a · b = |a||b| cos(θ). Used to find the angle between two vectors or project one vector onto another."},
+        {"title": "Cross Product (Vector Product)", "desc": "a × b = |a||b| sin(θ) n̂. The resulting vector is perpendicular to both a and b. Direction is determined by the right-hand rule."}
+    ],
+    definitions=[
+        {"term": "Unit Vector", "def": "A vector of magnitude 1, calculated by dividing a vector by its magnitude (â = a / |a|)."},
+        {"term": "Collinear Vectors", "def": "Vectors that lie along the same line or parallel lines, meaning one is a scalar multiple of the other (a = kb)."}
+    ],
+    formulas=[
+        {"name": "Magnitude of Vector", "eq": "|a| = sqrt(x^2 + y^2 + z^2)", "desc": "For a vector a = xî + yĵ + zk̂."},
+        {"name": "Dot Product", "eq": "a · b = x1*x2 + y1*y2 + z1*z2", "desc": "Algebraic calculation of dot product."},
+        {"name": "Projection of a on b", "eq": "proj = (a · b) / |b|", "desc": "Scalar projection length of vector a along vector b."}
+    ],
+    examNotes="If the dot product of two non-zero vectors is zero, they are perpendicular (θ = 90°). If their cross product is zero, they are parallel (θ = 0° or 180°).",
+    mistakes=[
+        {"title": "Cross Product Order", "desc": "Assuming cross product is commutative. Actually, a × b = -(b × a). Order matters!"},
+        {"title": "Confusing Dot and Cross", "desc": "Using cross product when asked to find the angle between vectors. Dot product is much easier for angle calculations."}
+    ],
+    revision=[
+        "Dot product of perpendicular vectors is zero.",
+        "Cross product of parallel vectors is zero.",
+        "i x j = k, j x k = i, k x i = j."
+    ],
+    questions=[
+        {
+            "q": "What is the dot product of vectors a = 2î + 3ĵ + k̂ and b = î - 2ĵ + 4k̂?",
+            "options": ["0", "2", "-2", "4"],
+            "correctAnswerIndex": 0,
+            "explanation": "a · b = (2*1) + (3*-2) + (1*4) = 2 - 6 + 4 = 0. Thus, the vectors are perpendicular.",
+            "a": "a · b = 0"
+        }
+    ],
+    flashcards=[
+        {"front": "What is the magnitude of a unit vector?", "back": "1"},
+        {"front": "Is cross product commutative?", "back": "No, a × b = -(b × a)"}
+    ],
+    videos=[
+        {"title": "Vector Algebra Concepts & Solved Problems", "channel": "Khan Academy", "duration": "20m", "videoId": "8t4e_yB6-oo"}
+    ],
+    related=["matrices_determinants", "probability"],
+    learningPath=["Matrices and Determinants", "Vectors", "Probability", "Complex Numbers"]
+)
+
+add_topic(
+    id="probability",
+    topic="Probability",
+    subject="mathematics",
+    exam="jee",
+    aliases=["probability", "conditional probability", "bayes theorem", "independent events"],
+    keywords=["probability", "conditional", "bayes", "independent", "sample space", "mutually exclusive"],
+    difficulty="Hard",
+    tags=["Algebra", "Mathematics", "JEE", "Class 12"],
+    overview="Probability is the branch of mathematics concerning numerical descriptions of how likely an event is to occur, covering sample spaces, conditional probability, and Bayes' Theorem.",
+    explanation="Probability ranges from 0 (impossible) to 1 (certain). Conditional probability evaluates the likelihood of an event given that another event has occurred. Bayes' Theorem reverses conditional probabilities, widely used to find the probability of a specific cause given an observed event.",
+    concepts=[
+        {"title": "Conditional Probability", "desc": "P(A|B) = P(A ∩ B) / P(B). Probability of A occurring given B has already occurred."},
+        {"title": "Bayes' Theorem", "desc": "Calculates reverse conditional probability: P(E_i|A) = [P(E_i) * P(A|E_i)] / Σ[P(E_j) * P(A|E_j)]. Crucial for diagnosis/test questions."}
+    ],
+    definitions=[
+        {"term": "Independent Events", "def": "Events where the occurrence of one does not affect the probability of the other, meaning P(A ∩ B) = P(A) * P(B)."},
+        {"term": "Mutually Exclusive Events", "def": "Events that cannot occur at the same time, meaning P(A ∩ B) = 0."}
+    ],
+    formulas=[
+        {"name": "Addition Rule", "eq": "P(A ∪ B) = P(A) + P(B) - P(A ∩ B)", "desc": "Calculates probability of either A or B occurring."},
+        {"name": "Bayes' Theorem", "eq": "P(A|B) = P(B|A) * P(A) / P(B)", "desc": "Calculates conditional probability of A given B."}
+    ],
+    examNotes="For independent events, P(A|B) = P(A). Read problems carefully to distinguish between mutually exclusive events (addition) and independent events (multiplication).",
+    mistakes=[
+        {"title": "Adding Independent Probabilities", "desc": "Adding probabilities of independent events instead of multiplying them (e.g. flipping two heads in a row is 0.5 * 0.5 = 0.25, not 0.5 + 0.5 = 1.0)."},
+        {"title": "Confusion between Mutually Exclusive and Independent", "desc": "Thinking mutually exclusive events are independent. If events are mutually exclusive, P(A ∩ B) = 0, so they are highly dependent: if A occurs, B cannot."}
+    ],
+    revision=[
+        "Probability of any event is between 0 and 1.",
+        "Sum of probabilities of all outcomes in sample space is 1.",
+        "P(A') = 1 - P(A)."
+    ],
+    questions=[
+        {
+            "q": "A bag contains 3 red and 5 black balls. If two balls are drawn one after another without replacement, what is the probability that both are red?",
+            "options": ["9/64", "3/28", "3/8", "15/56"],
+            "correctAnswerIndex": 1,
+            "explanation": "Probability of first red = 3/8. Since there is no replacement, 2 red and 5 black remain. Probability of second red = 2/7. Total probability = (3/8) * (2/7) = 6/56 = 3/28.",
+            "a": "Probability is 3/28"
+        }
+    ],
+    flashcards=[
+        {"front": "State the condition for two events to be independent.", "back": "P(A ∩ B) = P(A) * P(B)"},
+        {"front": "What is the probability of a certain event?", "back": "1"}
+    ],
+    videos=[
+        {"title": "Conditional Probability & Bayes Theorem", "channel": "Khan Academy", "duration": "24m", "videoId": "8t4e_yB6-oo"}
+    ],
+    related=["vectors", "complex_numbers"],
+    learningPath=["Vectors", "Probability", "Complex Numbers", "Sequences and Series"]
+)
+
+add_topic(
+    id="complex_numbers",
+    topic="Complex Numbers",
+    subject="mathematics",
+    exam="jee",
+    aliases=["complex numbers", "conjugate of complex", "euler's form", "de moivre's theorem"],
+    keywords=["complex", "imaginary", "euler", "de moivre", "conjugate", "modulus", "argument"],
+    difficulty="Hard",
+    tags=["Algebra", "Mathematics", "JEE", "Class 11"],
+    overview="Complex Numbers extends the real number system to include imaginary units, expressed in the form a + ib, where i = sqrt(-1).",
+    explanation="A complex number has a real part and an imaginary part. Geometrically, they are represented on the Argand Plane. Operations are simplified using polar form (r(cos θ + i sin θ)) or Euler's form (r * e^(iθ)). De Moivre's Theorem is used to compute powers and roots of complex numbers.",
+    concepts=[
+        {"title": "Euler's Form", "desc": "z = r * e^(iθ), where r is the modulus |z| = sqrt(a² + b²) and θ is the argument. It makes multiplication and division of complex numbers extremely simple."},
+        {"title": "De Moivre's Theorem", "desc": "State that [r(cos θ + i sin θ)]^n = r^n(cos nθ + i sin nθ). Essential for finding roots of unity."}
+    ],
+    definitions=[
+        {"term": "Conjugate", "def": "The complex conjugate of z = a + ib is z* = a - ib, representing a reflection across the real axis on the Argand plane."},
+        {"term": "Modulus", "def": "The distance of a complex number from the origin on the Argand plane."}
+    ],
+    formulas=[
+        {"name": "Modulus and Argument", "eq": "|z| = sqrt(a^2 + b^2) | θ = arctan(b / a)", "desc": "Calculates the magnitude and angle of z = a + ib. Adjust θ based on the quadrant."},
+        {"name": "Euler's Identity", "eq": "e^(i * θ) = cos(θ) + i * sin(θ)", "desc": "Relates complex exponentials to trigonometric functions."}
+    ],
+    examNotes="Always find the correct quadrant of the complex number before calculating its principal argument. For quadrant II, θ = π - arctan(|b/a|); for quadrant III, θ = -π + arctan(|b/a|).",
+    mistakes=[
+        {"title": "Principal Argument Mistake", "desc": "Assuming argument of -1 - i is simply arctan(-1/-1) = 45°. Since it lies in the third quadrant, the principal argument is -135° (-3π/4)."},
+        {"title": "Square root of negative numbers", "desc": "Multiplying sqrt(-2) * sqrt(-3) = sqrt(6). The correct calculation is (i*sqrt(2)) * (i*sqrt(3)) = i² * sqrt(6) = -sqrt(6)."}
+    ],
+    revision=[
+        "i = sqrt(-1), i² = -1, i³ = -i, i⁴ = 1.",
+        "z * z* = |z|².",
+        "Cube roots of unity are 1, ω, and ω², where 1 + ω + ω² = 0."
+    ],
+    questions=[
+        {
+            "q": "What is the polar representation of the complex number z = 1 + i*sqrt(3)?",
+            "options": ["2 * e^(i*π/3)", "2 * e^(i*π/6)", "4 * e^(i*π/3)", "2 * e^(-i*π/3)"],
+            "correctAnswerIndex": 0,
+            "explanation": "Modulus |z| = sqrt(1² + (sqrt(3))²) = sqrt(4) = 2. Since both real and imaginary parts are positive, it lies in the first quadrant. θ = arctan(sqrt(3)/1) = 60° = π/3. Euler form is 2 * e^(i*π/3).",
+            "a": "2 * e^(i*π/3)"
+        }
+    ],
+    flashcards=[
+        {"front": "What is the value of 1 + ω + ω²?", "back": "0 (for cube roots of unity)"},
+        {"front": "What is the conjugate of 3 - 4i?", "back": "3 + 4i"}
+    ],
+    videos=[
+        {"title": "Complex Numbers & De Moivre's Theorem", "channel": "Unacademy JEE", "duration": "1h 15m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["probability", "sequences_series"],
+    learningPath=["Probability", "Complex Numbers", "Sequences and Series", "Trigonometry"]
+)
+
+add_topic(
+    id="sequences_series",
+    topic="Sequences and Series",
+    subject="mathematics",
+    exam="class10",
+    aliases=["sequences and series", "arithmetic progression", "geometric progression", "ap gp"],
+    keywords=["progression", "arithmetic", "geometric", "series", "sequence", "sum", "common ratio"],
+    difficulty="Easy",
+    tags=["Algebra", "Mathematics", "Class 10", "Class 11"],
+    overview="Sequences and Series covers ordered lists of numbers and their summations, focusing on Arithmetic Progressions (AP) and Geometric Progressions (GP).",
+    explanation="An Arithmetic Progression (AP) is a sequence where the difference between consecutive terms is constant. A Geometric Progression (GP) is a sequence where each term is found by multiplying the previous term by a non-zero constant (common ratio). Formulas calculate nth terms and sums of finite and infinite progressions.",
+    concepts=[
+        {"title": "Arithmetic Progression (AP)", "desc": "Terms: a, a+d, a+2d, ... where d is the common difference. The terms increase or decrease linearly."},
+        {"title": "Geometric Progression (GP)", "desc": "Terms: a, ar, ar², ... where r is the common ratio. If |r| < 1, the sum of an infinite GP converges."}
+    ],
+    definitions=[
+        {"term": "Sequence", "def": "An ordered list of numbers following a specific rule."},
+        {"term": "Series", "def": "The sum of the terms of a sequence."}
+    ],
+    formulas=[
+        {"name": "AP nth Term & Sum", "eq": "t_n = a + (n-1)*d | S_n = (n/2) * [2a + (n-1)*d]", "desc": "a is first term, d is common difference, n is term count."},
+        {"name": "GP nth Term & Sum", "eq": "t_n = a * r^(n-1) | S_n = a * (r^n - 1) / (r - 1)", "desc": "a is first term, r is common ratio (r ≠ 1)."},
+        {"name": "Infinite GP Sum", "eq": "S_inf = a / (1 - r)", "desc": "Valid ONLY when the common ratio satisfies |r| < 1."}
+    ],
+    examNotes="For three numbers in AP, assume them as a-d, a, a+d to simplify sums. For three numbers in GP, assume them as a/r, a, ar to simplify products.",
+    mistakes=[
+        {"title": "Summing Divergent GP", "desc": "Attempting to use S_inf = a/(1-r) when r >= 1 (e.g. 1 + 2 + 4 + ...). The sum diverges and the formula yields meaningless answers."},
+        {"title": "Confusing Term Count", "desc": "Using n instead of n-1 in the exponent of a GP term, writing t_n = a*r^n."}
+    ],
+    revision=[
+        "AP common difference d = t_n - t_(n-1).",
+        "GP common ratio r = t_n / t_(n-1).",
+        "Arithmetic Mean (AM) of a, b is (a+b)/2. Geometric Mean (GM) is sqrt(ab)."
+    ],
+    questions=[
+        {
+            "q": "What is the sum of the infinite geometric series 1 + 1/2 + 1/4 + 1/8 + ...?",
+            "options": ["1.5", "2", "3", "Infinite"],
+            "correctAnswerIndex": 1,
+            "explanation": "Here, first term a = 1, common ratio r = 1/2. Since |r| < 1, S_inf = a / (1 - r) = 1 / (1 - 0.5) = 1 / 0.5 = 2.",
+            "a": "Sum is 2"
+        }
+    ],
+    flashcards=[
+        {"front": "What is the sum of an infinite GP if |r| < 1?", "back": "S_inf = a / (1 - r)"},
+        {"front": "State the formula for the nth term of an AP.", "back": "t_n = a + (n-1)d"}
+    ],
+    videos=[
+        {"title": "AP & GP Concepts and Exercises Class 10", "channel": "Khan Academy", "duration": "18m", "videoId": "8t4e_yB6-oo"}
+    ],
+    related=["complex_numbers", "trigonometry"],
+    learningPath=["Complex Numbers", "Sequences and Series", "Trigonometry", "Photosynthesis"]
+)
+
+add_topic(
+    id="trigonometry",
+    topic="Trigonometry",
+    subject="mathematics",
+    exam="class10",
+    aliases=["trigonometry", "trigonometric identities", "trigonometric equations"],
+    keywords=["trigonometry", "sine", "cosine", "tangent", "identities", "radians", "angles"],
+    difficulty="Easy",
+    tags=["Geometry", "Mathematics", "Class 10", "Class 11"],
+    overview="Trigonometry is the branch of mathematics that studies relationships between side lengths and angles of triangles, establishing fundamental identities.",
+    explanation="Trigonometry is defined using right-angled triangles and extended to all angles using the unit circle. Core functions are sine, cosine, tangent, and their reciprocals. Three fundamental Pythagorean identities form the base for advanced formulas used in calculus and geometry.",
+    concepts=[
+        {"title": "Unit Circle Definition", "desc": "For a point (x,y) on a unit circle at angle θ, cos θ = x and sin θ = y. This extends trigonometric functions beyond 90°."},
+        {"title": "Fundamental Identities", "desc": "Relations derived from the Pythagorean theorem on the unit circle: sin²θ + cos²θ = 1, 1 + tan²θ = sec²θ, 1 + cot²θ = cosec²θ."}
+    ],
+    definitions=[
+        {"term": "Radian", "def": "The standard unit of angular measure, equal to the angle subtended at the center of a circle by an arc equal in length to the radius (π radians = 180°)."},
+        {"term": "Trigonometric Ratio", "def": "The ratio of sides of a right-angled triangle relative to an acute angle."}
+    ],
+    formulas=[
+        {"name": "Double Angle Formulas", "eq": "sin(2θ) = 2*sin(θ)*cos(θ) | cos(2θ) = cos^2(θ) - sin^2(θ)", "desc": "Extremely useful in calculus integrations and mechanics."},
+        {"name": "Trigonometric Identities", "eq": "sin^2(θ) + cos^2(θ) = 1 | 1 + tan^2(θ) = sec^2(θ)", "desc": "Core algebraic substitutions."}
+    ],
+    examNotes="Remember the ASTC rule for signs in quadrants: All positive in Q1, Sine positive in Q2, Tangent positive in Q3, Cosine positive in Q4.",
+    mistakes=[
+        {"title": "Confusing sin(2A) and 2*sin(A)", "desc": "Assuming sin(2A) is equal to 2*sin(A) (e.g. sin(60°) = 2*sin(30°) is wrong since sqrt(3)/2 ≠ 2*(1/2)). Use double angle identities instead."},
+        {"title": "Ignoring Quadrant Signs", "desc": "Calculating cos(θ) from sin(θ) = 3/5 as 4/5, without verifying if θ is in the second quadrant where cosine is negative (-4/5)."}
+    ],
+    revision=[
+        "sin(θ) and cos(θ) values always lie between -1 and 1.",
+        "tan(θ) is undefined at odd multiples of 90° (π/2).",
+        "sin(-θ) = -sin(θ), cos(-θ) = cos(θ)."
+    ],
+    questions=[
+        {
+            "q": "If sin(θ) = 3/5 and θ is in the second quadrant, what is the value of tan(θ)?",
+            "options": ["4/3", "-4/3", "3/4", "-3/4"],
+            "correctAnswerIndex": 3,
+            "explanation": "Since sin(θ) = 3/5, cos²(θ) = 1 - 9/25 = 16/25. In Q2, cosine is negative, so cos(θ) = -4/5. tan(θ) = sin(θ) / cos(θ) = (3/5) / (-4/5) = -3/4.",
+            "a": "tan(θ) = -3/4"
+        }
+    ],
+    flashcards=[
+        {"front": "State the value of cos(120°).", "back": "-1/2"},
+        {"front": "Write the identity linking sec²θ and tan²θ.", "back": "1 + tan²θ = sec²θ"}
+    ],
+    videos=[
+        {"title": "Trigonometric Identities Class 10 boards", "channel": "Khan Academy Class 10", "duration": "14m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["sequences_series", "photosynthesis"],
+    learningPath=["Sequences and Series", "Trigonometry", "Photosynthesis", "Cell Theory"]
+)
+
+# ----------------------------------------------------
+# BIOLOGY (10 Topics)
+# ----------------------------------------------------
+add_topic(
+    id="photosynthesis",
+    topic="Photosynthesis",
+    subject="biology",
+    exam="neet",
+    aliases=["photosynthesis", "light reaction", "calvin cycle", "dark reaction"],
+    keywords=["chloroplast", "photosynthesis", "calvin", "light", "chlorophyll", "stroma", "thylakoid"],
+    difficulty="Medium",
+    tags=["Plant Physiology", "Biology", "NEET", "Class 10"],
+    overview="Photosynthesis is the metabolic process by which green plants, algae, and some bacteria convert light energy into chemical energy (glucose) using water and carbon dioxide.",
+    explanation="Photosynthesis takes place in chloroplasts. It is split into Light Reactions (occurring in thylakoid membranes, producing ATP and NADPH, releasing O2) and Dark Reactions / Calvin Cycle (occurring in stroma, using ATP/NADPH to fix CO2 into glucose). Factors like light, CO2, and temperature govern the rate, as outlined by Blackman's Law of Limiting Factors.",
+    concepts=[
+        {"title": "Light Reactions (Photophosphorylation)", "desc": "Absorption of light by photosystems (PS I & PS II), photolysis of water releasing O2, and generation of ATP and NADPH via electron transport chain."},
+        {"title": "Calvin Cycle (C3 Pathway)", "desc": "Three stages: Carboxylation (catalyzed by RuBisCO), Reduction, and Regeneration of RuBP. Requires 18 ATP and 12 NADPH to produce one glucose molecule."}
+    ],
+    definitions=[
+        {"term": "Photolysis of Water", "def": "The splitting of water molecules into protons, electrons, and oxygen in the presence of light, associated with PS II."},
+        {"term": "RuBisCO", "def": "Ribulose bisphosphate carboxylase-oxygenase, the most abundant enzyme on Earth, catalyzing the first step of carbon fixation."}
+    ],
+    formulas=[
+        {"name": "Photosynthesis Balanced Equation", "eq": "6CO2 + 6H2O + Light -> C6H12O6 + 6O2", "desc": "Overall chemical equation showing conversion of carbon dioxide and water into glucose and oxygen."},
+        {"name": "Calvin Cycle Requirements", "eq": "1 Glucose = 6 turns of cycle = 18 ATP + 12 NADPH", "desc": "Energetic requirements for synthesis of one molecule of glucose."}
+    ],
+    examNotes="RuBisCO can bind to both CO2 and O2. In C3 plants, when O2 concentrations are high, RuBisCO binds to O2 in a wasteful process called Photorespiration. C4 plants avoid this using Kranz anatomy.",
+    mistakes=[
+        {"title": "Location Mixups", "desc": "Stating that light reactions happen in the stroma and dark reactions in thylakoids. It is the opposite: Light = Thylakoids (membranes); Dark = Stroma (fluid)."},
+        {"title": "Dark Reaction Timing", "desc": "Assuming dark reactions only happen at night. They do not require light directly but rely on light-reaction products (ATP/NADPH) and occur during the day."}
+    ],
+    revision=[
+        "Photosynthesis is an anabolic, endergonic redox process.",
+        "Chlorophyll a is the primary photosynthetic pigment.",
+        "C4 plants are more efficient in hot, dry environments than C3 plants."
+    ],
+    questions=[
+        {
+            "q": "How many molecules of ATP and NADPH are required to produce one molecule of glucose in the C3 Calvin Cycle?",
+            "options": ["18 ATP and 12 NADPH", "12 ATP and 18 NADPH", "30 ATP and 12 NADPH", "18 ATP and 18 NADPH"],
+            "correctAnswerIndex": 0,
+            "explanation": "To fix 1 molecule of CO2, 3 ATP and 2 NADPH are needed. Glucose has 6 carbons, requiring 6 turns of the cycle: 6 * 3 = 18 ATP, and 6 * 2 = 12 NADPH.",
+            "a": "18 ATP and 12 NADPH"
+        }
+    ],
+    flashcards=[
+        {"front": "Where do light reactions occur?", "back": "In the thylakoid membranes of chloroplasts."},
+        {"front": "Which pigment acts as the reaction center in photosystems?", "back": "Chlorophyll a"}
+    ],
+    videos=[
+        {"title": "Photosynthesis Light & Dark Reactions", "channel": "Khan Academy", "duration": "22m", "videoId": "8t4e_yB6-oo"}
+    ],
+    related=["trigonometry", "cell_theory"],
+    learningPath=["Trigonometry", "Photosynthesis", "Cell Theory", "DNA_replication"]
+)
+
+add_topic(
+    id="cell_theory",
+    topic="Cell Theory",
+    subject="biology",
+    exam="class10",
+    aliases=["cell theory", "cell structure", "cell organelles", "eukaryotic cell"],
+    keywords=["cell", "organelle", "mitochondria", "nucleus", "membrane", "eukaryotic", "prokaryotic"],
+    difficulty="Easy",
+    tags=["Cell Biology", "Biology", "Class 10", "NEET"],
+    overview="Cell Theory is a unified biological theory stating that all living organisms are composed of cells, the cell is the basic unit of life, and all cells arise from pre-existing cells.",
+    explanation="Formulated by Schleiden, Schwann, and Virchow, cell theory applies to all cellular life (except viruses). Cells are categorized as prokaryotic (lacking a membrane-bound nucleus and organelles, e.g. bacteria) and eukaryotic (having a true nucleus and specialized organelles like mitochondria, chloroplasts, and lysosomes).",
+    concepts=[
+        {"title": "Prokaryotic vs Eukaryotic Cells", "desc": "Prokaryotes are smaller, have circular DNA in a nucleoid, and 70S ribosomes. Eukaryotes have linear DNA inside a nuclear envelope, membrane-bound organelles, and 80S ribosomes."},
+        {"title": "Endosymbiotic Theory", "desc": "Mitochondria and chloroplasts evolved from free-living prokaryotes engulfed by ancestral eukaryotes, evidenced by their own circular DNA and 70S ribosomes."}
+    ],
+    definitions=[
+        {"term": "Protoplasm", "def": "The living content of a cell, composed of cytoplasm and nucleoplasm."},
+        {"term": "Omnis cellula-e cellula", "def": "Rudolf Virchow's famous generalization meaning 'all cells arise from pre-existing cells.'"}
+    ],
+    formulas=[
+        {"name": "Ribosome Subunits", "eq": "70S = 50S + 30S | 80S = 60S + 40S", "desc": "S stands for Svedberg unit (sedimentation coefficient), showing non-additive assembly of ribosomal subunits."}
+    ],
+    examNotes="Viruses are a major exception to Cell Theory because they lack cellular organization and cannot replicate outside a host cell.",
+    mistakes=[
+        {"title": "Svedberg Additive Error", "desc": "Adding ribosome subunits mathematically (e.g. 50 + 30 = 80). The Svedberg unit is a measure of density and shape, not mass, so they assemble non-additively (50S + 30S = 70S)."},
+        {"title": "Chloroplasts in Animal cells", "desc": "Drawing or listing chloroplasts in animal cell diagrams. Chloroplasts are exclusive to plants and algae."}
+    ],
+    revision=[
+        "Cell theory was modified by Virchow to include cell division.",
+        "Mitochondria is the powerhouse of the cell, generating ATP.",
+        "Cell membrane is a selectively permeable lipid bilayer (fluid mosaic model)."
+    ],
+    questions=[
+        {
+            "q": "Who proposed the statement 'Omnis cellula-e cellula'?",
+            "options": ["Robert Hooke", "Theodor Schwann", "Rudolf Virchow", "Anton van Leeuwenhoek"],
+            "correctAnswerIndex": 2,
+            "explanation": "Rudolf Virchow in 1855 added this concept to cell theory, stating that all cells arise from pre-existing cells.",
+            "a": "Rudolf Virchow"
+        }
+    ],
+    flashcards=[
+        {"front": "Who discovered the cell?", "back": "Robert Hooke in 1665 (observed dead cork cells)"},
+        {"front": "What type of ribosome is found in prokaryotes?", "back": "70S ribosomes"}
+    ],
+    videos=[
+        {"title": "Introduction to the Cell & Cell Theory", "channel": "Khan Academy Biology", "duration": "12m", "videoId": "8t4e_yB6-oo"}
+    ],
+    related=["photosynthesis", "dna_replication"],
+    learningPath=["Photosynthesis", "Cell Theory", "DNA Replication", "Mitosis"]
+)
+
+add_topic(
+    id="dna_replication",
+    topic="DNA Replication",
+    subject="biology",
+    exam="neet",
+    aliases=["dna replication", "dna structure", "semi-conservative replication"],
+    keywords=["dna", "replication", "polymerase", "helicase", "okazaki", "leading strand", "lagging strand"],
+    difficulty="Hard",
+    tags=["Molecular Biology", "Biology", "NEET", "Class 12"],
+    overview="DNA Replication is the biological process of producing two identical replicas of DNA from one original DNA molecule, ensuring genetic continuity.",
+    explanation="Occurring in the S-phase of cell cycle, DNA replication is semi-conservative (each new double helix contains one old and one new strand), proved by Meselson and Stahl. Replication is semi-discontinuous: the leading strand is synthesized continuously in 5' to 3' direction, while the lagging strand is synthesized discontinuously as Okazaki fragments.",
+    concepts=[
+        {"title": "Semi-Conservative Model", "desc": "The two parental strands separate, and each acts as a template for synthesis of a new complementary strand. Thus, the daughter DNA consists of one parental and one nascent strand."},
+        {"title": "Enzymes of Replication", "desc": "Helicase unwinds the double helix, Primase adds RNA primers, DNA Polymerase III synthesizes new DNA, and Ligase seals nicks in the sugar-phosphate backbone."}
+    ],
+    definitions=[
+        {"term": "Okazaki Fragments", "def": "Short, newly synthesized DNA fragments formed on the lagging template strand during replication."},
+        {"term": "Origin of Replication (ori)", "def": "A specific sequence in a genome at which replication is initiated."}
+    ],
+    formulas=[
+        {"name": "Chargaff's Rule", "eq": "%A = %T | %G = %C | (A+G)/(T+C) = 1", "desc": "In double-stranded DNA, the ratio of purines (Adenine, Guanine) to pyrimidines (Thymine, Cytosine) is always equal to 1."}
+    ],
+    examNotes="DNA polymerase can only add nucleotides in the 5' to 3' direction. Because of this, the strand template with 3' to 5' orientation is replicated continuously (leading), and the 5' to 3' template is replicated discontinuously (lagging).",
+    mistakes=[
+        {"title": "Direction of Synthesis", "desc": "Stating that the lagging strand is synthesized in the 3' to 5' direction. ALL DNA synthesis occurs in the 5' to 3' direction; it's the direction of TEMPLATE reading that differs."},
+        {"title": "Helicase vs Topoisomerase", "desc": "Confusing their functions. Helicase unwinds hydrogen bonds; Topoisomerase relieves torsional strain ahead of the replication fork."}
+    ],
+    revision=[
+        "Replication is semiconservative, bidirectional, and semidiscontinuous.",
+        "RNA primer is essential to provide the free 3'-OH group for DNA polymerase.",
+        "Meselson and Stahl used heavy nitrogen isotope (N15) to prove semiconservative replication."
+    ],
+    questions=[
+        {
+            "q": "If a double-stranded DNA has 20% Cytosine, what is the percentage of Adenine?",
+            "options": ["20%", "30%", "40%", "60%"],
+            "correctAnswerIndex": 1,
+            "explanation": "According to Chargaff's rule: %C = %G = 20%. Together C + G = 40%. The remaining 60% must be split equally between A and T (A + T = 60%). Thus, %A = 30%.",
+            "a": "Adenine is 30%"
+        }
+    ],
+    flashcards=[
+        {"front": "Which enzyme joins Okazaki fragments?", "back": "DNA Ligase"},
+        {"front": "In which phase of the cell cycle does DNA replication occur?", "back": "S-phase (Synthesis phase) of interphase"}
+    ],
+    videos=[
+        {"title": "DNA Replication Mechanism and Enzymes", "channel": "Unacademy NEET", "duration": "35m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["cell_theory", "mitosis"],
+    learningPath=["Cell Theory", "DNA Replication", "Mitosis", "Human Circulatory System"]
+)
+
+add_topic(
+    id="mitosis",
+    topic="Mitosis",
+    subject="biology",
+    exam="neet",
+    aliases=["mitosis", "cell division", "stages of mitosis", "karyokinesis"],
+    keywords=["mitosis", "division", "prophase", "metaphase", "anaphase", "telophase", "spindle", "chromatin"],
+    difficulty="Easy",
+    tags=["Cell Biology", "Biology", "NEET", "Class 11"],
+    overview="Mitosis is a process of cell division that results in two genetically identical daughter cells, each having the same number and kind of chromosomes as the parent nucleus.",
+    explanation="Mitosis (equational division) occurs in somatic cells for growth and repair. It consists of Karyokinesis (nuclear division) divided into four consecutive stages: Prophase (condensation of chromatin, disappearance of nucleolus/nuclear membrane), Metaphase (alignment of chromosomes at the equatorial plate), Anaphase (splitting of centromeres, movement of sister chromatids to opposite poles), and Telophase (decondensation of chromosomes, reforming of nuclear envelope). This is followed by Cytokinesis (division of cytoplasm).",
+    concepts=[
+        {"title": "Metaphase Alignment", "desc": "Chromosomes are shortest and thickest, making this the best stage to study chromosome morphology. Spindle fibers attach to kinetochores of chromosomes."},
+        {"title": "Anaphase Separation", "desc": "Centromeres split, and sister chromatids separate into individual chromosomes, pulled to opposite poles by contraction of spindle fibers."}
+    ],
+    definitions=[
+        {"term": "Karyokinesis", "def": "The division of the cell nucleus during cell division."},
+        {"term": "Kinetochore", "def": "A disc-shaped protein structure on the centromere of a chromosome to which spindle fibers attach."}
+    ],
+    formulas=[
+        {"name": "Mitotic Divisions", "eq": "Number of cells = 2^n", "desc": "Where n is the number of successive mitotic divisions starting from a single cell."}
+    ],
+    examNotes="Colchicine is an alkaloid chemical used in genetics that prevents spindle fiber formation, arresting cells at Metaphase. It is used to count and study chromosomes.",
+    mistakes=[
+        {"title": "Sister Chromatids count in Anaphase", "desc": "Failing to count separated sister chromatids as individual chromosomes. During Anaphase, the chromosome number of the cell temporarily doubles."},
+        {"title": "Plant vs Animal Cytokinesis", "desc": "Stating plant cells divide by furrowing. Animal cells divide by cell furrowing (outer to inner), whereas plant cells divide by cell plate formation (inner to outer) due to rigid cell walls."}
+    ],
+    revision=[
+        "Mitosis is also called equational division.",
+        "Nuclear membrane disappears in prophase and reappears in telophase.",
+        "Spindle fibers are composed of microtubules."
+    ],
+    questions=[
+        {
+            "q": "At which stage of mitosis do chromosomes align at the equatorial plate?",
+            "options": ["Prophase", "Metaphase", "Anaphase", "Telophase"],
+            "correctAnswerIndex": 1,
+            "explanation": "During Metaphase, spindle fibers attach to kinetochores and pull chromosomes to align at the center of the cell (metaphase plate).",
+            "a": "Metaphase"
+        }
+    ],
+    flashcards=[
+        {"front": "In which stage of karyokinesis do centromeres split?", "back": "Anaphase"},
+        {"front": "What is the primary function of mitosis in multicellular organisms?", "back": "Growth, tissue repair, and asexual reproduction."}
+    ],
+    videos=[
+        {"title": "Mitosis Cell Division - Stages and Animation", "channel": "Khan Academy", "duration": "18m", "videoId": "8t4e_yB6-oo"}
+    ],
+    related=["dna_replication", "human_circulatory_system"],
+    learningPath=["DNA Replication", "Mitosis", "Human Circulatory System", "Nervous System"]
+)
+
+add_topic(
+    id="human_circulatory_system",
+    topic="Human Circulatory System",
+    subject="biology",
+    exam="class10",
+    aliases=["human circulatory system", "heart structure", "double circulation", "blood vessels"],
+    keywords=["heart", "circulation", "arteries", "veins", "blood", "systole", "diastole", "capillaries"],
+    difficulty="Medium",
+    tags=["Human Physiology", "Biology", "Class 10", "NEET"],
+    overview="The Human Circulatory System is an organ system that permits blood to circulate and transport nutrients, oxygen, carbon dioxide, hormones, and blood cells to and from cells.",
+    explanation="The system is closed, centered around a 4-chambered heart (2 auricles, 2 ventricles). It employs Double Circulation: Pulmonary circulation (heart to lungs and back) and Systemic circulation (heart to body tissues and back). This keeps oxygenated and deoxygenated blood separate, maximizing energy efficiency.",
+    concepts=[
+        {"title": "Double Circulation", "desc": "Blood passes through the heart twice in one complete cycle: once as deoxygenated blood to the lungs, and once as oxygenated blood to the body."},
+        {"title": "Pacemaker (SA Node)", "desc": "Sinoatrial node, a specialized bundle of cardiac muscle fibers in the right atrium that generates electrical impulses to initiate heart contraction (systole)."}
+    ],
+    definitions=[
+        {"term": "Systole", "def": "The phase of the heartbeat when the heart muscle contracts and pumps blood from the chambers into the arteries."},
+        {"term": "Arteries", "def": "Thick-walled blood vessels that carry oxygenated blood away from the heart (except the pulmonary artery)."}
+    ],
+    formulas=[
+        {"name": "Cardiac Output", "eq": "Cardiac Output = Stroke Volume * Heart Rate", "desc": "Stroke Volume (~70 mL) times Heart Rate (~72 bpm) equals total volume of blood pumped per minute (~5 Liters)."}
+    ],
+    examNotes="All arteries carry oxygenated blood EXCEPT the Pulmonary Artery, which carries deoxygenated blood to the lungs. All veins carry deoxygenated blood EXCEPT the Pulmonary Vein, which carries oxygenated blood from the lungs.",
+    mistakes=[
+        {"title": "Heart Chamber Wall thickness", "desc": "Thinking auricles have thicker walls than ventricles. Ventricles must pump blood to distant organs (lungs/body) and have much thicker muscular walls, particularly the left ventricle."},
+        {"title": "Valves Direction Error", "desc": "Assuming valves allow bidirectional flow. Valves exist strictly to prevent backflow of blood (e.g. tricuspid/bicuspid valves prevent backflow into atria)."}
+    ],
+    revision=[
+        "Human heart is myogenic (initiates its own beats).",
+        "Arteries are thick-walled and have no valves; veins are thin-walled and contain valves.",
+        "Blood pressure is measured using a sphygmomanometer."
+    ],
+    questions=[
+        {
+            "q": "Which chamber of the human heart has the thickest muscular wall?",
+            "options": ["Right Atrium", "Left Atrium", "Right Ventricle", "Left Ventricle"],
+            "correctAnswerIndex": 3,
+            "explanation": "The Left Ventricle has the thickest wall because it must generate enough pressure to pump oxygenated blood throughout the entire systemic circulation of the body.",
+            "a": "Left Ventricle"
+        }
+    ],
+    flashcards=[
+        {"front": "What is the normal blood pressure of a healthy human?", "back": "120/80 mmHg (systolic/diastolic)"},
+        {"front": "What is the function of the SA Node?", "back": "Acts as the natural pacemaker, initiating the heartbeat."}
+    ],
+    videos=[
+        {"title": "Human Heart Structure & Circulation", "channel": "Khan Academy Class 10", "duration": "15m", "videoId": "8t4e_yB6-oo"}
+    ],
+    related=["mitosis", "nervous_system"],
+    learningPath=["Mitosis", "Human Circulatory System", "Nervous System", "Mendelian Genetics"]
+)
+
+add_topic(
+    id="nervous_system",
+    topic="Nervous System",
+    subject="biology",
+    exam="class10",
+    aliases=["nervous system", "neuron structure", "action potential", "reflex arc"],
+    keywords=["neuron", "brain", "synapse", "reflex", "nervous", "axon", "myelin"],
+    difficulty="Medium",
+    tags=["Human Physiology", "Biology", "Class 10", "NEET"],
+    overview="The Nervous System coordinates animal behavior and transmits signals between different parts of the body, composed of the central and peripheral nervous systems.",
+    explanation="The functional unit is the neuron (sensory, motor, interneuron). Signals travel as electrical impulses (action potentials) along the axon. Communication between neurons occurs chemically at the synapse via neurotransmitters. A reflex arc is a rapid, involuntary pathway that bypasses conscious brain processing for immediate protection.",
+    concepts=[
+        {"title": "Synaptic Transmission", "desc": "When an impulse reaches the axon terminal, it triggers release of neurotransmitters (like acetylcholine) into the synaptic cleft, which bind to receptors on the next neuron's dendrite."},
+        {"title": "Reflex Arc Pathway", "desc": "Stimulus -> Receptor -> Sensory Neuron -> Spinal Cord (Interneuron) -> Motor Neuron -> Effector (Muscle). Leads to extremely rapid response."}
+    ],
+    definitions=[
+        {"term": "Synapse", "def": "The microscopic gap between the axon terminal of one neuron and the dendrite of the next neuron."},
+        {"term": "Myelin Sheath", "def": "An insulating layer around nerves that allows electrical impulses to transmit quickly along the axons."}
+    ],
+    formulas=[
+        {"name": "Reflex Response Time", "eq": "Time = Path Length / Velocity + Synaptic Delay", "desc": "Calculates speed of reflex loops, showing how bypassing the brain reduces latency."}
+    ],
+    examNotes="Reflex actions are coordinated by the spinal cord, not the brain. This allows for immediate response to dangerous stimuli (like touching a hot plate) before the brain registers pain.",
+    mistakes=[
+        {"title": "Electrical Synapse misconception", "desc": "Assuming all synapses are electrical. Most synapses in the human body are chemical synapses, which are slightly slower but allow complex modulation."},
+        {"title": "Axon Signal flow", "desc": "Stating signals flow from axon to dendrite within a neuron. Inside a neuron, impulses flow unidirectionally from Dendrite -> Cell Body -> Axon -> Axon Terminal."}
+    ],
+    revision=[
+        "Central Nervous System (CNS) consists of Brain and Spinal Cord.",
+        "Neurons do not divide because they lack centrioles.",
+        "Chemical messengers at synapses are called neurotransmitters."
+    ],
+    questions=[
+        {
+            "q": "What is the correct pathway of a nerve impulse in a reflex arc?",
+            "options": [
+                "Receptor -> Motor Neuron -> Spinal Cord -> Sensory Neuron -> Effector",
+                "Receptor -> Sensory Neuron -> Spinal Cord -> Motor Neuron -> Effector",
+                "Effector -> Sensory Neuron -> Brain -> Motor Neuron -> Receptor",
+                "Receptor -> Sensory Neuron -> Brain -> Motor Neuron -> Effector"
+            ],
+            "correctAnswerIndex": 1,
+            "explanation": "A reflex arc flows from Receptor to Sensory Neuron, passes through Spinal Cord (bypassing brain), travels down Motor Neuron, and activates Effector (muscle).",
+            "a": "Receptor -> Sensory Neuron -> Spinal Cord -> Motor Neuron -> Effector"
+        }
+    ],
+    flashcards=[
+        {"front": "What is the structural unit of the nervous system?", "back": "Neuron (nerve cell)"},
+        {"front": "What is the gap between two neurons called?", "back": "Synaptic cleft / Synapse"}
+    ],
+    videos=[
+        {"title": "Structure of Neuron & Reflex Arc", "channel": "Khan Academy Class 10", "duration": "14m", "videoId": "8t4e_yB6-oo"}
+    ],
+    related=["human_circulatory_system", "mendelian_genetics"],
+    learningPath=["Human Circulatory System", "Nervous System", "Mendelian Genetics", "Plant Kingdom"]
+)
+
+add_topic(
+    id="mendelian_genetics",
+    topic="Mendelian Genetics",
+    subject="biology",
+    exam="neet",
+    aliases=["mendelian genetics", "mendel's laws", "monohybrid cross", "dihybrid cross"],
+    keywords=["mendel", "genetics", "allele", "heterozygous", "homozygous", "phenotype", "genotype", "punnett"],
+    difficulty="Medium",
+    tags=["Genetics", "Biology", "NEET", "Class 12"],
+    overview="Mendelian Genetics analyzes the patterns of inheritance of traits from parents to offspring, formulated by Gregor Mendel using pea plants.",
+    explanation="Mendel established three laws: Law of Dominance, Law of Segregation (alleles separate during gametogenesis), and Law of Independent Assortment (different genes separate independently). Inheritance ratios are calculated using Punnett squares, showing characteristic phenotypic ratios of 3:1 (monohybrid) and 9:3:3:1 (dihybrid).",
+    concepts=[
+        {"title": "Law of Segregation", "desc": "During gamete formation, the alleles for each gene segregate from each other so that each gamete carries only one allele for each gene. It is a universal law with no exceptions."},
+        {"title": "Law of Independent Assortment", "desc": "Genes for different traits segregate independently during the formation of gametes. This law does not hold true for genes located close together on the same chromosome (linkage)."}
+    ],
+    definitions=[
+        {"term": "Allele", "def": "Alternative forms of a single gene that govern the same trait (e.g. T and t for height)."},
+        {"term": "Genotype", "def": "The genetic constitution of an organism (e.g. TT, Tt, tt)."}
+    ],
+    formulas=[
+        {"name": "Monohybrid Cross Ratios", "eq": "Phenotypic = 3:1 | Genotypic = 1:2:1", "desc": "Ratios obtained in F2 generation from crossing heterozygous parents (Tt x Tt)."},
+        {"name": "Dihybrid Cross Phenotypic Ratio", "eq": "Ratio = 9:3:3:1", "desc": "F2 ratio for two independent traits (e.g. seed shape and color)."}
+    ],
+    examNotes="The Law of Segregation is also known as the Law of Purity of Gametes because gametes are always haploid and carry only one allele, never both.",
+    mistakes=[
+        {"title": "Applying Independent Assortment to Linkage", "desc": "Assuming genes on the same chromosome always assort independently. If genes are linked, parental combinations will appear more frequently than expected."},
+        {"title": "Confusing Phenotype and Genotype", "desc": "Writing genotypic ratios when asked for phenotypic ratios. Remember: Phenotype is physical appearance (3:1); Genotype is genetic code (1:2:1)."}
+    ],
+    revision=[
+        "Mendel used Garden Pea (Pisum sativum) for his experiments.",
+        "Test cross is used to find genotype of dominant phenotype by crossing with homozygous recessive.",
+        "Incomplete dominance (e.g. Mirabilis jalapa pink flowers) violates Law of Dominance."
+    ],
+    questions=[
+        {
+            "q": "What is the phenotypic ratio of a dihybrid cross in the F2 generation?",
+            "options": ["3:1", "1:2:1", "9:3:3:1", "1:1:1:1"],
+            "correctAnswerIndex": 2,
+            "explanation": "A standard Mendelian dihybrid cross F2 generation exhibits a 9:3:3:1 ratio (9 double dominant, 3 dominant-recessive, 3 recessive-dominant, 1 double recessive).",
+            "a": "9:3:3:1"
+        }
+    ],
+    flashcards=[
+        {"front": "What is a test cross?", "back": "Crossing an F1 individual of unknown genotype with a homozygous recessive parent."},
+        {"front": "Which Mendelian law has no exceptions?", "back": "Law of Segregation"}
+    ],
+    videos=[
+        {"title": "Mendel's Laws of Inheritance NEET", "channel": "Biology Simplified", "duration": "28m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["nervous_system", "plant_kingdom"],
+    learningPath=["Nervous System", "Mendelian Genetics", "Plant Kingdom", "Human Reproduction"]
+)
+
+add_topic(
+    id="plant_kingdom",
+    topic="Plant Kingdom",
+    subject="biology",
+    exam="neet",
+    aliases=["plant kingdom", "algae", "bryophytes", "pteridophytes", "gymnosperms"],
+    keywords=["plant", "algae", "bryophyte", "pteridophyte", "gymnosperm", "angiosperm", "alternation", "haploid"],
+    difficulty="Hard",
+    tags=["Plant Diversity", "Biology", "NEET", "Class 11"],
+    overview="Plant Kingdom classifies plants into five major groups based on structural complexity: Algae, Bryophytes, Pteridophytes, Gymnosperms, and Angiosperms.",
+    explanation="Classification is based on body differentiation, vascular tissues, and seed formation. Alternation of generations occurs between a haploid gametophyte (sexual stage) and a diploid sporophyte (asexual stage). In primitive plants (algae, bryophytes), gametophyte is dominant. In vascular plants (pteridophytes, gymnosperms, angiosperms), sporophyte is dominant.",
+    concepts=[
+        {"title": "Bryophytes (Amphibians of Plant Kingdom)", "desc": "Lack vascular tissues (xylem/phloem). Live in soil but require water for sexual reproduction (flagellated antherozoids swim to archegonia)."},
+        {"title": "Gymnosperms", "desc": "Naked seed plants. Ovules are not enclosed by ovary wall, so they do not produce fruits (e.g. Pinus, Cycas)."}
+    ],
+    definitions=[
+        {"term": "Alternation of Generations", "def": "The alternation between a multicellular haploid gametophyte phase and a multicellular diploid sporophyte phase in a plant's life cycle."},
+        {"term": "Double Fertilization", "def": "A characteristic feature of Angiosperms where one male gamete fuses with egg (syngamy) and another with polar nuclei (triple fusion)."}
+    ],
+    formulas=[
+        {"name": "Ploidy Levels", "eq": "Gametophyte = n | Sporophyte = 2n | Endosperm (Angiosperms) = 3n", "desc": "Ploidy level of key structures in plant life cycles."}
+    ],
+    examNotes="Bryophytes are called amphibians of the plant kingdom. Angiosperms are unique in having double fertilization resulting in triploid (3n) endosperm.",
+    mistakes=[
+        {"title": "Gymnosperm Fruit Assumption", "desc": "Searching for fruit structures in Gymnosperms. They produce seeds, but because they lack ovaries, they have no fruit structures (naked seeds)."},
+        {"title": "Ploidy of Endosperm", "desc": "Assuming endosperm ploidy is always 3n. Gymnosperm endosperm is haploid (n) because it forms before fertilization; only Angiosperm endosperm is triploid (3n)."}
+    ],
+    revision=[
+        "Algae are thalloid and autotrophic.",
+        "Pteridophytes are the first terrestrial plants to possess vascular tissues (xylem/phloem).",
+        "Sphagnum (a bryophyte) is used as packing material due to high water-holding capacity."
+    ],
+    questions=[
+        {
+            "q": "Which group of plants is known as the 'amphibians of the plant kingdom'?",
+            "options": ["Algae", "Bryophytes", "Pteridophytes", "Gymnosperms"],
+            "correctAnswerIndex": 1,
+            "explanation": "Bryophytes are called amphibians of the plant kingdom because they live in soil but require water for fertilization (sperm must swim to egg).",
+            "a": "Bryophytes"
+        }
+    ],
+    flashcards=[
+        {"front": "What is the ploidy of angiosperm endosperm?", "back": "Triploid (3n)"},
+        {"front": "Which group has naked seeds?", "back": "Gymnosperms"}
+    ],
+    videos=[
+        {"title": "Plant Kingdom Classification & Life Cycles", "channel": "Unacademy NEET", "duration": "42m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["mendelian_genetics", "human_reproduction"],
+    learningPath=["Mendelian Genetics", "Plant Kingdom", "Human Reproduction", "Ecology and Ecosystem"]
+)
+
+add_topic(
+    id="human_reproduction",
+    topic="Human Reproduction",
+    subject="biology",
+    exam="neet",
+    aliases=["human reproduction", "gametogenesis", "fertilization", "menstrual cycle"],
+    keywords=["reproduction", "menstrual", "gametogenesis", "spermatogenesis", "ovary", "testis", "fertilization"],
+    difficulty="Medium",
+    tags=["Human Physiology", "Biology", "NEET", "Class 12"],
+    overview="Human Reproduction describes the anatomical and physiological processes of sexual reproduction, gamete formation, fertilization, and embryonic development.",
+    explanation="The process includes Gametogenesis (spermatogenesis in males, oogenesis in females). Oogenesis is a discontinuous process, starting before birth and pausing at Prophase I until puberty. The female reproductive cycle (menstrual cycle) is regulated by pituitary and ovarian hormones (LH, FSH, Estrogen, Progesterone), with ovulation triggered by a surge in LH.",
+    concepts=[
+        {"title": "Menstrual Cycle Phases", "desc": "Menstrual phase -> Follicular phase (Estrogen rises, follicles grow) -> Ovulatory phase (LH surge causes release of ovum at day 14) -> Luteal phase (Corpus luteum secretes Progesterone)."},
+        {"title": "Fertilization", "desc": "Occurs in the ampullary-isthmic junction of the fallopian tube. Acrosome of sperm releases enzymes to penetrate the zona pellucida of the ovum."}
+    ],
+    definitions=[
+        {"term": "Spermatogenesis", "def": "The process of formation of haploid spermatozoa from diploid spermatogonia in the seminiferous tubules of testes."},
+        {"term": "Ovulation", "def": "The release of a mature secondary oocyte from the Graafian follicle of the ovary."}
+    ],
+    formulas=[
+        {"name": "Gametogenesis Yield", "eq": "1 Primary Spermatocyte = 4 Spermatozoa | 1 Primary Oocyte = 1 Ovum + Polar Bodies", "desc": "Showing differences in cell division efficiency between male and female gamete production."}
+    ],
+    examNotes="Ovulation occurs on day 14 of a standard 28-day cycle, triggered by a sharp rise (surge) in Luteinizing Hormone (LH).",
+    mistakes=[
+        {"title": "Site of Fertilization", "desc": "Stating that fertilization occurs in the uterus. Fertilization occurs in the fallopian tube (specifically the ampullary region). The fertilized zygote then travels to implant in the uterus."},
+        {"title": "Oogenesis continuity", "desc": "Assuming oogenesis is continuous. It begins in fetal development, halts at prophase I, resumes at puberty, halts again at metaphase II, and only completes if fertilized by sperm."}
+    ],
+    revision=[
+        "Testes are extra-abdominal to maintain a lower temperature (2-2.5°C below body temp) required for spermatogenesis.",
+        "Corpus luteum secretes progesterone to maintain the endometrium for implantation.",
+        "LH and FSH are secreted by the anterior pituitary gland."
+    ],
+    questions=[
+        {
+            "q": "Which hormone surge triggers ovulation in females?",
+            "options": ["Progesterone", "Estrogen", "LH (Luteinizing Hormone)", "FSH"],
+            "correctAnswerIndex": 2,
+            "explanation": "A rapid surge of LH (LH surge) in the middle of the cycle (day 14) induces the rupture of the Graafian follicle and release of the ovum.",
+            "a": "LH (Luteinizing Hormone)"
+        }
+    ],
+    flashcards=[
+        {"front": "Where does fertilization take place?", "back": "Ampulla of the fallopian tube"},
+        {"front": "What is the function of Progesterone?", "back": "Maintains the endometrium lining of the uterus for potential pregnancy."}
+    ],
+    videos=[
+        {"title": "Human Reproduction & Menstrual Cycle NEET", "channel": "Biology Simplified", "duration": "45m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["plant_kingdom", "ecology_ecosystem"],
+    learningPath=["Plant Kingdom", "Human Reproduction", "Ecology and Ecosystem", "Journal Entries"]
+)
+
+add_topic(
+    id="ecology_ecosystem",
+    topic="Ecology and Ecosystem",
+    subject="biology",
+    exam="class12",
+    aliases=["ecology and ecosystem", "food chain", "trophic levels", "ecological pyramids"],
+    keywords=["ecology", "ecosystem", "trophic", "pyramid", "food chain", "biodiversity", "consumers"],
+    difficulty="Easy",
+    tags=["Ecology", "Biology", "Class 12", "NEET"],
+    overview="Ecology and Ecosystem studies interactions among organisms and their environment, focusing on energy flows, food webs, and ecological pyramids.",
+    explanation="An ecosystem consists of biotic (living) and abiotic (non-living) components. Energy enters via producers and flows through trophic levels. Lindeman's 10% Law states only 10% of energy is transferred to the next level. Ecological pyramids (number, biomass, energy) represent distributions; the pyramid of energy is always upright.",
+    concepts=[
+        {"title": "Energy Flow (10% Law)", "desc": "During transfer of organic food energy from one trophic level to the next higher level, only about 10% of the transferred energy is stored as flesh. The rest is lost as heat."},
+        {"title": "Pyramid of Energy", "desc": "Always upright because energy is lost as heat at each step in accordance with thermodynamic laws. It can never be inverted, unlike biomass or number pyramids."}
+    ],
+    definitions=[
+        {"term": "Trophic Level", "def": "The specific position an organism occupies in a food chain based on its source of nutrition."},
+        {"term": "Primary Productivity", "def": "The rate at which solar energy is captured and stored as organic matter by producers in an ecosystem."}
+    ],
+    formulas=[
+        {"name": "Lindeman's 10% Law", "eq": "Energy_next = Energy_prev * 0.10", "desc": "Calculates energy available to the next trophic level."}
+    ],
+    examNotes="The Pyramid of Biomass in a sea/aquatic ecosystem is inverted because the biomass of fishes (consumers) far exceeds the biomass of phytoplankton (producers).",
+    mistakes=[
+        {"title": "Inverted Energy Pyramid", "desc": "Drawing an inverted pyramid of energy. Energy loss is absolute; a higher trophic level can never have more energy than the lower level, so it is ALWAYS upright."},
+        {"title": "Decomposers in Pyramids", "desc": "Attempting to fit decomposers in standard trophic pyramids. Decomposers are crucial but are generally excluded from ecological pyramid models."}
+    ],
+    revision=[
+        "Ecosystem is the functional unit of nature.",
+        "Primary consumers are herbivores; secondary consumers are carnivores.",
+        "Bioaccumulation refers to the increase in concentration of a toxic chemical (like DDT) in trophic levels."
+    ],
+    questions=[
+        {
+            "q": "If 10,000 Joules of energy is available at the producer level, how much energy is available to secondary consumers?",
+            "options": ["1,000 J", "100 J", "10 J", "1 J"],
+            "correctAnswerIndex": 1,
+            "explanation": "Producer = 10,000 J. Primary Consumer (Herbivore) = 10% of 10,000 = 1,000 J. Secondary Consumer (Carnivore) = 10% of 1,000 = 100 J.",
+            "a": "100 J"
+        }
+    ],
+    flashcards=[
+        {"front": "Why is the pyramid of energy always upright?", "back": "Due to energy loss at each trophic level (10% law/thermodynamics)."},
+        {"front": "Define food web.", "back": "An interconnected network of food chains in an ecosystem."}
+    ],
+    videos=[
+        {"title": "Ecosystem and Energy Flow", "channel": "Khan Academy Biology", "duration": "16m", "videoId": "8t4e_yB6-oo"}
+    ],
+    related=["human_reproduction", "journal_entries"],
+    learningPath=["Human Reproduction", "Ecology and Ecosystem", "Journal Entries", "Ledger Posting"]
+)
+
+# ----------------------------------------------------
+# CA FOUNDATION (5 Topics)
+# ----------------------------------------------------
+add_topic(
+    id="journal_entries",
+    topic="Journal Entries",
+    subject="accounting",
+    exam="cafoundation",
+    aliases=["journal entry", "journal entries", "double entry bookkeeping", "journalizing"],
+    keywords=["journal", "ledger", "bookkeeping", "debit", "credit", "transaction", "asset", "liability"],
+    difficulty="Easy",
+    tags=["Accounting", "CA Foundation"],
+    overview="Journal Entries are the primary records of financial transactions in double-entry bookkeeping, documenting debits and credits chronologically.",
+    explanation="Every business transaction affects at least two accounts. Debit represents increases in assets/expenses and decreases in liabilities/equity. Credit represents increases in liabilities/equity/revenue and decreases in assets/expenses. Journalizing records transactions with a narration explaining the entry.",
+    concepts=[
+        {"title": "Three Golden Rules of Accounting", "desc": "Real Accounts: Debit what comes in, Credit what goes out. Personal Accounts: Debit the receiver, Credit the giver. Nominal Accounts: Debit all expenses/losses, Credit all incomes/gains."},
+        {"title": "Modern Approach (ALORE)", "desc": "Assets and Expenses rise with Debits. Liabilities, Owner's Equity, and Revenues rise with Credits. This is the modern, systematic method."}
+    ],
+    definitions=[
+        {"term": "Double-Entry Bookkeeping", "def": "An accounting system where every transaction has dual effects, meaning total debits must equal total credits."},
+        {"term": "Narration", "def": "A brief explanation written beneath each journal entry to explain the nature of the transaction."}
+    ],
+    formulas=[
+        {"name": "Accounting Equation", "eq": "Assets = Liabilities + Capital", "desc": "The foundational balance sheet equality that remains in equilibrium after every journal entry."}
+    ],
+    examNotes="For Drawings (owner's personal withdrawals), always debit Drawings Account and credit Cash/Bank (or Purchase Account if goods are withdrawn). Never debit Owner's Personal Expense Account directly.",
+    mistakes=[
+        {"title": "Mixing Personal and Business Expenses", "desc": "Recording the owner's personal house rent as business Rent Expense instead of Drawings."},
+        {"title": "Crediting Cash on Credit Purchases", "desc": "Crediting cash when goods are purchased on credit. You must credit the Creditor's Account."}
+    ],
+    revision=[
+        "Journal is the book of prime entry.",
+        "Total Debits must equal Total Credits for every entry.",
+        "Narration is a mandatory part of a journal entry."
+    ],
+    questions=[
+        {
+            "q": "Goods of list price ₹10,000 purchased at 10% trade discount. What is the purchase entry?",
+            "options": [
+                "Debit Purchases ₹10,000, Credit Cash ₹10,000",
+                "Debit Purchases ₹9,000, Credit Cash ₹9,000",
+                "Debit Purchases ₹10,000, Credit Cash ₹9,000, Credit Discount ₹1,000",
+                "Debit Purchases ₹9,000, Credit Cash ₹10,000"
+            ],
+            "correctAnswerIndex": 1,
+            "explanation": "Trade discount is deducted directly from list price and NOT recorded in books. Net purchase price = 10,000 - 10% = ₹9,000. Entry: Purchases A/c Dr. ₹9,000 to Cash/Bank A/c ₹9,000.",
+            "a": "Debit Purchases ₹9,000, Credit Cash ₹9,000"
+        }
+    ],
+    flashcards=[
+        {"front": "State the golden rule for Nominal Accounts.", "back": "Debit all expenses and losses, Credit all incomes and gains."},
+        {"front": "What is Drawings A/c classified as?", "back": "Personal Account (representative of the owner)"}
+    ],
+    videos=[
+        {"title": "Journal Entries - Concept and Rules", "channel": "CA Foundation classes", "duration": "25m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["ecology_ecosystem", "ledger_posting"],
+    learningPath=["Ecology and Ecosystem", "Journal Entries", "Ledger Posting", "Trial Balance"]
+)
+
+add_topic(
+    id="ledger_posting",
+    topic="Ledger Posting",
+    subject="accounting",
+    exam="cafoundation",
+    aliases=["ledger posting", "ledger account", "posting transactions", "t-accounts"],
+    keywords=["ledger", "posting", "t-account", "balance", "trial balance", "posting"],
+    difficulty="Easy",
+    tags=["Accounting", "CA Foundation"],
+    overview="Ledger Posting is the process of transferring transaction entries from the journal to their respective individual T-accounts in the ledger.",
+    explanation="While the journal is chronological, the ledger groups transactions by account. This allows businesses to see the net balance of any account (e.g. Cash, Sales, Creditors) at any time. Ledger accounts are structured as T-shapes: Debit on the left, Credit on the right. Balancing accounts at period-end finds net debit or credit balances.",
+    concepts=[
+        {"title": "T-Account Structure", "desc": "Divided into Left Side (Debit) and Right Side (Credit). Entries posted from Journal write 'To [Opposite A/c]' on the debit side and 'By [Opposite A/c]' on the credit side."},
+        {"title": "Balancing the Ledger", "desc": "Summing both sides. If debit exceeds credit, insert 'By Balance c/d' on the credit side to balance, which becomes a 'To Balance b/d' debit balance next period."}
+    ],
+    definitions=[
+        {"term": "Ledger", "def": "The principal book of accounts where transactions are sorted, classified, and posted into individual accounts."},
+        {"term": "Posting", "def": "The process of transferring journal entries to the ledger accounts."}
+    ],
+    formulas=[
+        {"name": "Closing Balance Calculation", "eq": "Closing Balance = Opening Balance + Additions - Deductions", "desc": "Equation to reconcile ledger balances at the end of the month."}
+    ],
+    examNotes="Real and Personal accounts are balanced and carried forward (Balance c/d) to the next year's balance sheet. Nominal accounts are NOT balanced; they are closed by transferring their balances to the Trading and Profit & Loss Account.",
+    mistakes=[
+        {"title": "Posting on wrong side", "desc": "Posting a debited item in the journal to the credit side of the ledger account. Remember: if the account is Debited in the journal, post it on the Debit (left) side of that account."},
+        {"title": "Balancing Nominal Accounts", "desc": "Writing 'Balance c/d' for salary or rent accounts. Nominal accounts must be closed to the P&L account, not carried forward."}
+    ],
+    revision=[
+        "Ledger is the book of final entry.",
+        "Debit balances represent assets/expenses; Credit balances represent liabilities/equity/revenue.",
+        "Posting facilitates the preparation of a Trial Balance."
+    ],
+    questions=[
+        {
+            "q": "What does a debit balance in a Personal Account (like a customer) indicate?",
+            "options": ["Amount owed by the person (Debtor)", "Amount owed to the person (Creditor)", "An expense incurred", "A liability paid off"],
+            "correctAnswerIndex": 0,
+            "explanation": "A debit balance in a personal account means the debit side exceeds the credit side, indicating that the person is a Debtor who owes money to the business.",
+            "a": "The person is a Debtor (owes money to the business)"
+        }
+    ],
+    flashcards=[
+        {"front": "What is the ledger called?", "back": "The book of final entry / Principal book of accounts"},
+        {"front": "How do you close nominal accounts?", "back": "By transferring their balances to the Trading or Profit & Loss Account."}
+    ],
+    videos=[
+        {"title": "How to Post Journal to Ledger Accounts", "channel": "Commerce Mentor", "duration": "18m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["journal_entries", "trial_balance"],
+    learningPath=["Journal Entries", "Ledger Posting", "Trial Balance", "Bank Reconciliation Statement"]
+)
+
+add_topic(
+    id="trial_balance",
+    topic="Trial Balance",
+    subject="accounting",
+    exam="cafoundation",
+    aliases=["trial balance", "rectification of errors", "preparing trial balance"],
+    keywords=["trial balance", "debit", "credit", "rectification", "suspense account", "errors"],
+    difficulty="Medium",
+    tags=["Accounting", "CA Foundation"],
+    overview="A Trial Balance is a worksheet listing the balances of all ledger accounts into debit and credit columns, used to test arithmetical accuracy before preparing financial statements.",
+    explanation="Under double-entry bookkeeping, total debits must equal total credits, so a trial balance must agree. If the columns do not match, it indicates errors. Errors are classified as: errors of omission, errors of commission, errors of principle, and compensating errors. Rectification of errors corrects these mistakes, using a Suspense Account for one-sided errors.",
+    concepts=[
+        {"title": "Agreement of Trial Balance", "desc": "Arithmetical check. If it matches, it does not guarantee the books are 100% correct, as errors of principle or compensating errors do not affect the totals."},
+        {"title": "Suspense Account", "desc": "A temporary account opened to balance the trial balance when columns do not match. Closed once the one-sided errors are located and rectified."}
+    ],
+    definitions=[
+        {"term": "Error of Principle", "def": "An error committed by violating basic accounting principles, such as treating capital expenditure as revenue expenditure (e.g. charging repairs to machinery account)."},
+        {"term": "Compensating Error", "def": "Multiple errors that counteract each other so that the trial balance agreement is unaffected."}
+    ],
+    formulas=[
+        {"name": "Trial Balance Agreement", "eq": "Total Debit Balances = Total Credit Balances", "desc": "The arithmetic check that must balance."}
+    ],
+    examNotes="Errors of principle (like debiting Machinery for repairs) do NOT affect the agreement of the trial balance, because a debit was still recorded. They require careful review to locate.",
+    mistakes=[
+        {"title": "Suspense Account for Two-Sided Errors", "desc": "Using the Suspense Account to rectify two-sided errors. Two-sided errors (like posting to wrong person's account) are rectified directly without using the suspense account."},
+        {"title": "Omission Error distinction", "desc": "Confusing partial omission (affects trial balance) with complete omission (does not affect trial balance)."}
+    ],
+    revision=[
+        "Trial balance is a statement, not an account.",
+        "Agreement is proof of only arithmetical accuracy, not absolute correctness.",
+        "One-sided errors are rectified using a Suspense Account."
+    ],
+    questions=[
+        {
+            "q": "Wages paid for construction of office building debited to Wages Account. What type of error is this?",
+            "options": ["Error of Omission", "Error of Commission", "Error of Principle", "Compensating Error"],
+            "correctAnswerIndex": 2,
+            "explanation": "Building construction is capital expenditure and should be debited to Building A/c. Debiting Wages (revenue expenditure) violates accounting principles, making it an Error of Principle.",
+            "a": "Error of Principle"
+        }
+    ],
+    flashcards=[
+        {"front": "Does an Error of Principle affect Trial Balance agreement?", "back": "No"},
+        {"front": "When is a Suspense Account opened?", "back": "When the Trial Balance does not agree, to temporarily balance the columns."}
+    ],
+    videos=[
+        {"title": "Rectification of Errors & Trial Balance", "channel": "CA Foundation classes", "duration": "30m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["ledger_posting", "bank_reconciliation"],
+    learningPath=["Ledger Posting", "Trial Balance", "Bank Reconciliation Statement", "Depreciation Accounting"]
+)
+
+add_topic(
+    id="bank_reconciliation",
+    topic="Bank Reconciliation Statement",
+    subject="accounting",
+    exam="cafoundation",
+    aliases=["brs", "bank reconciliation statement", "reconciling passbook and cashbook"],
+    keywords=["brs", "passbook", "cashbook", "reconciliation", "cheques", "interest"],
+    difficulty="Medium",
+    tags=["Accounting", "CA Foundation"],
+    overview="A Bank Reconciliation Statement (BRS) reconciles the bank balance in the firm's cash book with the balance in the bank passbook (bank statement) on a specific date.",
+    explanation="Differences arise due to: timing differences (cheques issued but not presented, cheques deposited but not cleared) and transactions recorded only in the passbook (bank charges, interest credited, direct deposits, standing instructions). Preparing a BRS involves adding or subtracting these differences to match the balances.",
+    concepts=[
+        {"title": "Causes of Differences", "desc": "1. Cheques issued but not presented (Cash book decreases, bank hasn't changed). 2. Cheques deposited but not cleared (Cash book increases, bank hasn't changed). 3. Direct bank entries (Bank charges, interest, direct collections)."},
+        {"title": "Adjusted Cash Book", "desc": "Best practice. Adjust the cash book for all passbook-only entries first, then prepare BRS only for timing differences (outstanding/clearing cheques)."}
+    ],
+    definitions=[
+        {"term": "Favourable Balance", "def": "Debit balance in Cash Book (asset) or Credit balance in Pass Book (bank's liability to customer)."},
+        {"term": "Overdraft Balance", "def": "Credit balance in Cash Book (liability) or Debit balance in Pass Book (overdrawn asset), representing amount owed to the bank."}
+    ],
+    formulas=[
+        {"name": "BRS Reconciliation (Cash book to Pass book)", "eq": "Passbook Bal = Cashbook Bal + Cheques Issued but not Presented - Cheques Deposited but not Cleared ± Bank Adjustments", "desc": "Formula to reconcile Cash Book balance to match Pass Book."}
+    ],
+    examNotes="When starting BRS with a Credit balance as per Cash Book (Overdraft), remember it is a negative balance. Reconcile with extreme care regarding sign additions.",
+    mistakes=[
+        {"title": "Sign Confusion in Overdrafts", "desc": "Adding items to overdrafts when they should be deducted. A simple tip: solve it assuming a favourable balance first, then reverse the final sign, or treat overdraft as a negative number."},
+        {"title": "Adjusting Cheques in Adjusted Cash Book", "desc": "Adjusting outstanding cheques in the Adjusted Cash Book. Only entries that are finalized in the bank statement (like bank charges) are adjusted; timing differences are not."}
+    ],
+    revision=[
+        "BRS is prepared on a specific date, not for a period.",
+        "Cash book bank column is maintained by customer; Pass book is maintained by bank.",
+        "Favourable Cash Book balance = Debit; Favourable Pass Book balance = Credit."
+    ],
+    questions=[
+        {
+            "q": "Starting with Debit balance as per Cash Book of ₹10,000, if cheques deposited but not cleared total ₹3,000, what is the balance as per Pass Book (assuming no other differences)?",
+            "options": ["₹13,000", "₹7,000", "₹10,000", "-₹7,000"],
+            "correctAnswerIndex": 1,
+            "explanation": "Since we start with Cash Book balance, we need to match Pass Book. Cheques deposited but not cleared are added in the Cash Book but not yet credited in the Pass Book. To match Pass Book, we must subtract: 10,000 - 3,000 = ₹7,000.",
+            "a": "₹7,000"
+        }
+    ],
+    flashcards=[
+        {"front": "What does a credit balance in the bank passbook represent?", "back": "A favourable balance (money owned by customer)."},
+        {"front": "Name one timing difference in BRS.", "back": "Cheques issued but not yet presented for payment."}
+    ],
+    videos=[
+        {"title": "Bank Reconciliation Statement (BRS) Tutorial", "channel": "CA Foundation classes", "duration": "22m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["trial_balance", "depreciation_accounting"],
+    learningPath=["Trial Balance", "Bank Reconciliation Statement", "Depreciation Accounting", "Quantitative Ratios"]
+)
+
+add_topic(
+    id="depreciation_accounting",
+    topic="Depreciation Accounting",
+    subject="accounting",
+    exam="cafoundation",
+    aliases=["depreciation accounting", "depreciation", "straight line method", "written down value method", "slm wdv"],
+    keywords=["depreciation", "slm", "wdv", "salvage value", "asset", "amortization"],
+    difficulty="Medium",
+    tags=["Accounting", "CA Foundation"],
+    overview="Depreciation Accounting covers the systematic allocation of the depreciable amount of a tangible fixed asset over its useful life.",
+    explanation="Depreciation reflects wear and tear, passage of time, and obsolescence. The two primary methods are the Straight Line Method (SLM - constant depreciation based on original cost) and the Written Down Value Method (WDV - reducing depreciation calculated on the book value at the start of each year). WDV is preferred under tax laws.",
+    concepts=[
+        {"title": "Straight Line Method (SLM)", "desc": "Depreciation is equal each year: (Cost - Salvage Value) / Useful Life. The asset value can eventually be written down to zero."},
+        {"title": "Written Down Value Method (WDV)", "desc": "Depreciation is calculated as a fixed percentage of the reducing book value. The asset value decreases exponentially but never reaches absolute zero."}
+    ],
+    definitions=[
+        {"term": "Depreciation", "def": "A measure of the wearing out, consumption, or other loss of value of a depreciable asset arising from use, effluxion of time, or obsolescence."},
+        {"term": "Salvage Value (Residual Value)", "def": "The estimated scrap or resale value of an asset at the end of its useful life."}
+    ],
+    formulas=[
+        {"name": "SLM Annual Depreciation", "eq": "Depr = (Cost - Salvage Value) / Useful Life", "desc": "Calculates the constant annual depreciation amount under SLM."},
+        {"name": "WDV Depreciation", "eq": "Depr_Year_N = Book_Value_Start_N * Rate", "desc": "Rate is a percentage. Book value reduces each year."}
+    ],
+    examNotes="For mid-year additions or disposals of assets, always calculate depreciation pro-rata based on the number of months the asset was actually put to use.",
+    mistakes=[
+        {"title": "SLM Percentage on WDV", "desc": "Calculating depreciation on original cost every year under the WDV method. Remember to calculate on the reducing balance (book value) instead of original cost."},
+        {"title": "Neglecting Pro-Rata months", "desc": "Charging a full year's depreciation for an asset purchased on October 1st (when the financial year ends on March 31st). Charge only for 6 months."}
+    ],
+    revision=[
+        "Depreciation is a non-cash expense.",
+        "Land is generally not depreciated because it has an indefinite useful life.",
+        "WDV method results in higher depreciation in initial years compared to SLM."
+    ],
+    questions=[
+        {
+            "q": "An asset is purchased for ₹1,00,000. Under 10% WDV method, what is the book value at the end of 2 years?",
+            "options": ["₹80,000", "₹81,000", "₹90,000", "₹72,900"],
+            "correctAnswerIndex": 1,
+            "explanation": "Year 1 Depreciation = 10% of 1,00,000 = 10,000. Book value at end of Year 1 = 90,000. Year 2 Depreciation = 10% of 90,000 = 9,000. Book value at end of Year 2 = 90,000 - 9,000 = ₹81,000.",
+            "a": "₹81,000"
+        }
+    ],
+    flashcards=[
+        {"front": "Which depreciation method is allowed under Indian Income Tax Act?", "back": "Written Down Value (WDV) method"},
+        {"front": "Define depreciable assets.", "back": "Assets expected to be used for more than one accounting period, having a limited useful life, and held for production/services."}
+    ],
+    videos=[
+        {"title": "Depreciation Accounting - SLM and WDV Methods", "channel": "Commerce Mentor", "duration": "25m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["bank_reconciliation", "quantitative_ratios"],
+    learningPath=["Bank Reconciliation Statement", "Depreciation Accounting", "Quantitative Ratios", "Percentage Calculations"]
+)
+
+# ----------------------------------------------------
+# APTITUDE/CUET (5 Topics)
+# ----------------------------------------------------
+add_topic(
+    id="quantitative_ratios",
+    topic="Quantitative Ratios",
+    subject="aptitude",
+    exam="cuet",
+    aliases=["quantitative ratios", "ratio and proportion", "direct proportion"],
+    keywords=["ratio", "proportion", "percentage", "fractions", "division", "aptitude"],
+    difficulty="Easy",
+    tags=["Aptitude", "CUET", "Class 10"],
+    overview="Quantitative Ratios study relationships between quantities, comparing sizes, shares, and proportional divisions in numerical problems.",
+    explanation="A ratio (a:b) compares two quantities of the same units. A proportion states that two ratios are equal (a:b = c:d). Rules include finding duplicate, sub-duplicate, triplicate, and inverse ratios. Word problems often involve dividing quantities into parts, sharing mixtures, and finding direct or inverse variations.",
+    concepts=[
+        {"title": "Ratio and Share Division", "desc": "To divide a quantity Q in ratio a:b, the shares are Q * (a / (a+b)) and Q * (b / (a+b))."},
+        {"title": "Proportion Rule", "desc": "If a:b = c:d, then a*d = b*c (product of extremes = product of means)."}
+    ],
+    definitions=[
+        {"term": "Ratio", "def": "A comparison of two quantities of the same kind by division, showing how many times one number contains another."},
+        {"term": "Mean Proportional", "def": "The mean proportional between a and b is x = sqrt(ab), so that a:x = x:b."}
+    ],
+    formulas=[
+        {"name": "Proportion Equality", "eq": "a / b = c / d", "desc": "Expresses that ratio a:b is equal to ratio c:d."},
+        {"name": "Mean Proportional", "eq": "x = sqrt(a * b)", "desc": "Calculates the geometric mean of two numbers."}
+    ],
+    examNotes="When solving mixture problems (like milk and water), write down ratios as equations in terms of a constant multiplier x (e.g. 5x and 3x) to easily solve additions of water/milk.",
+    mistakes=[
+        {"title": "Comparing different units", "desc": "Writing a ratio between different units (e.g. comparing 500 meters to 2 kilometers as 500:2). Always convert to the same unit first (500:2000 = 1:4)."},
+        {"title": "Inverse proportion addition", "desc": "Adding variables in inverse proportion directly instead of taking their reciprocals."}
+    ],
+    revision=[
+        "Ratios have no units.",
+        "If a:b = c:d, then d is the fourth proportional.",
+        "Compound ratio of a:b and c:d is ac:bd."
+    ],
+    questions=[
+        {
+            "q": "If A:B = 2:3 and B:C = 4:5, what is the ratio A:B:C?",
+            "options": ["2:3:5", "8:12:15", "8:12:10", "4:6:5"],
+            "correctAnswerIndex": 1,
+            "explanation": "To combine ratios, make the B term equal. Multiply A:B by 4 => 8:12. Multiply B:C by 3 => 12:15. Combined ratio is 8:12:15.",
+            "a": "A:B:C = 8:12:15"
+        }
+    ],
+    flashcards=[
+        {"front": "What is the mean proportional between 4 and 9?", "back": "6 (sqrt(4 * 9) = sqrt(36) = 6)"},
+        {"front": "Do ratios have units?", "back": "No, they are pure numbers comparing quantities of same units."}
+    ],
+    videos=[
+        {"title": "Ratio & Proportion Concepts CUET", "channel": "Aptitude Made Easy", "duration": "15m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["depreciation_accounting", "percentage_calculations"],
+    learningPath=["Depreciation Accounting", "Quantitative Ratios", "Percentage Calculations", "Simple and Compound Interest"]
+)
+
+add_topic(
+    id="percentage_calculations",
+    topic="Percentage Calculations",
+    subject="aptitude",
+    exam="cuet",
+    aliases=["percentage calculations", "percentages", "profit and loss"],
+    keywords=["percentage", "profit", "loss", "markup", "discount", "margin", "aptitude"],
+    difficulty="Easy",
+    tags=["Aptitude", "CUET"],
+    overview="Percentage Calculations covers fractions out of 100, widely applied in commercial mathematics to solve markup, discounts, profit, and loss.",
+    explanation="Percentages express numbers as fractions of 100. Profit and loss compare Cost Price (CP) and Selling Price (SP). Discount is calculated on Marked Price (MP). Successive discounts are solved by compounding percentage reductions.",
+    concepts=[
+        {"title": "Successive Percentage Changes", "desc": "If a value changes by a% and then b%, the net percentage change is a + b + (a*b)/100. Sign is positive for increase, negative for decrease."},
+        {"title": "Profit and Loss margins", "desc": "Profit = SP - CP. Loss = CP - SP. Profit/Loss percentage is calculated on Cost Price (CP) unless specified otherwise."}
+    ],
+    definitions=[
+        {"term": "Percentage", "def": "A rate, number, or amount in each hundred."},
+        {"term": "Marked Price", "def": "The price of an item as written on its tag, on which discount is offered."}
+    ],
+    formulas=[
+        {"name": "Profit / Loss %", "eq": "Profit % = (Profit / CP) * 100", "desc": "CP is Cost Price. Calculate Loss % similarly as (Loss/CP)*100."},
+        {"name": "Selling Price with Markup and Discount", "eq": "SP = CP * (1 + markup%) * (1 - discount%)", "desc": "Compounded commercial percentage equation."}
+    ],
+    examNotes="For successive discounts of 20% and 10%, the net discount is NOT 30%. It is 20 + 10 - (20*10)/100 = 28% discount.",
+    mistakes=[
+        {"title": "Percentage on wrong base", "desc": "Calculating profit percentage by dividing profit by Selling Price (SP). Profit percentage is always based on Cost Price (CP) unless the question explicitly asks for profit margin on sales."},
+        {"title": "Adding successive percentages", "desc": "Adding successive salary increases of 10% and 10% to get 20%. Net increase is 10 + 10 + 1 = 21%."}
+    ],
+    revision=[
+        "Percent means per hundred.",
+        "Discount is always subtracted from Marked Price.",
+        "Cost Price is the 100% baseline in profit/loss."
+    ],
+    questions=[
+        {
+            "q": "An item costing ₹80 is sold for ₹100. What is the profit percentage?",
+            "options": ["20%", "25%", "15%", "30%"],
+            "correctAnswerIndex": 1,
+            "explanation": "Profit = SP - CP = 100 - 80 = ₹20. Profit % = (Profit / CP) * 100 = (20 / 80) * 100 = 0.25 * 100 = 25%.",
+            "a": "25%"
+        }
+    ],
+    flashcards=[
+        {"front": "What is the net discount for successive discounts of 10% and 10%?", "back": "19% (10 + 10 - 1 = 19%)"},
+        {"front": "On what price is discount always calculated?", "back": "Marked Price (MP)"}
+    ],
+    videos=[
+        {"title": "Percentages, Profit & Loss One Shot", "channel": "Aptitude Made Easy", "duration": "20m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["quantitative_ratios", "interest_calculations"],
+    learningPath=["Quantitative Ratios", "Percentage Calculations", "Simple and Compound Interest", "Time and Work"]
+)
+
+add_topic(
+    id="interest_calculations",
+    topic="Simple and Compound Interest",
+    subject="aptitude",
+    exam="cuet",
+    aliases=["interest calculations", "simple interest", "compound interest", "si ci"],
+    keywords=["interest", "simple", "compound", "principal", "amount", "rate", "annually", "aptitude"],
+    difficulty="Medium",
+    tags=["Aptitude", "CUET"],
+    overview="Simple and Compound Interest studies interest rates charged on borrowed capital or earned on investments, comparing linear and exponential growth.",
+    explanation="Simple Interest (SI) is calculated only on the principal amount, remaining constant each year. Compound Interest (CI) is calculated on the principal plus accumulated interest, growing exponentially. Interest can compound annually, semi-annually, quarterly, or continuously.",
+    concepts=[
+        {"title": "Simple Interest (Linear Growth)", "desc": "Interest grows linearly. SI is the same every year since the principal baseline never changes."},
+        {"title": "Compound Interest (Exponential Growth)", "desc": "Interest is added back to the principal, so the baseline grows. 'Interest on interest' causes exponential wealth compounding."}
+    ],
+    definitions=[
+        {"term": "Principal", "def": "The initial amount of money borrowed or invested, before interest is applied."},
+        {"term": "Amount", "def": "The total sum of money returned after adding interest to the principal (Amount = Principal + Interest)."}
+    ],
+    formulas=[
+        {"name": "Simple Interest", "eq": "SI = P * R * T / 100", "desc": "P is principal, R is rate of interest per year, T is time in years."},
+        {"name": "Compound Interest Amount", "eq": "A = P * (1 + R/100)^T", "desc": "A is final Amount. Compound Interest is CI = A - P."},
+        {"name": "Difference between CI and SI for 2 years", "eq": "Diff_2 = P * (R / 100)^2", "desc": "Useful shortcut formula for competitive exams."}
+    ],
+    examNotes="For compound interest compounding semi-annually, divide the rate by 2 (R' = R/2) and double the time periods (T' = 2T) before plugging values in.",
+    mistakes=[
+        {"title": "Compound Interest Amount as CI", "desc": "Plugging P*(1+R/100)^T and calling it the compound interest. That formula calculates the total Amount (A = P + CI). Remember to subtract Principal P to get CI."},
+        {"title": "Using incorrect time unit", "desc": "Using T in months directly when rate R is per annum. Convert months to years (e.g. 6 months = 0.5 years)."}
+    ],
+    revision=[
+        "SI is constant; CI increases every year.",
+        "CI is always greater than or equal to SI for the same rate, principal, and time (equal for year 1).",
+        "Compounding more frequently (e.g. monthly vs yearly) yields higher final amount."
+    ],
+    questions=[
+        {
+            "q": "What is the difference between compound interest (compounded annually) and simple interest on ₹10,000 at 10% per annum for 2 years?",
+            "options": ["₹100", "₹200", "₹50", "₹0"],
+            "correctAnswerIndex": 0,
+            "explanation": "Using shortcut: Diff = P * (R/100)^2 = 10,000 * (10/100)^2 = 10,000 * 0.01 = ₹100.",
+            "a": "₹100"
+        }
+    ],
+    flashcards=[
+        {"front": "State the formula for compound interest amount.", "back": "A = P * (1 + R/100)^T"},
+        {"front": "How do you adjust R and T for half-yearly compounding?", "back": "Halve the rate (R/2) and double the time (2T)."}
+    ],
+    videos=[
+        {"title": "Simple & Compound Interest Short Tricks", "channel": "Aptitude Made Easy", "duration": "18m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["percentage_calculations", "time_work"],
+    learningPath=["Percentage Calculations", "Simple and Compound Interest", "Time and Work", "Logical Venn Diagrams"]
+)
+
+add_topic(
+    id="time_work",
+    topic="Time and Work",
+    subject="aptitude",
+    exam="cuet",
+    aliases=["time and work", "work efficiency", "pipes and cisterns"],
+    keywords=["work", "time", "efficiency", "pipes", "cisterns", "rates", "aptitude"],
+    difficulty="Medium",
+    tags=["Aptitude", "CUET"],
+    overview="Time and Work analyzes relationships between the number of workers, their individual rates of work (efficiency), and the time taken to complete a job.",
+    explanation="Work is generally assumed to be 1 unit. If a person does a job in D days, their daily rate of work is 1/D. When multiple people work together, their daily rates are added. Efficiency is inversely proportional to time taken. Pipes and Cisterns operates on similar logic, with outlet pipes representing negative work rates.",
+    concepts=[
+        {"title": "Unitary Method", "desc": "Solve by defining work as 1. If A takes 10 days and B takes 15 days, A's 1-day work is 1/10 and B's is 1/15. Combined 1-day work is 1/10 + 1/15 = 1/6, so they take 6 days together."},
+        {"title": "LCM Method", "desc": "Assume total work is the LCM of individual days (e.g. LCM of 10 and 15 is 30 units). A's efficiency is 3 units/day, B's is 2 units/day. Combined efficiency is 5 units/day, taking 30/5 = 6 days. Highly recommended for speed."}
+    ],
+    definitions=[
+        {"term": "Efficiency", "def": "The rate at which a person or machine does work, or the amount of work completed in unit time."},
+        {"term": "Negative Work", "def": "Work that undoes a job, such as an outlet pipe draining a tank while an inlet pipe is filling it."}
+    ],
+    formulas=[
+        {"name": "Combined Work Time", "eq": "T_together = (A * B) / (A + B)", "desc": "Calculates time taken by two people working together, where A and B are their individual times."},
+        {"name": "Man-Days Formula", "eq": "M1 * D1 * H1 / W1 = M2 * D2 * H2 / W2", "desc": "M is men, D is days, H is hours per day, W is amount of work."}
+    ],
+    examNotes="For pipes and cisterns, if an inlet pipe fills a tank in 4 hours and an outlet pipe drains it in 6 hours, the net fill rate is 1/4 - 1/6 = 1/12 unit per hour.",
+    mistakes=[
+        {"title": "Adding Days Directly", "desc": "Adding individual days to find combined time (e.g. if A takes 10 days and B takes 15, assuming they take 25 days together. They must take less than 10 days together!). Add daily rates, not days."},
+        {"title": "Ignoring Efficiency ratio direction", "desc": "Assuming A who is twice as efficient as B takes twice the time. If A is twice as efficient, A takes HALF the time of B."}
+    ],
+    revision=[
+        "Rate of work = 1 / Time taken.",
+        "Work done = Rate of work * Time.",
+        "Efficiency is inversely proportional to time."
+    ],
+    questions=[
+        {
+            "q": "A can complete a work in 12 days and B can do it in 24 days. If they work together, how many days will they take?",
+            "options": ["18 days", "8 days", "6 days", "10 days"],
+            "correctAnswerIndex": 1,
+            "explanation": "Using combined formula: Time = (12 * 24) / (12 + 24) = 288 / 36 = 8 days. Or LCM method: Work = 24. A's eff = 2, B's = 1. Together = 3. Days = 24/3 = 8.",
+            "a": "8 days"
+        }
+    ],
+    flashcards=[
+        {"front": "If A takes 8 days, what is A's 1-day work rate?", "back": "1/8 of total work"},
+        {"front": "State the formula for combining two workers.", "back": "Time = (A * B) / (A + B)"}
+    ],
+    videos=[
+        {"title": "Time and Work Concepts & Shortcut Tricks", "channel": "Aptitude Made Easy", "duration": "14m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["interest_calculations", "venn_diagrams"],
+    learningPath=["Simple and Compound Interest", "Time and Work", "Logical Venn Diagrams", "Coulomb's Law"]
+)
+
+add_topic(
+    id="venn_diagrams",
+    topic="Logical Venn Diagrams",
+    subject="aptitude",
+    exam="cuet",
+    aliases=["venn diagrams", "venn diagram", "set syllogisms"],
+    keywords=["venn", "diagram", "set", "intersection", "union", "syllogisms", "logic", "aptitude"],
+    difficulty="Easy",
+    tags=["Logical Reasoning", "CUET", "Aptitude"],
+    overview="Logical Venn Diagrams uses overlapping circles to represent logical relationships between sets of objects or groups, extensively tested in competitive exams.",
+    explanation="Venn diagrams show intersections, unions, and subsets. Syllogisms evaluate logical deductions from premises (e.g. 'All A are B, Some B are C') using circle overlaps to test the validity of conclusions.",
+    concepts=[
+        {"title": "Intersection and Union", "desc": "Union (A ∪ B) represents items in A, B, or both. Intersection (A ∩ B) represents items common to both sets."},
+        {"title": "Syllogism Circle Overlap", "desc": "Represent premises by drawing circles. Test conclusions by checking if the overlaps are mandatory under all possible configurations."}
+    ],
+    definitions=[
+        {"term": "Universal Set (U)", "def": "The set containing all possible objects under consideration, represented by a rectangle containing the circles."},
+        {"term": "Syllogism", "def": "A form of logical reasoning where a conclusion is drawn from two given or assumed premises."}
+    ],
+    formulas=[
+        {"name": "Set Cardinality Formula", "eq": "n(A ∪ B) = n(A) + n(B) - n(A ∩ B)", "desc": "Calculates the union size of two sets by subtracting their overlapping intersection once."},
+        {"name": "Three Set Cardinality", "eq": "n(A ∪ B ∪ C) = n(A) + n(B) + n(C) - n(A∩B) - n(B∩C) - n(A∩C) + n(A∩B∩C)", "desc": "Extension of set cardinality to three overlapping sets."}
+    ],
+    examNotes="Always draw the 'minimum overlap' condition when testing syllogism conclusions to see if a conclusion is strictly true under all circumstances, not just one possible drawing.",
+    mistakes=[
+        {"title": "Double Counting Intersection", "desc": "Adding n(A) and n(B) directly to find union size without subtracting the intersection n(A ∩ B)."},
+        {"title": "Syllogism Possibility Error", "desc": "Assuming a conclusion is true just because it CAN be drawn. A logical conclusion must be MANDATORILY true in all possible Venn configurations."}
+    ],
+    revision=[
+        "Circle inside circle represents subset relation (All A are B).",
+        "Disjoint circles represent no overlap (No A is B).",
+        "Overlapping circles represent partial intersection (Some A are B)."
+    ],
+    questions=[
+        {
+            "q": "In a group of 50 students, 30 play cricket, 25 play football, and 10 play both. How many play neither sport?",
+            "options": ["5", "10", "15", "0"],
+            "correctAnswerIndex": 0,
+            "explanation": "n(C) = 30, n(F) = 25, n(C ∩ F) = 10. Total playing at least one = n(C ∪ F) = 30 + 25 - 10 = 45. Neither = Total - Playing = 50 - 45 = 5.",
+            "a": "5 students"
+        }
+    ],
+    flashcards=[
+        {"front": "Write the set union formula for two sets.", "back": "n(A ∪ B) = n(A) + n(B) - n(A ∩ B)"},
+        {"front": "What does a disjoint set Venn diagram look like?", "back": "Two separate circles with no overlap."}
+    ],
+    videos=[
+        {"title": "Venn Diagrams & Syllogisms Logical Reasoning", "channel": "Aptitude Made Easy", "duration": "16m", "videoId": "bg7OszEl5EE"}
+    ],
+    related=["time_work", "coulombs_law"],
+    learningPath=["Time and Work", "Logical Venn Diagrams", "Coulomb's Law", "Electric Field"]
+)
+
+# Write to file
+output_path = r"c:\Users\ACER\Desktop\app\data\educational_database.json"
+os.makedirs(os.path.dirname(output_path), exist_ok=True)
+with open(output_path, "w", encoding="utf-8") as f:
+    json.dump(topics, f, indent=2, ensure_ascii=False)
+
+print(f"Database generation complete! {len(topics)} topics written to {output_path}.")
