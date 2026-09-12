@@ -5,7 +5,6 @@
  */
 
 import { store } from "../store.js";
-import { qualcommAIHub } from "./qualcommAIHub.js";
 
 export class StudyAgent {
   constructor() {
@@ -55,20 +54,9 @@ export class StudyAgent {
     try {
       let replyText = "";
 
-      // Try local Qualcomm AI Hub NPU inference first for zero-latency execution
       try {
-        const localResponse = await qualcommAIHub.runLocalInference(userPrompt, selectedExam);
-        if (localResponse) {
-          replyText = localResponse;
-        }
-      } catch (e) {
-        console.warn("Local Qualcomm AI Hub NPU attempt fallback to cloud:", e.message);
-      }
-
-      if (!replyText) {
-        try {
-          const controller = new AbortController();
-          const timeout = setTimeout(() => controller.abort(), 25000); // 25s timeout
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 25000); // 25s timeout
 
         const resp = await fetch(apiUrl, {
           method: "POST",

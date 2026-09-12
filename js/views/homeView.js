@@ -20,13 +20,9 @@ class HomeView {
         <!-- Hero Section -->
         <section class="home-hero-card card">
           <div class="hero-text-content">
-            <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
-              <span class="hero-pill">⚡ Welcome to Vidyaverse AI 3.0</span>
-              <span class="badge badge-accent" style="background:#3253DC; color:white; font-weight:600;">🔥 Snapdragon® AI Lab Challenge</span>
-              <span class="badge" style="background:#000; color:#38ef7d; border:1px solid #38ef7d;">⚡ Qualcomm Hexagon™ NPU: Active</span>
-            </div>
+            <span class="hero-pill">⚡ Welcome to Vidyaverse AI</span>
             <h1>Your Personalized Learning Universe</h1>
-            <p>Optimized for <strong>Snapdragon-powered HP PCs</strong> with <strong>Qualcomm AI Hub</strong> on-device NPU acceleration.</p>
+            <p>Learn topics instantly, generate notes, summarize documents, practice timed quizzes, and build study streaks.</p>
             
             <!-- Universal Study Search Bar -->
             <div class="universal-search-wrap">
