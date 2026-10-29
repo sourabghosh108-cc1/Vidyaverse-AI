@@ -20,6 +20,7 @@ import { focusTimerView } from "./js/views/focusTimerView.js";
 import { arcadeView } from "./js/views/arcadeView.js";
 import { dashboardView } from "./js/views/dashboardView.js";
 import { settingsView } from "./js/views/settingsView.js";
+import { creditsView } from "./js/views/creditsView.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   // 1. Initialize UI core handlers (Toasts, mobile hamburger overlay drawer)
@@ -80,6 +81,11 @@ document.addEventListener("DOMContentLoaded", () => {
   router.addRoute("settings", () => {
     updateActiveSidebarLink("settings");
     settingsView.render();
+  });
+
+  router.addRoute("credits", () => {
+    updateActiveSidebarLink("credits");
+    creditsView.render();
   });
 
   // 5. Initial stats synchronization

@@ -7,6 +7,7 @@ import { studyAgent } from "../agent/studyAgent.js";
 import { store } from "../store.js";
 import { ui } from "../ui.js";
 import { gamification } from "../gamification.js";
+import { creditManager } from "../creditManager.js";
 
 class ChatView {
   constructor() {
@@ -33,9 +34,9 @@ class ChatView {
             </div>
           </div>
           <div class="chat-header-actions" style="display:flex; align-items:center; gap:10px;">
-            <span class="badge" style="background:rgba(59,130,246,0.15); color:#60A5FA; border:1px solid rgba(59,130,246,0.3); padding:4px 12px; border-radius:14px; font-weight:600; font-size:0.8rem;">
-              ⚡ OpenRouter GPT-4o Live
-            </span>
+            <a href="#credits" class="badge" id="chat-header-credits-badge" style="background:rgba(16,185,129,0.15); color:#10B981; border:1px solid rgba(16,185,129,0.3); padding:5px 12px; border-radius:14px; font-weight:700; font-size:0.82rem; text-decoration:none; display:flex; align-items:center; gap:5px;">
+              💳 <span id="chat-credits-val">300</span>/300 Credits
+            </a>
             <button class="btn btn-sm btn-outline" id="btn-clear-chat" title="Clear conversation history">
               🗑️ Clear Chat
             </button>
@@ -92,6 +93,15 @@ class ChatView {
     `;
 
     this.bindEvents();
+    this.syncCreditsDisplay();
+  }
+
+  async syncCreditsDisplay() {
+    try {
+      const state = await creditManager.getCreditState();
+      const el = document.getElementById("chat-credits-val");
+      if (el) el.textContent = state.remainingCredits;
+    } catch (e) {}
   }
 
   bindEvents() {
@@ -183,6 +193,7 @@ class ChatView {
     } finally {
       if (typingIndicator) typingIndicator.classList.add("hidden");
       this.isGenerating = false;
+      this.syncCreditsDisplay();
       try { gamification.addXP(15); } catch(e) {}
       this.scrollToBottom();
     }

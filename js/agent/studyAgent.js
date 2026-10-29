@@ -1,14 +1,15 @@
 /**
  * Vidyaverse AI - Study Agent Module
- * ChatGPT-style AI study assistant.
+ * ChatGPT-style AI study assistant with IP-based Credit Limiter.
  * Dual-layer execution:
- *   1. Direct client-side engine with cushioning (Shrishti style)
+ *   1. Direct client-side engine with cushioning (Mistral primary + OpenRouter)
  *   2. Serverless /api/chat fallback
  *   3. Intelligent offline synthesizer
  */
 
 import { store } from "../store.js";
 import { requestAIWithCushion } from "./aiConfig.js";
+import { creditManager } from "../creditManager.js";
 
 export class StudyAgent {
   constructor() {
@@ -22,6 +23,17 @@ export class StudyAgent {
   }
 
   async processGoal(userPrompt) {
+    // 0. Verify IP Daily Credit Limit (300 credits / 100 queries limit)
+    const canQuery = await creditManager.canMakeQuery();
+    if (!canQuery) {
+      const state = await creditManager.getCreditState();
+      return {
+        reply: `⚠️ **Daily Educational AI Limit Reached**\n\nYour IP address (\`${state.ip}\`) has reached its daily quota of **${state.maxQueries} AI study queries** (${state.maxCredits} credits, 3 credits/query).\n\n⏰ **Quota resets every 24 hours at midnight.**\nYou can view your live credit usage on the **[AI Credits Page](#credits)**.`,
+        provider: "rate-limit",
+        model: "limit-enforcer",
+      };
+    }
+
     if (this.isProcessing) {
       let waited = 0;
       while (this.isProcessing && waited < 8000) {
@@ -58,10 +70,10 @@ Behavior Instructions:
 
     try {
       let replyText = "";
-      let usedProvider = "openrouter";
-      let usedModel = "llama-3.3-70b";
+      let usedProvider = "mistral";
+      let usedModel = "open-mistral-7b";
 
-      // 1. Primary: Direct Client-Side Engine with Model Cushioning (Shrishti style)
+      // 1. Primary: Direct Client-Side Engine with Model Cushioning (Mistral Primary)
       try {
         const clientRes = await requestAIWithCushion(this.conversationHistory, systemPrompt);
         if (clientRes && clientRes.content) {
@@ -105,6 +117,7 @@ Behavior Instructions:
             const data = await resp.json();
             replyText = (data.content || "").trim();
             if (data.model) usedModel = data.model;
+            if (data.provider) usedProvider = data.provider;
           }
         } catch (err) {
           console.warn("Backend API fallback error:", err.message);
@@ -114,6 +127,13 @@ Behavior Instructions:
       // 3. Smart offline fallback synthesis
       if (!replyText) {
         replyText = getSmartFallback(userPrompt, selectedExam);
+      }
+
+      // Deduct 3 credits upon successful AI answer
+      try {
+        await creditManager.deductQueryCredits(userPrompt);
+      } catch (e) {
+        console.warn("Credit deduction notice:", e.message);
       }
 
       this.conversationHistory.push({ role: "assistant", content: replyText });
