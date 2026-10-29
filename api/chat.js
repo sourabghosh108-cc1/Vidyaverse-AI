@@ -8,7 +8,7 @@ export const config = { maxDuration: 60 };
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 
-const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || "";
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || "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";
 
 const DEFAULT_MODEL = "openai/gpt-3.5-turbo";
 const FALLBACK_MODEL = "meta-llama/llama-3.3-70b-instruct";
