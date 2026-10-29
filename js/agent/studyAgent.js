@@ -23,12 +23,12 @@ export class StudyAgent {
   }
 
   async processGoal(userPrompt) {
-    // 0. Verify IP Daily Credit Limit (300 credits / 100 queries limit)
+    // 0. Verify IP Daily Credit Limit (150 credits / 30 queries limit)
     const canQuery = await creditManager.canMakeQuery();
     if (!canQuery) {
       const state = await creditManager.getCreditState();
       return {
-        reply: `⚠️ **Daily Educational AI Limit Reached**\n\nYour IP address (\`${state.ip}\`) has reached its daily quota of **${state.maxQueries} AI study queries** (${state.maxCredits} credits, 3 credits/query).\n\n⏰ **Quota resets every 24 hours at midnight.**\nYou can view your live credit usage on the **[AI Credits Page](#credits)**.`,
+        reply: `⚠️ **Daily Educational AI Limit Reached**\n\nYour IP address (\`${state.ip}\`) has reached its daily quota of **${state.maxQueries} AI study queries** (${state.maxCredits} credits, 5 credits/query).\n\n⏰ **Quota resets every 24 hours at midnight.**\nYou can view your live credit usage on the **[AI Credits Page](#credits)**.`,
         provider: "rate-limit",
         model: "limit-enforcer",
       };
@@ -129,7 +129,7 @@ Behavior Instructions:
         replyText = getSmartFallback(userPrompt, selectedExam);
       }
 
-      // Deduct 3 credits upon successful AI answer
+      // Deduct 5 credits upon successful AI answer
       try {
         await creditManager.deductQueryCredits(userPrompt);
       } catch (e) {

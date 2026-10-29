@@ -35,7 +35,7 @@ class ChatView {
           </div>
           <div class="chat-header-actions" style="display:flex; align-items:center; gap:10px;">
             <a href="#credits" class="badge" id="chat-header-credits-badge" style="background:rgba(16,185,129,0.15); color:#10B981; border:1px solid rgba(16,185,129,0.3); padding:5px 12px; border-radius:14px; font-weight:700; font-size:0.82rem; text-decoration:none; display:flex; align-items:center; gap:5px;">
-              💳 <span id="chat-credits-val">300</span>/300 Credits
+              💳 <span id="chat-credits-val">150</span>/150 Credits
             </a>
             <button class="btn btn-sm btn-outline" id="btn-clear-chat" title="Clear conversation history">
               🗑️ Clear Chat

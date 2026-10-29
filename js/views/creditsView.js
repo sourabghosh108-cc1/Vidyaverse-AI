@@ -53,7 +53,7 @@ class CreditsView {
             <div style="font-size:2.2rem; font-weight:800; font-family:var(--font-display); color:#3B82F6; margin:8px 0 4px 0;">
               ${state.remainingCredits} <span style="font-size:1rem; color:var(--text-secondary); font-weight:500;">/ ${state.maxCredits}</span>
             </div>
-            <div style="font-size:0.8rem; color:var(--text-muted);">Cost: 3 credits per AI query</div>
+            <div style="font-size:0.8rem; color:var(--text-muted);">Cost: 5 credits per AI query</div>
           </div>
 
           <div class="card" style="border-left:4px solid #10B981;">
@@ -84,8 +84,8 @@ class CreditsView {
           </div>
           <div style="margin-top:12px; font-size:0.82rem; color:var(--text-secondary); display:flex; justify-content:space-between;">
             <span>0 Credits</span>
-            <span>150 Credits</span>
-            <span>300 Credits Max</span>
+            <span>75 Credits</span>
+            <span>150 Credits Max</span>
           </div>
         </div>
 
@@ -93,10 +93,10 @@ class CreditsView {
         <div class="card" style="background:linear-gradient(135deg, rgba(59,130,246,0.05), rgba(16,185,129,0.05));">
           <h4 style="margin-bottom:10px;">📋 How Credits Work</h4>
           <ul style="padding-left:20px; line-height:1.7; font-size:0.9rem; color:var(--text-secondary);">
-            <li>Every distinct IP address automatically receives <strong>300 free credits daily</strong>.</li>
-            <li>Each AI query, doubt resolution, or practice question generation deducts <strong>3 credits</strong>.</li>
-            <li>This ensures every student gets up to <strong>100 free AI interactions per day</strong>.</li>
-            <li>Credits automatically restore to 300 credits at 12:00 AM (midnight) local time.</li>
+            <li>Every distinct IP address automatically receives <strong>150 free credits daily</strong>.</li>
+            <li>Each AI query, doubt resolution, or practice question generation deducts <strong>5 credits</strong>.</li>
+            <li>This ensures every student gets up to <strong>30 free AI interactions per day</strong>.</li>
+            <li>Credits automatically restore to 150 credits at 12:00 AM (midnight) local time.</li>
           </ul>
         </div>
 
@@ -142,3 +142,4 @@ class CreditsView {
 }
 
 export const creditsView = new CreditsView();
+

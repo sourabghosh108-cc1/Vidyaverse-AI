@@ -1,13 +1,13 @@
 /**
  * Credit & IP Rate Limit Service for VidyaAI
- * - 300 credits per IP per day
- * - 1 AI query = 3 credits (Exact 100 queries / day per IP)
+ * - 150 credits per IP per day
+ * - 1 AI query = 5 credits (Exact 30 queries / day per IP)
  * - Tracks usage and resets every 24 hours (midnight)
  */
 
 const STORAGE_KEY_PREFIX = "vidya_credit_state_";
-const DAILY_MAX_CREDITS = 300;
-const COST_PER_QUERY = 3;
+const DAILY_MAX_CREDITS = 150;
+const COST_PER_QUERY = 5;
 
 class CreditManager {
   constructor() {
@@ -59,8 +59,8 @@ class CreditManager {
       record = null;
     }
 
-    // Reset if it's a new day or not present
-    if (!record || record.date !== today) {
+    // Reset if it's a new day or config updated or not present
+    if (!record || record.date !== today || record.maxCredits !== DAILY_MAX_CREDITS || record.costPerQuery !== COST_PER_QUERY) {
       record = {
         ip,
         date: today,
@@ -68,7 +68,7 @@ class CreditManager {
         remainingCredits: DAILY_MAX_CREDITS,
         usedCredits: 0,
         queryCount: 0,
-        maxQueries: DAILY_MAX_CREDITS / COST_PER_QUERY, // 100
+        maxQueries: Math.floor(DAILY_MAX_CREDITS / COST_PER_QUERY), // 30
         costPerQuery: COST_PER_QUERY,
         history: []
       };
@@ -87,7 +87,7 @@ class CreditManager {
   async deductQueryCredits(topic = "Study Query") {
     const state = await this.getCreditState();
     if (state.remainingCredits < COST_PER_QUERY) {
-      throw new Error("Credit limit reached for today (100 queries / 300 credits used). Quota resets at midnight.");
+      throw new Error("Credit limit reached for today (30 queries / 150 credits used). Quota resets at midnight.");
     }
 
     state.remainingCredits -= COST_PER_QUERY;
@@ -114,3 +114,4 @@ class CreditManager {
 }
 
 export const creditManager = new CreditManager();
+
