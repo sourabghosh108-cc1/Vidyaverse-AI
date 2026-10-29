@@ -1,5 +1,8 @@
 {
   "cleanUrls": true,
+  "rewrites": [
+    { "source": "/((?!api|css|js|data|mcp).*)", "destination": "/index.html" }
+  ],
   "headers": [
     {
       "source": "/data/(.*).json",
@@ -11,11 +14,24 @@
       ]
     },
     {
-      "source": "/style.css",
+      "source": "/css/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public, max-age=3600"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
         }
       ]
     }

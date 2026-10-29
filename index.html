@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Vidyaverse AI - Your Personalized Learning Universe</title>
 
   <!-- SEO Meta Tags -->
@@ -12,6 +12,19 @@
   <meta name="keywords"
     content="Vidyaverse, Edtech, study dashboard, JEE study, NEET study, CUET prep, CA Foundation, PDF Summarizer, notes generator, Pomodoro timer">
   <meta name="author" content="Vidyaverse AI Team">
+  <meta name="theme-color" content="#1E293B" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Vidyaverse AI - Your Personalized Learning Universe">
+  <meta property="og:description" content="AI-powered gamified study assistant for JEE, NEET, Class 10/12, CUET & CA Foundation.">
+
+  <!-- Apple PWA -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Vidyaverse AI">
+  <meta name="mobile-web-app-capable" content="yes">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +65,7 @@
         <span class="logo-icon">🚀</span>
         <span class="logo-text">Vidyaverse <span class="logo-accent">AI 3.0</span></span>
       </a>
-      <div style="font-size:0.7rem; color:#3253DC; font-weight:700; margin-top:4px; letter-spacing:0.5px;">⚡ Snapdragon® AI Lab</div>
+      <div style="font-size:0.7rem; color:#3253DC; font-weight:700; margin-top:4px; letter-spacing:0.5px;">🚀 AI-Powered Learning</div>
     </div>
 
     <!-- Sidebar Main Navigation Menu -->
@@ -160,6 +173,30 @@
     <div id="view-arcade" class="view-panel"></div>
 
   </main>
+
+  <!-- Mobile Bottom Navigation Bar (visible on mobile/tablet only) -->
+  <nav class="mobile-bottom-nav" id="mobile-bottom-nav" aria-label="Mobile navigation">
+    <a href="#home" class="mobile-bottom-nav-item" data-route="home">
+      <span class="bnav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="#chat" class="mobile-bottom-nav-item" data-route="chat">
+      <span class="bnav-icon">🤖</span>
+      <span>AI Chat</span>
+    </a>
+    <a href="#quiz" class="mobile-bottom-nav-item" data-route="quiz">
+      <span class="bnav-icon">🎯</span>
+      <span>Quiz</span>
+    </a>
+    <a href="#arcade" class="mobile-bottom-nav-item" data-route="arcade">
+      <span class="bnav-icon">🕹️</span>
+      <span>Arcade</span>
+    </a>
+    <a href="#dashboard" class="mobile-bottom-nav-item" data-route="dashboard">
+      <span class="bnav-icon">📊</span>
+      <span>Dashboard</span>
+    </a>
+  </nav>
 
   <!-- App modular coordinator entry script -->
   <script type="module" src="./script.js"></script>

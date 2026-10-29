@@ -129,6 +129,14 @@ function updateActiveSidebarLink(route) {
       link.classList.add("active");
     }
   });
+
+  // Sync mobile bottom nav
+  document.querySelectorAll("#mobile-bottom-nav .mobile-bottom-nav-item").forEach(item => {
+    item.classList.remove("active");
+    if (item.getAttribute("data-route") === route) {
+      item.classList.add("active");
+    }
+  });
 }
 
 function bindThemeToggles() {

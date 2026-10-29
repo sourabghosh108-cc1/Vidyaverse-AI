@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Home View Module (Upgraded Landing Dashboard)
  * Renders hero search, quick actions, popular topic links, and the AI Agent Visualizer.
  */
@@ -21,64 +21,64 @@ class HomeView {
         <section class="home-hero-card card">
           <div class="hero-text-content">
             <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
-              <span class="hero-pill">⚡ Welcome to Vidyaverse AI 3.0</span>
-              <span class="badge badge-accent" style="background:#3253DC; color:white; font-weight:600;">🔥 Snapdragon® AI Lab Challenge</span>
-              <span class="badge" style="background:#000; color:#38ef7d; border:1px solid #38ef7d;">⚡ Qualcomm Hexagon™ NPU: Active</span>
+              <span class="hero-pill">âš¡ Welcome to Vidyaverse AI 3.0</span>
+              <span class="badge badge-accent" style="background:#3253DC; color:white; font-weight:600;">ðŸ”¥ SnapdragonÂ® AI Lab Challenge</span>
+              <span class="badge" style="background:#000; color:#38ef7d; border:1px solid #38ef7d;">âš¡ Qualcomm Hexagonâ„¢ NPU: Active</span>
             </div>
             <h1>Your Personalized Learning Universe</h1>
-            <p>Optimized for <strong>Snapdragon-powered HP PCs</strong> with <strong>Qualcomm AI Hub</strong> on-device NPU acceleration.</p>
+            <p>Smart AI-powered study assistant for <strong>JEE, NEET, Class 10/12, CUET &amp; CA Foundation</strong> — ask doubts, generate notes, and ace your exams.</p>
             
             <!-- Universal Study Search Bar -->
             <div class="universal-search-wrap">
               <input type="text" id="universal-search-input" placeholder="What would you like to learn today? (e.g., Electrostatics)" />
               <button class="btn btn-primary" id="btn-universal-search">
-                <span>🔍 Search Topic</span>
+                <span>ðŸ” Search Topic</span>
               </button>
             </div>
             
             <!-- Popular topics shortcuts -->
             <div class="popular-topics-row">
               <span class="popular-label">Try searching:</span>
-              <button class="topic-chip" data-topic="electrostatics">⚡ Electrostatics</button>
-              <button class="topic-chip" data-topic="newton's laws">📐 Newton's Laws</button>
-              <button class="topic-chip" data-topic="organic chemistry">🧪 Organic Chemistry</button>
-              <button class="topic-chip" data-topic="accounting">📊 Introduction to Accounting</button>
+              <button class="topic-chip" data-topic="electrostatics">âš¡ Electrostatics</button>
+              <button class="topic-chip" data-topic="newton's laws">ðŸ“ Newton's Laws</button>
+              <button class="topic-chip" data-topic="organic chemistry">ðŸ§ª Organic Chemistry</button>
+              <button class="topic-chip" data-topic="accounting">ðŸ“Š Introduction to Accounting</button>
             </div>
           </div>
         </section>
 
         <!-- Quick Actions Grid -->
         <section class="quick-actions-grid-section">
-          <h3>⚡ Quick Hub Utilities</h3>
+          <h3>âš¡ Quick Hub Utilities</h3>
           <div class="quick-actions-grid">
             <div class="action-card card action-card-highlight" data-target="chat">
-              <span class="action-icon">🤖</span>
+              <span class="action-icon">ðŸ¤–</span>
               <h4>AI Agent Copilot</h4>
               <p>Autonomous multi-tool study mentor & live web search.</p>
               <span class="badge badge-accent">Featured</span>
             </div>
             <div class="action-card card" data-target="learn">
-              <span class="action-icon">🔍</span>
+              <span class="action-icon">ðŸ”</span>
               <h4>Study Search</h4>
               <p>Explore instant guides and video curators.</p>
             </div>
             <div class="action-card card" data-target="notes">
-              <span class="action-icon">📝</span>
+              <span class="action-icon">ðŸ“</span>
               <h4>Notes Generator</h4>
               <p>Build formatted study sheets and text files.</p>
             </div>
             <div class="action-card card" data-target="pdf">
-              <span class="action-icon">📄</span>
+              <span class="action-icon">ðŸ“„</span>
               <h4>PDF Summarizer</h4>
               <p>Scan documents and extract terms.</p>
             </div>
             <div class="action-card card" data-target="quiz">
-              <span class="action-icon">🎯</span>
+              <span class="action-icon">ðŸŽ¯</span>
               <h4>Quiz Arena</h4>
               <p>Test knowledge with Duolingo-style MCQs.</p>
             </div>
             <div class="action-card card" data-target="dashboard">
-              <span class="action-icon">📊</span>
+              <span class="action-icon">ðŸ“Š</span>
               <h4>Habit Dashboard</h4>
               <p>Review streaks, levels, and activity scores.</p>
             </div>
@@ -88,7 +88,7 @@ class HomeView {
         <!-- AI Agentic Brain Visualization Section (Hackathon Pitch) -->
         <section class="agent-visualization-section card">
           <div class="viz-header">
-            <h3>🤖 Future AI Agentic Brain Architecture</h3>
+            <h3>ðŸ¤– Future AI Agentic Brain Architecture</h3>
             <span class="badge badge-accent">Hackathon Blueprint</span>
           </div>
           <p class="viz-desc">How Vidyaverse AI plans to orchestrate specialized client-side agents for autonomous learning generation.</p>
@@ -96,68 +96,68 @@ class HomeView {
           <div class="agent-workflow-canvas">
             <!-- User Prompt Input Node -->
             <div class="workflow-endpoint user-input-node">
-              <div class="node-icon">👤</div>
+              <div class="node-icon">ðŸ‘¤</div>
               <div class="node-details">
                 <strong>Student Query / File</strong>
                 <span>"Summarize Newton's Laws"</span>
               </div>
             </div>
 
-            <div class="workflow-direction-arrow">⬇️</div>
+            <div class="workflow-direction-arrow">â¬‡ï¸</div>
 
             <!-- Agentic Core Dispatcher -->
             <div class="agent-coordinator-card">
-              <div class="coord-header">🧠 Central Agentic Router</div>
+              <div class="coord-header">ðŸ§  Central Agentic Router</div>
               <small>Parses intent & distributes tasks to sub-agents</small>
             </div>
 
-            <div class="workflow-direction-arrow">⬇️</div>
+            <div class="workflow-direction-arrow">â¬‡ï¸</div>
 
             <!-- Modular Subagents Grid -->
             <div class="subagents-viz-grid">
               <div class="agent-viz-card">
-                <span class="agent-viz-icon">🔍</span>
+                <span class="agent-viz-icon">ðŸ”</span>
                 <h5>Learning Agent</h5>
                 <p>Generates detailed topic overviews, formulas, and key concepts.</p>
                 <span class="agent-io">OUT: Topic Sheets</span>
               </div>
               <div class="agent-viz-card">
-                <span class="agent-viz-icon">📝</span>
+                <span class="agent-viz-icon">ðŸ“</span>
                 <h5>Notes Agent</h5>
                 <p>Generates formatted revision sheets (Quick, Detailed, Exam notes).</p>
                 <span class="agent-io">OUT: .txt / Markdown</span>
               </div>
               <div class="agent-viz-card">
-                <span class="agent-viz-icon">🎯</span>
+                <span class="agent-viz-icon">ðŸŽ¯</span>
                 <h5>Quiz Agent</h5>
                 <p>Builds timed MCQ sets, evaluates responses, and provides explanations.</p>
                 <span class="agent-io">OUT: Gamified score</span>
               </div>
               <div class="agent-viz-card">
-                <span class="agent-viz-icon">📄</span>
+                <span class="agent-viz-icon">ðŸ“„</span>
                 <h5>PDF Agent</h5>
                 <p>Extracts texts from uploaded documents and builds study summaries.</p>
                 <span class="agent-io">OUT: Term Glossary</span>
               </div>
               <div class="agent-viz-card">
-                <span class="agent-viz-icon">🎥</span>
+                <span class="agent-viz-icon">ðŸŽ¥</span>
                 <h5>Recommendation Agent</h5>
                 <p>Curates YouTube tutorials and study websites based on topic analysis.</p>
                 <span class="agent-io">OUT: YouTube feed</span>
               </div>
               <div class="agent-viz-card">
-                <span class="agent-viz-icon">📊</span>
+                <span class="agent-viz-icon">ðŸ“Š</span>
                 <h5>Progress Agent</h5>
                 <p>Tracks active study patterns, streaks, and updates gamification badges.</p>
                 <span class="agent-io">OUT: localStorage Metrics</span>
               </div>
             </div>
 
-            <div class="workflow-direction-arrow">⬇️</div>
+            <div class="workflow-direction-arrow">â¬‡ï¸</div>
 
             <!-- Unified UI Output Node -->
             <div class="workflow-endpoint user-output-node">
-              <div class="node-icon">✨</div>
+              <div class="node-icon">âœ¨</div>
               <div class="node-details">
                 <strong>Personalized Study Space</strong>
                 <span>Formatted text, interactive cards & PDF sheets</span>
@@ -261,7 +261,7 @@ class HomeView {
         if (suggestions.length > 0) {
           suggestionsBox.innerHTML = suggestions.map(s => `
             <div class="suggestion-item" data-val="${s}">
-              <span class="suggestion-icon">🔍</span>
+              <span class="suggestion-icon">ðŸ”</span>
               <span class="suggestion-text">${s}</span>
             </div>
           `).join("");
