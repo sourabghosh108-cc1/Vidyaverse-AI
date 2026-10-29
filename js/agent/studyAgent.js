@@ -1,11 +1,14 @@
 /**
  * Vidyaverse AI - Study Agent Module
  * ChatGPT-style AI study assistant.
- * Calls cloud API (OpenRouter) for all responses.
+ * Dual-layer execution:
+ *   1. Direct client-side engine with cushioning (Shrishti style)
+ *   2. Serverless /api/chat fallback
+ *   3. Intelligent offline synthesizer
  */
 
 import { store } from "../store.js";
-import { qualcommAIHub } from "./qualcommAIHub.js";
+import { requestAIWithCushion } from "./aiConfig.js";
 
 export class StudyAgent {
   constructor() {
@@ -42,29 +45,44 @@ export class StudyAgent {
       this.conversationHistory = this.conversationHistory.slice(-12);
     }
 
-    let apiUrl = "/api/chat";
-    if (typeof window !== "undefined" && window?.location?.protocol === "file:") {
-      apiUrl = "http://localhost:8000/api/chat";
-    }
+    const systemPrompt = `You are VidyaAI, an expert AI Study Assistant and Tutor for Indian competitive & board examinations (JEE Main & Advanced, NEET, Class 10, Class 12, CUET, CA Foundation).
+Current Student Context:
+- Target Exam: ${(selectedExam || "jee").toUpperCase()}
+- Student Name: ${profile.name || "Aspirant"}
+
+Behavior Instructions:
+- Answer direct, conversational, and technical study questions naturally like ChatGPT and Claude.
+- If asked for doubts, derivations, or problem solutions, solve them step-by-step with clear formulas and final answers.
+- If asked for practice questions or PYQs (e.g. NEET Biology, Physics, Chemistry), generate 3-4 high-yield questions with options, correct answer keys, and clear explanations.
+- Use clean Markdown formatting (bold, headings, bullet points, code blocks).`;
 
     try {
       let replyText = "";
+      let usedProvider = "openrouter";
+      let usedModel = "llama-3.3-70b";
 
-      // 1. Try local inference (no-op stub, always returns null)
+      // 1. Primary: Direct Client-Side Engine with Model Cushioning (Shrishti style)
       try {
-        const localResponse = await qualcommAIHub.runLocalInference(userPrompt, selectedExam);
-        if (localResponse) {
-          replyText = localResponse;
+        const clientRes = await requestAIWithCushion(this.conversationHistory, systemPrompt);
+        if (clientRes && clientRes.content) {
+          replyText = clientRes.content;
+          usedModel = clientRes.model;
+          usedProvider = clientRes.provider;
         }
-      } catch (e) {
-        // ignore
+      } catch (err) {
+        console.warn("Client AI cushion fallback:", err.message);
       }
 
-      // 2. Query cloud API
+      // 2. Secondary: Backend Serverless API route fallback (/api/chat)
       if (!replyText) {
         try {
+          let apiUrl = "/api/chat";
+          if (typeof window !== "undefined" && window?.location?.protocol === "file:") {
+            apiUrl = "http://localhost:8000/api/chat";
+          }
+
           const controller = new AbortController();
-          const timeout = setTimeout(() => controller.abort(), 25000);
+          const timeout = setTimeout(() => controller.abort(), 20000);
 
           const resp = await fetch(apiUrl, {
             method: "POST",
@@ -86,19 +104,14 @@ export class StudyAgent {
           if (resp.ok) {
             const data = await resp.json();
             replyText = (data.content || "").trim();
-          } else {
-            console.warn(`API returned status ${resp.status}`);
+            if (data.model) usedModel = data.model;
           }
         } catch (err) {
-          if (err.name === "AbortError") {
-            console.warn("Chat request timed out after 25s");
-          } else {
-            console.warn("API network error:", err.message);
-          }
+          console.warn("Backend API fallback error:", err.message);
         }
       }
 
-      // 3. Offline fallback
+      // 3. Smart offline fallback synthesis
       if (!replyText) {
         replyText = getSmartFallback(userPrompt, selectedExam);
       }
@@ -108,8 +121,8 @@ export class StudyAgent {
 
       return {
         reply: replyText,
-        provider: "openrouter",
-        model: "gpt-3.5-turbo",
+        provider: usedProvider,
+        model: usedModel,
       };
     } catch (err) {
       this.isProcessing = false;
@@ -122,7 +135,7 @@ export class StudyAgent {
 }
 
 /**
- * Smart fallback: gives a useful reply when API is down
+ * Smart fallback: gives a useful reply when networks are completely offline
  */
 function getSmartFallback(userPrompt, exam) {
   const q = userPrompt.toLowerCase().trim();
